@@ -13,9 +13,9 @@ export default function Login() {
 
       <View style={styles.form}>
         <TextInput style={styles.input} placeholder='Mobile number/Email' placeholderTextColor='white' />
-        <TextInput style={styles.input} placeholder='Password' 
-        placeholderTextColor='white'
-        secureTextEntry={true} />
+        <TextInput style={styles.input} placeholder='Password'
+          placeholderTextColor='white'
+          secureTextEntry={true} />
         <TouchableOpacity style={styles.loginbutton}>
           <Text style={styles.loginbuttonText}>Login</Text>
         </TouchableOpacity>
@@ -24,8 +24,20 @@ export default function Login() {
 
 
 
-      <View>
+      <View style={styles.bottomBtns}>
+        <TouchableOpacity style={styles.newUser}>
+          <Text>New user sign up</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.forgetPassword}>
+          <Text>Forget Password?</Text>
+        </TouchableOpacity>
+      </View>
+
+
+
+      <View style={styles.continue}>
         <></>
+        <Text style={styles.continueGuest}>Continue as a Guest</Text>
       </View>
     </View>
   )
@@ -74,8 +86,8 @@ const styles = StyleSheet.create({
     width: 330,
     color: 'white',
     borderRadius: 12,
-    padding:12,
-    fontSize:18,
+    padding: 12,
+    fontSize: 18,
   },
   textfour: {
     color: 'aqua'
@@ -93,4 +105,31 @@ const styles = StyleSheet.create({
     textAlign: 'center',
 
   },
+
+  bottomBtns: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop:15,
+   
+  },
+  newUser: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#325066',
+    color: '#325066',
+  },
+  forgetPassword: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#325066',
+    color: '#325066',
+  },
+  continue: {
+    display: 'flex',
+    alignItems: 'center',
+    marginTop: 100
+  },
+  continueGuest: {
+    color: '#325066',
+    fontSize: 20,
+  }
 })
