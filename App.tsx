@@ -26,7 +26,8 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import Welcome from './components/Welcome';
 import Login from './components/Login';
-
+import StartSearch from './components/StartSearch';
+StartSearch
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
@@ -68,7 +69,8 @@ function App(): React.JSX.Element {
  
     <>
      {/* <Welcome /> */}
-     <Login />
+     {/* <Login /> */}
+      <StartSearch /> 
      </>
   );
 }
