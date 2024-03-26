@@ -1,15 +1,23 @@
-
 import React from 'react';
-import { SafeAreaView, StyleSheet, View, Text, TextInput } from 'react-native';
+import { SafeAreaView, StyleSheet, View, Text, TextInput ,Image,TouchableOpacity,ScrollView} from 'react-native';
 import NearByShop from './NearByShop';
+import NearByServices from './NearByServices';
+import NearByClassified from './NearByClassified';
 
 const StartSearch = () => {
   const [text, onChangeText] = React.useState('Useless Text');
   const [number, onChangeNumber] = React.useState('');
 
   return (
+    <ScrollView>
     <View style={styles.maincontainerr}>
     <View style={styles.containerr}>
+      <View style={{}}>
+        <TouchableOpacity>
+        <Image source={require('../images/radius.jpg')} style={styles.radiusimage}  />
+        </TouchableOpacity>
+      </View>
+      <View>
       <Text style={styles.searcheadr}>Start your Search</Text>
       <View style={styles.flexr}>
         <Text  style={styles.labelr}>Keyword:</Text>
@@ -19,7 +27,8 @@ const StartSearch = () => {
           value={number}
           keyboardType="numeric"
         />
-      </View>
+      </View></View>
+
       <View style={styles.flexr}>
         <Text style={styles.labelr}>Category:</Text>
         <TextInput
@@ -31,7 +40,10 @@ const StartSearch = () => {
       </View>
       </View>
       <NearByShop />
+      <NearByServices />
+      <NearByClassified />
     </View>
+    </ScrollView>
   );
 };
 
@@ -44,12 +56,11 @@ const styles = StyleSheet.create({
   containerr: {
 
    alignItems: 'center',
-    marginTop: 70,
+    marginTop: 20,
   },
   searcheadr:{
     color: '#b51e3b',
     fontSize: 18,
-    textAlign: 'right',
   },
   labelr:{
     color: '#525355',

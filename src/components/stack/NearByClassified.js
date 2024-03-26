@@ -3,21 +3,21 @@ import { SafeAreaView, StyleSheet, View, Text, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 
-const NearByShop = () => {
+const NearByClassified = () => {
   const [text, onChangeText] = React.useState('Useless Text');
   const [number, onChangeNumber] = React.useState('');
 
   const navigation=useNavigation();
 
   const handleExplore=()=>{
-    navigation.navigate('ExploreNearShop');
+    navigation.navigate('ExploreClassified');
 
   }
 
   return (
     <View style={styles.componentr2}>
 
-      <Text style={styles.nearbyboxr}>Near by Shop</Text>
+      <Text style={styles.nearbyboxr}>NearByClassified</Text>
       <View style={styles.flexboxr}>
         <View style={styles.imagesbox}>
           <Image source={require('../images/bajaj.png')} style={styles.nearbyimg} />
@@ -36,8 +36,6 @@ const NearByShop = () => {
             <Text style={styles.textCenter}>0.6 kms</Text>
 
           </View>
-
-
 
 
         </View>
@@ -68,7 +66,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#61d836',
     fontSize: 18,
     color: '#fff',
-    width: 125,
+    width: "40%",
     paddingLeft: 0,
     paddingRight: 0,
     paddingTop: 7,
@@ -85,7 +83,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     // alignItems: 'center',
     paddingTop: 25,
-    paddingBottom: 25,
+    paddingBottom: 20,
     paddingLeft: 30,
     paddingRight: 30,
     gap: 40,
@@ -108,4 +106,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NearByShop;
+export default NearByClassified;

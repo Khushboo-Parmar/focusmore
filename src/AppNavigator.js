@@ -10,45 +10,40 @@ import StartSearch from './components/stack/StartSearch';
 import BottomNavPage from './components/tab/BottomNavPage';
 import { useNavigation } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/Entypo';
-import {Text} from 'react-native';
+import { Text } from 'react-native';
+import ExploreNearShop from './components/stack/ExploreNearShop';
+import ExploreNearServices from './components/stack/ExploreNearServices';
+import ExploreClassified from './components/stack/ExploreClassified';
 
-// const TitleWithLocationIcon = ({ title }) => {
-//   return (
-//     <React.Fragment>
-//       <Text style={{ color: '#fff' }}>{title}</Text>
-//       <Icon name="location-pin" size={20} color="#fff" />
-//     </React.Fragment>
-//   );
-// };
 
 const AppNavigator = () => {
 
   const Stack = createNativeStackNavigator();
-  const navigation=useNavigation();
+  const navigation = useNavigation();
   return (
     <>
       <Stack.Navigator
-       screenOptions={{
-        statusBarColor: '#0163d2',
-        headerStyle: {
-          backgroundColor: '#0163d2',
-        },
-        headerTintColor: '#fff',
-        headerTitleAlign: 'center',
+        screenOptions={{
+          statusBarColor: '#0163d2',
+          headerStyle: {
+            backgroundColor: '#0163d2',
+          },
+          headerTintColor: '#fff',
+          headerTitleAlign: 'center',
 
-        headerLeft: () => {
-          return (
-            <Icon
-              name="menu"
-              onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
-              size={30}
-              color="#fff"
-            />
-          );
-        },
-      }}
+          headerLeft: () => {
+            return (
+              <Icon
+                name="menu"
+                onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+                size={30}
+                color="#fff"
+              />
+            );
+          },
+        }}
 
-      
+
       >
         <Stack.Screen name="Welcome" component={Welcome} options={{ headerShown: false }} />
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
@@ -64,16 +59,10 @@ const AppNavigator = () => {
             ),
           }}
         />
-             {/* <Stack.Screen
-          name="StartSearch"
-          component={StartSearch}
-          options={{
-            headerRight: () => (
-              <TitleWithLocationIcon title="Koti, Hyderabad" />
-            ),
-          }}
-        /> */}
         <Stack.Screen name="BottomNavPage" component={BottomNavPage} />
+        <Stack.Screen name="ExploreNearShop" component={ExploreNearShop} />
+        <Stack.Screen name="ExploreNearServices" component={ExploreNearServices} />
+        <Stack.Screen name="ExploreClassified" component={ExploreClassified} />
       </Stack.Navigator>
     </>
   )
