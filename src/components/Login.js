@@ -1,8 +1,19 @@
 import React from 'react'
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TextInput, TouchableOpacity,SafeAreaView} from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+
+
 
 export default function Login() {
+  const navigation=useNavigation();
+
+
+  const handleLogin = () => {
+    navigation.navigate('StartSearch');
+  }
+  
   return (
+  
     <View style={styles.container}>
 
       <Text style={styles.text}>Welcome </Text>
@@ -16,8 +27,8 @@ export default function Login() {
         <TextInput style={styles.input} placeholder='Password'
           placeholderTextColor='white'
           secureTextEntry={true} />
-        <TouchableOpacity style={styles.loginbutton}>
-          <Text style={styles.loginbuttonText}>Login</Text>
+        <TouchableOpacity style={styles.loginbutton} onPress={handleLogin}>
+          <Text style={styles.loginbuttonText} >Login</Text>
         </TouchableOpacity>
 
       </View>
@@ -40,6 +51,7 @@ export default function Login() {
         <Text style={styles.continueGuest}>Continue as a Guest</Text>
       </View>
     </View>
+
   )
 }
 

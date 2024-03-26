@@ -1,6 +1,7 @@
+
 import React from 'react';
 import { SafeAreaView, StyleSheet, View, Text, TextInput } from 'react-native';
-import NearByShop from '../components/NearByShop';
+import NearByShop from './NearByShop';
 
 const StartSearch = () => {
   const [text, onChangeText] = React.useState('Useless Text');
@@ -48,6 +49,7 @@ const styles = StyleSheet.create({
   searcheadr:{
     color: '#b51e3b',
     fontSize: 18,
+    textAlign: 'right',
   },
   labelr:{
     color: '#525355',

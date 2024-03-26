@@ -28,6 +28,9 @@ const NearByShop = () => {
           <Text style={styles.textCenter}>Universal Book Store
             0.8 kms</Text>
         </View>
+        <View>
+          <Text style={styles.exploretext}>Explore More</Text>
+        </View>
       </View>
 
     </View>
@@ -51,7 +54,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   flexboxr: {
-    backgroundColor: '#f1f1f1',
+    backgroundColor: '#edeaea',
     // height: 'windowHeight',
     width: 390,
     display: 'flex',
@@ -62,13 +65,23 @@ const styles = StyleSheet.create({
     paddingBottom: 25,
     paddingLeft: 30,
     paddingRight: 30,
+    gap: 40,
   },
   nearbyimg: {
     marginBottom: 10,
   },
   textCenter: {
     textAlign: 'center',
-    width: 95,
+    width: 75,
+    color: 'black',
+    fontSize: 11,
+  },
+  exploretext: {
+    marginTop: 30,
+    width: 50,
+    textAlign: 'center',
+    color: '#6ec8f8',
+    fontFamily: 'math',
   },
 });
 
