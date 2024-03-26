@@ -3,7 +3,7 @@ import { SafeAreaView, StyleSheet, View, Text, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 
-const NearByShop = () => {
+const NearByServices = () => {
   const [text, onChangeText] = React.useState('Useless Text');
   const [number, onChangeNumber] = React.useState('');
 
@@ -17,7 +17,7 @@ const NearByShop = () => {
   return (
     <View style={styles.componentr2}>
 
-      <Text style={styles.nearbyboxr}>Near by Shop</Text>
+      <Text style={styles.nearbyboxr}>Near by Services</Text>
       <View style={styles.flexboxr}>
         <View style={styles.imagesbox}>
           <Image source={require('../images/bajaj.png')} style={styles.nearbyimg} />
@@ -68,9 +68,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#61d836',
     fontSize: 18,
     color: '#fff',
-    width: 125,
-    paddingLeft: 0,
-    paddingRight: 0,
+    width: '38%',
+    paddingLeft: 2,
+    paddingRight: 2,
     paddingTop: 7,
     paddingBottom: 7,
     textAlign: 'center',
@@ -108,4 +108,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NearByShop;
+export default NearByServices;
