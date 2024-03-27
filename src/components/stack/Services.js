@@ -3,7 +3,7 @@ import React from "react";
 import { SafeAreaView, StyleSheet, Text, View, Image, Button, TouchableOpacity, TextInput } from 'react-native';
 
 
-export const Service = () => {
+ const Service = () => {
 
     return (
         <>
@@ -43,3 +43,4 @@ export const Service = () => {
 
         </>)
     }
+    export default Service;

@@ -1,61 +1,72 @@
-import React from 'react';
-import { SafeAreaView, StyleSheet, View, Text, Image } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 
 const NearByShop = () => {
-  const [text, onChangeText] = React.useState('Useless Text');
-  const [number, onChangeNumber] = React.useState('');
+  const [data, setData] = useState(null);
 
-  const navigation=useNavigation();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = await AsyncStorage.getItem('token');
+        if (token) {
+          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+          const response = await axios.get('http://focusmore.codelive.info/api/shop/list');
+          setData(response.data.data);
+          console.warn(response)
+        }
+      } catch (error) {
+        console.error('Error fetching nearby shops:', error);
+      }
+    };
 
-  const handleExplore=()=>{
+    fetchData();
+  }, []);
+
+  const navigation = useNavigation();
+
+  const handleExplore = () => {
     navigation.navigate('ExploreNearShop');
+  };
 
-  }
+  const handleImgClick = () => {
+    navigation.navigate('DetailPage');
+  };
 
   return (
     <View style={styles.componentr2}>
-
-      <Text style={styles.nearbyboxr}>Near by Shop</Text>
+      <Text style={styles.nearbyboxr}>Nearby Shop</Text>
       <View style={styles.flexboxr}>
-        <View style={styles.imagesbox}>
-          <Image source={require('../images/bajaj.png')} style={styles.nearbyimg} />
-          <View>
-            <Text style={styles.textCenter}>Bajaj Electronics</Text>
-            <Text style={styles.textCenter}>0.5 kms</Text>
+        {data ? (
+          <>
+            {data.slice(0, 3).map((shop) => (
+              <View style={styles.imagesbox} key={shop.id}>
+                {/* <TouchableOpacity onPress={handleImgClick}> */}
+                {/* <TouchableOpacity  onPress={()=>{navigation.navigate('Detail',{data:[{id:i.id,name:i.name,address:i.address,phone:i.phone}]});}}> */}
+                <TouchableOpacity onPress={() => navigation.navigate('Detail', { data: [{ id: shop.id, name: shop.name, address: shop.address, phone: shop.phone }] })}>
 
-          </View>
-        </View>
-
-        <View style={styles.imagesbox}>
-          <Image source={require('../images/bajaj.png')} style={styles.nearbyimg} />
-          <View>
-            <Text style={styles.textCenter}>Havells</Text>
-
-            <Text style={styles.textCenter}>0.6 kms</Text>
-
-          </View>
-
-
-
-
-        </View>
-
-        <View>
-          <Image source={require('../images/bajaj.png')} style={styles.nearbyimg} />
-            <View>
-            <Text style={styles.textCenter}>Universal Book Store</Text>
-            <Text style={styles.textCenter}>0.8 kms</Text>
-          </View>
-        </View>
+                  {/* <Image source={{ uri: shop.image_url }} style={styles.nearbyimg} />
+                   */}
+                  <Image source={require('../images/bajaj.png')} style={styles.nearbyimg} />
+                </TouchableOpacity>
+                <View>
+                  <Text style={styles.textCenter}>{shop.name}</Text>
+                  <Text style={styles.textCenter}>0.5 kms</Text>
+                </View>
+              </View>
+            ))}
+          </>
+        ) : (
+          <Text>Loading...</Text>
+        )}
         <View>
           <TouchableOpacity onPress={handleExplore}>
-          <Text style={styles.exploretext}>Explore More</Text>
+            <Text style={styles.exploretext}>Explore More</Text>
           </TouchableOpacity>
         </View>
       </View>
-
     </View>
   );
 };
@@ -78,12 +89,10 @@ const styles = StyleSheet.create({
   },
   flexboxr: {
     backgroundColor: '#edeaea',
-    // height: 'windowHeight',
     width: 390,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    // alignItems: 'center',
     paddingTop: 25,
     paddingBottom: 25,
     paddingLeft: 30,
@@ -92,6 +101,8 @@ const styles = StyleSheet.create({
   },
   nearbyimg: {
     marginBottom: 10,
+    width: 100,
+    height: 100,
   },
   textCenter: {
     textAlign: 'center',

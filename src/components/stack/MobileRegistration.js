@@ -1,9 +1,15 @@
 
 import React from "react";
 import { SafeAreaView, StyleSheet, Text, View, Image, Button, TouchableOpacity, TextInput } from 'react-native';
+import { useNavigation } from '@react-navigation/native'
 
 
-export const MobileRegistration = () => {
+ const MobileRegistration = () => {
+    const navigation = useNavigation();
+
+    const handleGet=()=>{
+            navigation.navigate('OtpRegistration');
+    }
 
     return (
         <>
@@ -17,7 +23,7 @@ export const MobileRegistration = () => {
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginTop: 10, marginRight: 10 }}>
                     <TouchableOpacity style={{ backgroundColor: 'black', width: 125, alignItems: 'center', paddingVertical: 7, borderRadius: 13 }}>
-                        <Text style={{ alignItems: 'flex-end', color: 'white', fontWeight: '500' }}>Get</Text>
+                        <Text style={{ alignItems: 'flex-end', color: 'white', fontWeight: '500' }} onPress={handleGet}>Get</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -25,3 +31,4 @@ export const MobileRegistration = () => {
 
         </>)
 }
+export default MobileRegistration;
