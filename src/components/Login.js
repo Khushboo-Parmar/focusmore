@@ -1,39 +1,63 @@
-import React from 'react'
-import { StyleSheet, Text, View, TextInput, TouchableOpacity,SafeAreaView} from 'react-native'
-import { useNavigation } from '@react-navigation/native'
-
-
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from 'axios';
 
 export default function Login() {
-  const navigation=useNavigation();
+  const navigation = useNavigation();
+
+  const [emailOrMobile, setEmailOrMobile] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  // const handleLogin = async () => {
+  //   try {
+  //     setLoading(true);
+  //     const response = await axios.post(`http://focusmore.codelive.info/api/login`, {
+  //       email: emailOrMobile,
+  //       password: password,
+  //     });
+  //     const token = response.data.data.token;
+  //     await AsyncStorage.setItem('token', token);
+  //     navigation.navigate('StartSearch');
+  //   } catch (error) {
+  //     console.error('Login error:', error);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
 
-  const handleLogin = () => {
+  const handleLogin=()=>{
     navigation.navigate('StartSearch');
   }
-  
   return (
-  
     <View style={styles.container}>
-
       <Text style={styles.text}>Welcome </Text>
-      <Text style={styles.texttwo}>To</Text>
-      <Text style={styles.textthree}>F
-        <Text style={styles.textfour}>O</Text>CUSM<Text style={styles.textfour}>O</Text>RE</Text>
-
+      <Text style={styles.text}>To</Text>
+      <Text style={styles.logo}>FOCUSMORE</Text>
 
       <View style={styles.form}>
-        <TextInput style={styles.input} placeholder='Mobile number/Email' placeholderTextColor='white' />
-        <TextInput style={styles.input} placeholder='Password'
+        <TextInput
+          style={styles.input}
+          placeholder='Mobile number/Email'
           placeholderTextColor='white'
-          secureTextEntry={true} />
-        <TouchableOpacity style={styles.loginbutton} onPress={handleLogin}>
-          <Text style={styles.loginbuttonText} >Login</Text>
+          value={emailOrMobile}
+          onChangeText={text => setEmailOrMobile(text)}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder='Password'
+          placeholderTextColor='white'
+          secureTextEntry={true}
+          value={password}
+          onChangeText={text => setPassword(text)}
+        />
+        <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
+          <Text style={styles.loginButtonText}>Login</Text>
         </TouchableOpacity>
-
       </View>
-
-
 
       <View style={styles.bottomBtns}>
         <TouchableOpacity style={styles.newUser}>
@@ -44,15 +68,11 @@ export default function Login() {
         </TouchableOpacity>
       </View>
 
-
-
       <View style={styles.continue}>
-        <></>
         <Text style={styles.continueGuest}>Continue as a Guest</Text>
       </View>
     </View>
-
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -60,39 +80,26 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'orange',
     paddingTop: 10,
-
+    alignItems: 'center',
   },
   text: {
-    color: 'black',
-    fontSize: 30,
-    fontWeight: '500',
-    textAlign: 'center',
-    // letterSpacing:0
-  },
-  texttwo: {
     color: 'white',
     fontSize: 30,
     fontWeight: '500',
     textAlign: 'center',
   },
-  textthree: {
-    color: 'white',
+  logo: {
+    color: 'aqua',
     fontSize: 45,
     fontWeight: '500',
     textAlign: 'center',
     letterSpacing: 3,
   },
   form: {
+    marginTop: 50,
     alignItems: 'center',
-    marginTop: 100,
-    gap: 15,
-
+    justifyContent: 'center',
   },
-  label: {
-    textAlign: 'center',
-    padding: 5,
-  },
-
   input: {
     backgroundColor: '#af792f',
     width: 330,
@@ -100,30 +107,24 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 12,
     fontSize: 18,
+    marginBottom: 20,
   },
-  textfour: {
-    color: 'aqua'
-
-  },
-  loginbutton: {
+  loginButton: {
     backgroundColor: '#51473a',
     width: 329,
-    color: 'white',
     borderRadius: 12,
     padding: 14,
+    alignItems: 'center',
   },
-  loginbuttonText: {
+  loginButtonText: {
     color: 'white',
-    textAlign: 'center',
-
+    fontSize: 18,
   },
-
   bottomBtns: {
-    display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginTop:15,
-   
+    marginTop: 15,
+    width: '100%',
   },
   newUser: {
     borderBottomWidth: 1,
@@ -136,12 +137,10 @@ const styles = StyleSheet.create({
     color: '#325066',
   },
   continue: {
-    display: 'flex',
-    alignItems: 'center',
-    marginTop: 100
+    marginTop: 100,
   },
   continueGuest: {
     color: '#325066',
     fontSize: 20,
-  }
-})
+  },
+});

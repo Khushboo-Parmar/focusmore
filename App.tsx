@@ -7,10 +7,9 @@ import DrawerNavigatorPage from './src/components/drawer/DrawerNavigtorPage'
 const App = () => {
   const Stack = createNativeStackNavigator();
 
-  // const Drawer = createDrawerNavigator();
   return (
     <>
-      {/* <AppNavigator /> */}
+    
       <DrawerNavigatorPage />
     </>
   )

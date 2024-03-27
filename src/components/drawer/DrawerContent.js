@@ -5,25 +5,27 @@ import {Avatar, Title} from 'react-native-paper';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import BusinessAdd from '../stack/BusinessAdd';
+
 
 const DrawerList = [
-  {icon: 'home-outline', label: 'Register', navigateTo: 'Register'},
-  {icon: 'home-outline', label: 'Login', navigateTo: 'Login'},
+  {icon: 'file-document-outline', label: 'Register', navigateTo: 'MobileRegistration'},
+  {icon: 'login', label: 'Login', navigateTo: 'Login'},
   {icon: 'home-outline', label: 'Home', navigateTo: 'Home'},
-  {icon: 'account-multiple', label: 'Categories', navigateTo: 'Categories'},
-  {icon: 'account-group', label: 'Add Business', navigateTo: 'AddBusiness'},
-  {icon: 'bookshelf', label: 'Add Services', navigateTo: 'AddServices'},
-  {icon: 'bookshelf', label: 'Add Classifieds', navigateTo: 'AddClassifieds'},
-  {icon: 'bookshelf', label: 'Find Job', navigateTo: ''},
-  {icon: 'bookshelf', label: 'Setting', navigateTo: ''},
-  {icon: 'bookshelf', label: 'Privacy Policy', navigateTo: ''},
-  {icon: 'bookshelf', label: 'Terms & Condition', navigateTo: ''},
-  {icon: 'bookshelf', label: 'Help', navigateTo: ''},
+  {icon: 'border-none', label: 'Categories', navigateTo: 'Categories'},
+  {icon: 'home-city-outline', label: 'Add Business', navigateTo: 'BusinessAdd'},
+  {icon: 'account-search', label: 'Add Services', navigateTo: 'AddServices'},
+  {icon: 'text-box-search-outline', label: 'Add Classifieds', navigateTo: 'AddClassifieds'},
+  {icon: 'briefcase-account-outline', label: 'Find Job', navigateTo: ''},
+  {icon: 'wrench-clock', label: 'Setting', navigateTo: ''},
+  {icon: 'shield-lock-outline', label: 'Privacy Policy', navigateTo: ''},
+  {icon: 'note-check-outline', label: 'Terms & Condition', navigateTo: ''},
+  {icon: 'information-outline', label: 'Help', navigateTo: ''},
 ];
 
 const DrawerLayout = ({icon, label, navigateTo}) => {
   const navigation = useNavigation();
-  // console.log(userData);
+
   return (
     <DrawerItem
       icon={({color, size}) => <Icon name={icon} color={color} size={size} />}

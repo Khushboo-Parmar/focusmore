@@ -1,11 +1,10 @@
-
 import React from "react";
-import { SafeAreaView, StyleSheet, Text, View, Image, Button, TouchableOpacity, TextInput } from 'react-native';
-import getDirections from 'react-native-google-maps-directions'
+import { Button, View } from 'react-native';
+import getDirections from 'react-native-google-maps-directions';
 
-
-export const Location = () => {
-    handleGetDirections = () => {
+const Location = () => {
+  
+  const handleGetDirections = () => {
     const data = {
       source: {
         latitude: -33.8356372,
@@ -41,15 +40,13 @@ export const Location = () => {
       ]
     };
 
-    getDirections(data)
-  }
+    getDirections(data);
+  };
 
-    return (
-        <>
-        <View style={{marginTop:200}}>
-        <Button onPress={this.handleGetDirections} title="Get Directions" />
-      </View> 
-
-        
-        </>)
-    }
+  return (
+    <View style={{marginTop: 200}}>
+      <Button onPress={handleGetDirections} title="Get Directions" />
+    </View>
+  );
+};
+export default Location;

@@ -6,6 +6,7 @@ import Call from './Call';
 import Chat from './Chat';
 import Mail from './Mail';
 import Website from './Website';
+import StackAndBottom from './StackAndBottom';
 
 
 
@@ -15,12 +16,8 @@ const BottomNavPage=()=>{
   return(
         <Tab.Navigator  screenOptions={{
             headerShown: false,
-            // tabBarActiveTintColor: 'blue', 
-            // tabBarInactiveTintColor: 'black',
-            // tabBarStyle: {
-        
-            // },
           }}>
+          <Tab.Screen name="StackAndBottom" component={StackAndBottom} />
           <Tab.Screen name="Product" component={Product} />
           <Tab.Screen name="Call" component={Call} />
           <Tab.Screen name="Chat" component={Chat} />
