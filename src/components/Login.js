@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-nativ
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from 'axios';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default function Login() {
   const navigation = useNavigation();
@@ -11,32 +12,32 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // const handleLogin = async () => {
-  //   try {
-  //     setLoading(true);
-  //     const response = await axios.post(`http://focusmore.codelive.info/api/login`, {
-  //       email: emailOrMobile,
-  //       password: password,
-  //     });
-  //     const token = response.data.data.token;
-  //     await AsyncStorage.setItem('token', token);
-  //     navigation.navigate('StartSearch');
-  //   } catch (error) {
-  //     console.error('Login error:', error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+  const handleLogin = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.post(`https://focusmore.codelive.info/api/login`, {
+        email: emailOrMobile,
+        password: password,
+      });
+      const token = response.data.data.token;
+      await AsyncStorage.setItem('token', token);
+      navigation.navigate('StartSearch');
+    } catch (error) {
+      console.error('Login error:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
-  const handleLogin=()=>{
-    navigation.navigate('StartSearch');
-  }
+  // const handleLogin = () => {
+  //   navigation.navigate('StartSearch');
+  // }
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Welcome </Text>
-      <Text style={styles.text}>To</Text>
-      <Text style={styles.logo}>FOCUSMORE</Text>
+      <Text style={styles.texttwo}>To</Text>
+      <Text style={styles.textthree}>F<Text style={styles.textfour}>O</Text>CUSM<Text style={styles.textfour}>O</Text>RE</Text>
 
       <View style={styles.form}>
         <TextInput
@@ -60,15 +61,16 @@ export default function Login() {
       </View>
 
       <View style={styles.bottomBtns}>
-        <TouchableOpacity style={styles.newUser}>
-          <Text>New user sign up</Text>
+        <TouchableOpacity >
+          <Text style={styles.newUser}>New user sign up</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.forgetPassword}>
-          <Text>Forget Password?</Text>
+        <TouchableOpacity>
+          <Text style={styles.newUser}>Forget Password?</Text>
         </TouchableOpacity>
       </View>
 
       <View style={styles.continue}>
+        <Icon name="play-box-multiple-outline" size={30} color="black"/>
         <Text style={styles.continueGuest}>Continue as a Guest</Text>
       </View>
     </View>
@@ -79,21 +81,38 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'orange',
-    paddingTop: 10,
+    paddingTop: 15,
     alignItems: 'center',
   },
   text: {
+    color: 'black',
+    fontSize: 30,
+    fontWeight: '800',
+    textAlign: 'center',
+    // letterSpacing:0
+  },
+  texttwo: {
     color: 'white',
     fontSize: 30,
     fontWeight: '500',
     textAlign: 'center',
   },
-  logo: {
-    color: 'aqua',
+  textthree: {
+    color: 'white',
     fontSize: 45,
     fontWeight: '500',
     textAlign: 'center',
     letterSpacing: 3,
+  },
+  // logo: {
+  //   color: 'aqua',
+  //   fontSize: 45,
+  //   fontWeight: '500',
+  //   textAlign: 'center',
+  //   letterSpacing: 3,
+  // },
+  textfour: {
+    color: 'aqua',
   },
   form: {
     marginTop: 50,
@@ -128,19 +147,16 @@ const styles = StyleSheet.create({
   },
   newUser: {
     borderBottomWidth: 1,
-    borderBottomColor: '#325066',
-    color: '#325066',
-  },
-  forgetPassword: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#325066',
-    color: '#325066',
+    borderBottomColor: '#354e7d',
+    color: '#354e7d', 
   },
   continue: {
     marginTop: 100,
+    alignItems: 'center',
   },
   continueGuest: {
     color: '#325066',
     fontSize: 20,
   },
+
 });
