@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet, Text, ImageBackground} from 'react-native';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import {Avatar, Title} from 'react-native-paper';
 import {TouchableOpacity} from 'react-native-gesture-handler';
@@ -54,7 +54,10 @@ function DrawerContent(props) {
     <View style={{flex: 1}}>
       <DrawerContentScrollView {...props}>
         <View style={styles.drawerContent}>
-          <TouchableOpacity activeOpacity={0.8}>
+
+        <ImageBackground source={require('../images/bgimage.jpg')}>
+          <TouchableOpacity activeOpacity={0.8} style={styles.bgImage}>
+        
             <View style={styles.userInfoSection}>
               <View style={{flexDirection: 'row', marginTop: 15}}>
                 <Avatar.Image
@@ -72,20 +75,22 @@ function DrawerContent(props) {
                 </View>
               </View>
             </View>
+        
           </TouchableOpacity>
+          </ImageBackground>
           <View style={styles.drawerSection}>
             <DrawerItems />
           </View>
         </View>
       </DrawerContentScrollView>
-      {/* <View style={styles.bottomDrawerSection}>
+      <View style={styles.bottomDrawerSection}>
         <DrawerItem
           icon={({color, size}) => (
             <Icon name="exit-to-app" color={color} size={size} />
           )}
           label="Sign Out"
         />
-      </View> */}
+      </View>
     </View>
   );
 }
@@ -94,6 +99,7 @@ export default DrawerContent;
 const styles = StyleSheet.create({
   drawerContent: {
     flex: 1,
+    marginTop:0
   },
   userInfoSection: {
     paddingLeft: 20,
@@ -145,4 +151,5 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 16,
   },
+
 });

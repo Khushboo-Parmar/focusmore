@@ -11,23 +11,16 @@ import { Text } from 'react-native';
 import ExploreNearShop from './components/stack/ExploreNearShop';
 import ExploreNearServices from './components/stack/ExploreNearServices';
 import ExploreClassified from './components/stack/ExploreClassified';
-import DetailPage from './components/stack/DetailPage';
 import Location from './components/stack/Location';
 import MobileRegistration from './components/stack/MobileRegistration';
 import OtpRegistration from './components/stack/OtpRegistration';
-import Details from './components/stack/DetailPage';
-import Product from './components/tab/Product';
-import Service  from './components/stack/Services';
-import SocialMedia from './components/stack/SocilaMedia'
-import Broucher from './components/stack/Brouchere';
-import ServiceTiming from './components/stack/Timing';
-import Reviews from './components/stack/Reviews';
-import Experience from './components/stack/Experience';
-import Services from './components/stack/DriverService';
-import Gallery from './components/stack/Gallery';
-import Certificates from './components/stack/Certificates';
-import SetReviews from './components/stack/SetReview';
+import SocialMedia from './components/tab/stackbottom/SocilaMedia'
+import Broucher from './components/tab/stackbottom/Brouchere';
+import ServiceTiming from './components/tab/stackbottom/Timing';
+
 import BusinessAdd from './components/stack/BusinessAdd';
+
+// import Product from './components/stack/Product';
 
 const AppNavigator = () => {
 
@@ -64,51 +57,97 @@ const AppNavigator = () => {
           name="StartSearch"
           component={StartSearch}
           options={{
-            headerTitle:'',
+            headerTitle: '',
             headerRight: () => (
               <>
-                <Text style={{ color: '#fff', marginRight: 5 }}>Koti, Hyderabad</Text>
+                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
                 <Icon name="location-pin" size={20} color="#fff" />
               </>
             ),
           }}
         />
-        <Stack.Screen name="BottomNavPage" component={BottomNavPage} />
-        <Stack.Screen name="ExploreNearShop" component={ExploreNearShop} options={{
-            headerRight: () => (
-              <>
-                <Text style={{ color: '#fff', marginRight: 5 }}>Koti, Hyderabad</Text>
-                <Icon name="location-pin" size={20} color="#fff" />
-              </>
-            ),
-          }}/>
-        <Stack.Screen name="ExploreNearServices" component={ExploreNearServices} options={{
-            headerRight: () => (
-              <>
-                <Text style={{ color: '#fff', marginRight: 5 }}>Koti, Hyderabad</Text>
-                <Icon name="location-pin" size={20} color="#fff" />
-              </>
-            ),
-          }}/>
-        <Stack.Screen name="ExploreClassified" component={ExploreClassified} />
-        {/* <Stack.Screen name="DetailPage" component={DetailPage} /> */}
-        {/* <Stack.Screen name="DetailPage" component={BottomNavPage} /> */}
-        <Stack.Screen name="Location" component={Location} />
-        <Stack.Screen name="MobileRegistration" component={MobileRegistration} />
-        <Stack.Screen name="OtpRegistration" component={OtpRegistration} />
 
-        <Stack.Screen name="Detail" component={Details} />
-        <Stack.Screen name="ShopProducts" component={Product} />
-        <Stack.Screen name="Services" component={Service} />
-        <Stack.Screen name="SocialMedia" component={SocialMedia} />
-        <Stack.Screen name="Broucher" component={Broucher} />
-        <Stack.Screen name="ServiceTiming" component={ServiceTiming} />
-        <Stack.Screen name="Reviews" component={Reviews} />
-        <Stack.Screen name="Experience" component={Experience} />
-        <Stack.Screen name="Gallery" component={Gallery} />
-        <Stack.Screen name="Certificates" component={Certificates} />
-        <Stack.Screen name="SetReviews" component={SetReviews} />
-        <Stack.Screen name="BusinessAdd" component={BusinessAdd} />
+        <Stack.Screen name="ExploreNearShop" component={ExploreNearShop} options={{
+          headerTitle: '',
+          headerRight: () => (
+            <>
+              <Text style={{ color: '#fff', marginRight: 5 }}>Koti, Hyderabad</Text>
+              <Icon name="location-pin" size={20} color="#fff" />
+            </>
+          ),
+        }} />
+        <Stack.Screen name="ExploreNearServices" component={ExploreNearServices} options={{
+          headerTitle: '',
+          headerRight: () => (
+            <>
+              <Text style={{ color: '#fff', marginRight: 5 }}>Koti, Hyderabad</Text>
+              <Icon name="location-pin" size={20} color="#fff" />
+            </>
+          ),
+        }} />
+        <Stack.Screen name="ExploreClassified" component={ExploreClassified}
+          options={{
+            headerTitle: '',
+            headerRight: () => (
+              <>
+                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+                <Icon name="location-pin" size={20} color="#fff" />
+              </>
+            ),
+          }} />
+
+        <Stack.Screen name="Location" component={Location}
+          options={{
+            headerTitle: '',
+            headerRight: () => (
+              <>
+                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+                <Icon name="location-pin" size={20} color="#fff" />
+              </>
+            ),
+          }} />
+        <Stack.Screen name="MobileRegistration" component={MobileRegistration}
+          options={{
+            headerTitle: '',
+            headerRight: () => (
+              <>
+                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+                <Icon name="location-pin" size={20} color="#fff" />
+              </>
+            ),
+          }} />
+        <Stack.Screen name="OtpRegistration" component={OtpRegistration}
+          options={{
+            headerTitle: '',
+            headerRight: () => (
+              <>
+                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+                <Icon name="location-pin" size={20} color="#fff" />
+              </>
+            ),
+          }}
+        />
+
+        <Stack.Screen name="BusinessAdd" component={BusinessAdd}
+          options={{
+            headerTitle: '',
+            headerRight: () => (
+              <>
+                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+                <Icon name="location-pin" size={20} color="#fff" />
+              </>
+            ),
+          }} />
+
+        <Stack.Screen name="BottomNavPage" component={BottomNavPage} options={{
+          headerTitle: '',
+          headerRight: () => (
+            <>
+              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+              <Icon name="location-pin" size={20} color="#fff" />
+            </>
+          ),
+        }} />
       </Stack.Navigator>
     </>
   )

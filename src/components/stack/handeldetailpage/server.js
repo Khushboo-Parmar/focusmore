@@ -1,9 +1,10 @@
 export async function fetchProducts(id) {
+    const token = await AsyncStorage.getItem('token');
     try {
         const result = await fetch('http://focusmore.codelive.info/api/shop/product', {
             method: 'POST',
             headers: {
-                'Authorization': 'Bearer 45|neT3OvlNU0LKpA05F9C4IfS3bKFsKRtCKe0D9oL78fbf33ff',
+                'Authorization': `Bearer ${token}` ,
                 'Content-Type':'application/json'
             },
             body:JSON.stringify({
@@ -20,11 +21,12 @@ export async function fetchProducts(id) {
 
 
 export async function fetchServices(id) {
+    const token = await AsyncStorage.getItem('token');
     try {
         const result = await fetch('http://focusmore.codelive.info/api/shop/services', {
             method: 'POST',
             headers: {
-                'Authorization': 'Bearer 45|neT3OvlNU0LKpA05F9C4IfS3bKFsKRtCKe0D9oL78fbf33ff',
+                'Authorization': `Bearer ${token}` ,
                 'Content-Type':'application/json'
             },
             body:JSON.stringify({
