@@ -1,13 +1,13 @@
 
 import React from "react";
 import { SafeAreaView, StyleSheet, Text, View, Image, Button, TouchableOpacity, TextInput } from 'react-native';
-
+import { useNavigation } from '@react-navigation/native'
 
 const OtpRegistration = () => {
-
+  const navigation = useNavigation();
     return (
         <>
-             <View style={{padding:20}}>
+             {/* <View style={{padding:20}}>
       <View style={{flexDirection:'row',width:'100%',alignItems:'center'}}>
         <Text style={{color:'#5e5e61',fontSize:17}}>Mobile Number:</Text>
         <TextInput
@@ -20,7 +20,24 @@ const OtpRegistration = () => {
       <Text style={{ alignItems: 'flex-end',color: 'white', fontWeight: '500' }}>Get</Text>
     </TouchableOpacity>
   </View>
-     </View>
+     </View> */}
+
+           <View style={{ alignItems: 'center' }}>
+  <Text style={{ justifyContent: 'center', marginBottom: 30,marginTop:30 , fontSize:20 , color:'#5f5e61'}}>Get Verified !</Text>
+  <View style={{ flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
+    <TextInput style={styles.input} maxLength={1} />
+    <TextInput style={styles.input} maxLength={1} />
+    <TextInput style={styles.input} maxLength={1} />
+    <TextInput style={styles.input} maxLength={1} />
+    <TextInput style={styles.input} maxLength={1} />
+    <TextInput style={styles.input} maxLength={1} />
+  </View>
+  <View style={{ flexDirection:'row', justifyContent:'flex-end', marginTop: 20 ,marginRight:10}}>
+    <TouchableOpacity onPress={()=>{ navigation.navigate('resgistration');}} style={{ backgroundColor: 'black', width: 125, alignItems: 'center', paddingVertical: 7, borderRadius: 13 }}>
+      <Text style={{ alignItems: 'flex-end',color: 'white', fontWeight: '500' }}>Get</Text>
+    </TouchableOpacity>
+  </View>
+</View>
 
         
         </>)

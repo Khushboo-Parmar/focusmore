@@ -1,11 +1,57 @@
+
 import React, { useEffect, useState } from "react";
 import { Text, View, Image,TouchableOpacity,StyleSheet, TextInput } from "react-native";
 import { fetchAllData } from "./handeldetailpage/server";
 import { useNavigation } from '@react-navigation/native';
 import AwesomeIcon from "react-native-vector-icons/FontAwesome5";
 import { ScrollView } from "react-native-gesture-handler";
+// import Geolocation from '@react-native-community/geolocation';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 const BusinessAdd=()=>{
+  const [name, setName] = useState('');
+const [description, setDescription] = useState('');
+const [phone, setPhone] = useState('');
+const [email, setEmail] = useState('');
+const [website, setWebsite] = useState('');
+const [location, setLocation] = useState('');
+const [lan, setLan] = useState('567878578957568');
+const [lat, setLat] = useState('093409309309344');
+
+
+
+const handelsumbit = async () =>{
+  const token = await AsyncStorage.getItem('token');
+
+    try{
+      const result = await fetch('https://focusmore.codelive.info/api/shop/add', {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}` ,
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify({
+            name:name,
+            address:'testing',
+            latitude:lat,
+            longitude:lan,
+            email:email,
+            website:website,
+            phone:phone,
+            alt_phone:phone,
+            description:description,
+            user_id:1
+          }),
+    });
+    const response = await result.json();
+    console.warn(response)
+    }catch(e){
+     console.warn(e)
+    }
+
+}
+
     return(
       <>
 <ScrollView>
@@ -32,6 +78,7 @@ const BusinessAdd=()=>{
       Business Name:
       </Text>
       <TextInput
+      onChangeText={(e)=>{setName(e)}}
       style={[styles.input,{width:200}]}
       placeholder=''
     />
@@ -42,6 +89,7 @@ const BusinessAdd=()=>{
       About:
       </Text>
       <TextInput
+      onChangeText={(e)=>{setDescription(e)}}
       style={[styles.input,{width:200,height:50}]}
       placeholder=''
     />
@@ -51,6 +99,7 @@ const BusinessAdd=()=>{
       Contact:
       </Text>
       <TextInput
+      onChangeText={(e)=>{setPhone(e)}}
       style={[styles.input,{width:200}]}
       placeholder=''
     />
@@ -60,6 +109,7 @@ const BusinessAdd=()=>{
       Email:
       </Text>
       <TextInput
+      onChangeText={(e)=>{setEmail(e)}}
       style={[styles.input,{width:200}]}
       placeholder=''
     />
@@ -69,6 +119,7 @@ const BusinessAdd=()=>{
       Website:
       </Text>
       <TextInput
+      onChangeText={(e)=>{setWebsite(e)}}
       style={[styles.input,{width:200}]}
       placeholder=''
     />
@@ -83,9 +134,7 @@ const BusinessAdd=()=>{
       <View style={{paddingHorizontal:20,marginTop:10}}>
 
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-  <View style={{ backgroundColor: '#d6d5d5', borderColor: '#218a86', borderWidth: 1, borderRadius: 100, width: 13, height: 13, justifyContent: 'center', alignItems: 'center' }}>
-    
-  </View>
+      <View style={{ borderColor: '#218a86', borderWidth: 1, borderRadius: 1, width: 13, height: 13, justifyContent: 'center',marginRight:10}}></View>
   <View>
   <Text style={{ fontWeight: '600', marginLeft: 10 }}>Use my current location</Text>
   <Text style={{color:'#747d85',fontSize:10,marginLeft: 10}}>(KPHB main road, Madhapur)</Text>
@@ -94,7 +143,7 @@ const BusinessAdd=()=>{
 
 
 
-      <Text style={{textAlign:'center',color:'#0c81d2',fontSize:12}}>(OR)</Text>
+      <Text style={{textAlign:'center',color:'#0c81d2',fontSize:12,marginBottom:10}}>(OR)</Text>
       </View>
 
       <View style={{flexDirection:'row',marginBottom:10}}>
@@ -159,65 +208,115 @@ const BusinessAdd=()=>{
     </View>
 
 
-    <View style={{ flexDirection: 'row', marginBottom: 15 }}>
+    <View style={{ flexDirection: 'row', marginTop: 15 }}>
   <Text style={{ textAlign: 'left', width: '32%', fontWeight: '600' }}>
     Business Days:
   </Text>
 
-  <View style={{ flexDirection: 'row', flexWrap: 'wrap', flex: 1 }}>
-    <Text style={{ fontSize: 11, fontWeight: '600', marginRight: 15 , alignItems:'center' }}>
-      <View style={{ backgroundColor: '#d6d5d5', borderColor: '#218a86', borderWidth: 1, borderRadius: 100, width: 13, height: 13, justifyContent: 'center', alignItems: 'center' }}></View>
-      All Days</Text>
-    <Text style={{ fontSize: 11, fontWeight: '600', marginRight: 10 }}>
-    <View style={{ backgroundColor: '#d6d5d5', borderColor: '#218a86', borderWidth: 1, borderRadius: 100, width: 13, height: 13, justifyContent: 'center', alignItems: 'center' }}></View>
-      Mon</Text>
-    <Text style={{ fontSize: 11, fontWeight: '600', marginRight: 10 }}>
-    <View style={{ backgroundColor: '#d6d5d5', borderColor: '#218a86', borderWidth: 1, borderRadius: 100, width: 13, height: 13, justifyContent: 'center', alignItems: 'center' }}></View>
-      Tue</Text>
-    <Text style={{ fontSize: 11, fontWeight: '600', marginRight: 10 }}>
-    <View style={{ backgroundColor: '#d6d5d5', borderColor: '#218a86', borderWidth: 1, borderRadius: 100, width: 13, height: 13, justifyContent: 'center', alignItems: 'center' }}></View>
-      Wed</Text>
-    <Text style={{ fontSize: 11, fontWeight: '600', marginRight: 10 }}>
-    <View style={{ backgroundColor: '#d6d5d5', borderColor: '#218a86', borderWidth: 1, borderRadius: 100, width: 13, height: 13, justifyContent: 'center', alignItems: 'center' }}></View>
-      Thu</Text>
-    <Text style={{ fontSize: 11, fontWeight: '600', marginRight: 10 }}>
-    <View style={{ backgroundColor: '#d6d5d5', borderColor: '#218a86', borderWidth: 1, borderRadius: 100, width: 13, height: 13, justifyContent: 'center', alignItems: 'center' }}></View>
-      Fri</Text>
-    <Text style={{ fontSize: 11, fontWeight: '600', marginRight: 10 }}>
-    <View style={{ backgroundColor: '#d6d5d5', borderColor: '#218a86', borderWidth: 1, borderRadius: 100, width: 13, height: 13, justifyContent: 'center', alignItems: 'center' }}></View>
-      Sat</Text>
-    <Text style={{ fontSize: 11, fontWeight: '600' }}>
-    <View style={{ backgroundColor: '#d6d5d5', borderColor: '#218a86', borderWidth: 1, borderRadius: 100, width: 13, height: 13, justifyContent: 'center', alignItems: 'center' }}></View>
-      Sun</Text>
+  <View style={{ flexDirection: 'row', flexWrap: 'wrap', flex: 1,width:100 }}>
+
+
+  <View style={{flexDirection:'row',gap:10,flexWrap:'wrap'}}>
+
+
+      <View style={{alignItems:'center',flexDirection:'row'}}>
+        
+        <View style={{ borderColor: '#218a86', borderWidth: 1, borderRadius: 1, width: 13, height: 13, justifyContent: 'center',marginRight:10}}></View>
+        <Text style={{ fontSize: 11, fontWeight: '600'}}>
+          All Days</Text>
+        </View>
+
+
+
+        <View style={{alignItems:'center',flexDirection:'row'}}>
+        <View style={{ borderColor: '#218a86', borderWidth: 1, borderRadius: 1, width: 13, height: 13, justifyContent: 'center',marginRight:10}}></View>
+        <Text style={{ fontSize: 11, fontWeight: '600'}}>
+        {/* <View style={{ backgroundColor: '#d6d5d5', borderColor: '#218a86', borderWidth: 1, borderRadius: 100, width: 13, height: 13, justifyContent: 'center', alignItems: 'center' }}></View> */}
+       
+          Mon</Text>
+        </View>
+
+        <View style={{alignItems:'center',flexDirection:'row'}}>
+        <View style={{ borderColor: '#218a86', borderWidth: 1, borderRadius: 1, width: 13, height: 13, justifyContent: 'center',marginRight:10}}></View>
+        <Text style={{ fontSize: 11, fontWeight: '600'}}>
+        {/* <View style={{ backgroundColor: '#d6d5d5', borderColor: '#218a86', borderWidth: 1, borderRadius: 100, width: 13, height: 13, justifyContent: 'center', alignItems: 'center' }}></View> */}
+       
+          Tue</Text>
+        </View>
+
+        <View style={{alignItems:'center',flexDirection:'row'}}>
+        <View style={{ borderColor: '#218a86', borderWidth: 1, borderRadius: 1, width: 13, height: 13, justifyContent: 'center',marginRight:10}}></View>
+        <Text style={{ fontSize: 11, fontWeight: '600'}}>
+        {/* <View style={{ backgroundColor: '#d6d5d5', borderColor: '#218a86', borderWidth: 1, borderRadius: 100, width: 13, height: 13, justifyContent: 'center', alignItems: 'center' }}></View> */}
+       
+          Wed</Text>
+        </View>
+
+        <View style={{alignItems:'center',flexDirection:'row'}}>
+        <View style={{ borderColor: '#218a86', borderWidth: 1, borderRadius: 1, width: 13, height: 13, justifyContent: 'center',marginRight:10}}></View>
+        <Text style={{ fontSize: 11, fontWeight: '600'}}>
+        {/* <View style={{ backgroundColor: '#d6d5d5', borderColor: '#218a86', borderWidth: 1, borderRadius: 100, width: 13, height: 13, justifyContent: 'center', alignItems: 'center' }}></View> */}
+       
+          Thu</Text>
+        </View>
+
+        <View style={{alignItems:'center',flexDirection:'row'}}>
+        <View style={{ borderColor: '#218a86', borderWidth: 1, borderRadius: 1, width: 13, height: 13, justifyContent: 'center',marginRight:10}}></View>
+        <Text style={{ fontSize: 11, fontWeight: '600'}}>
+        {/* <View style={{ backgroundColor: '#d6d5d5', borderColor: '#218a86', borderWidth: 1, borderRadius: 100, width: 13, height: 13, justifyContent: 'center', alignItems: 'center' }}></View> */}
+       
+          Fri</Text>
+        </View>
+
+        <View style={{alignItems:'center',flexDirection:'row'}}>
+        <View style={{ borderColor: '#218a86', borderWidth: 1, borderRadius: 1, width: 13, height: 13, justifyContent: 'center',marginRight:10}}></View>
+        <Text style={{ fontSize: 11, fontWeight: '600'}}>
+        {/* <View style={{ backgroundColor: '#d6d5d5', borderColor: '#218a86', borderWidth: 1, borderRadius: 100, width: 13, height: 13, justifyContent: 'center', alignItems: 'center' }}></View> */}
+       
+          Sat</Text>
+        </View>
+        
+      </View>
   </View>
 </View>
 
 
-<View style={{flexDirection:'row',marginBottom:15}}>
+<View style={{flexDirection:'row',marginTop:25}}>
       <Text style={{textAlign:'left',width:'48%',fontWeight:'600'}} >
       Home Delivery Service:
       </Text>
-      <View style={{flexDirection:'row'}}>
-        <Text style={{ fontSize: 11, fontWeight: '600', marginRight: 35 }}>
-        <View style={{ backgroundColor: '#d6d5d5', borderColor: '#218a86', borderWidth: 1, borderRadius: 100, width: 13, height: 13, justifyContent: 'center', alignItems: 'center' }}></View>
+      <View style={{flexDirection:'row',gap:20}}>
+      <View style={{alignItems:'center',flexDirection:'row'}}>
+
+        <View style={{ borderColor: '#218a86', borderWidth: 1, borderRadius: 1, width: 13, height: 13, justifyContent: 'center',marginRight:10}}></View>
+        <Text style={{ fontSize: 11, fontWeight: '600'}}>
+        {/* <View style={{ backgroundColor: '#d6d5d5', borderColor: '#218a86', borderWidth: 1, borderRadius: 100, width: 13, height: 13, justifyContent: 'center', alignItems: 'center' }}></View> */}
+       
           Yes</Text>
-        <Text style={{ fontSize: 11, fontWeight: '600', marginRight: 15 }}>
-        <View style={{ backgroundColor: '#d6d5d5', borderColor: '#218a86', borderWidth: 1, borderRadius: 100, width: 13, height: 13, justifyContent: 'center', alignItems: 'center' }}></View>
+        </View>
+
+
+
+        <View style={{alignItems:'center',flexDirection:'row'}}>
+        <View style={{ borderColor: '#218a86', borderWidth: 1, borderRadius: 1, width: 13, height: 13, justifyContent: 'center',marginRight:10}}></View>
+        <Text style={{ fontSize: 11, fontWeight: '600'}}>
+        {/* <View style={{ backgroundColor: '#d6d5d5', borderColor: '#218a86', borderWidth: 1, borderRadius: 100, width: 13, height: 13, justifyContent: 'center', alignItems: 'center' }}></View> */}
+       
           No</Text>
+        </View>
         
       </View>
     </View>
 
 
-    <View style={{flexDirection:'row',marginBottom:15}}>
+    <View style={{flexDirection:'row',marginTop:20}}>
       <Text style={{textAlign:'left',width:'28%',fontWeight:'600'}} >
       Banner Image:
       </Text>
-    <Image style={{width:150,height:150}} source={{uri:'https://thumbs.dreamstime.com/b/businessman-avatar-image-beard-hairstyle-male-profile-vector-illustration-178545831.jpg'}} />
     </View>
 
-    <View style={{ flexDirection:'row', justifyContent:'flex-start' ,marginRight:10}}>
-    <TouchableOpacity style={{ backgroundColor: 'black', width: 125, alignItems: 'center', paddingVertical: 7, borderRadius: 13 }}>
+    <View style={{ flexDirection:'row', justifyContent:'flex-start' ,marginRight:10,marginVertical:20}}>
+    <TouchableOpacity onPress={handelsumbit} style={{ backgroundColor: 'black', width: 125, alignItems: 'center', paddingVertical: 7, borderRadius:10 }}>
       <Text style={{ alignItems: 'flex-end',color: 'white', fontWeight: '500' }}>Regtister</Text>
     </TouchableOpacity>
   </View>
@@ -225,9 +324,7 @@ const BusinessAdd=()=>{
   </View>
 </View>
 
-     
-
-
+    
 {/* // {/ 29  /}
 
       /* <View>
@@ -339,6 +436,8 @@ const styles = StyleSheet.create({
       borderColor: '#9b9b9b',
       marginLeft: 5,
       height:30,
+      borderRadius:3,
+      paddingHorizontal:10
     },
     time_input: {
       borderWidth: 1,

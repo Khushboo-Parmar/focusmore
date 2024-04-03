@@ -1,4 +1,3 @@
-
 import React from "react";
 import { SafeAreaView, StyleSheet, Text, View, Image, Button, TouchableOpacity, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
