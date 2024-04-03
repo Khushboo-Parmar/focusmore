@@ -2,7 +2,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
 import { useNavigation } from '@react-navigation/native';
-import { ImageBackground, StyleSheet, Text, View, Image, Button, TouchableOpacity, TextInput } from 'react-native';
+import { ImageBackground, StyleSheet, Text, View, Image, Button, TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import Toast from 'react-native-toast-message';
 
 
 export const SignUp = () => {
@@ -30,7 +31,16 @@ export const SignUp = () => {
       const response = await result.json();
       console.warn(response)
       if(response.status <= 200){
+        Toast.show({
+          type: 'success',
+          text1:  `${response.message} 🚀`
+        });
         navigation.navigate('Login');
+      }else{
+        Toast.show({
+          type: 'error',
+          text1:  `${response.details?.email ? response.details?.email :response.message} 📦`,
+        });
       }
       }catch(e){
        console.warn(e)
@@ -42,7 +52,7 @@ export const SignUp = () => {
         <>
         <View style={{ alignItems: 'center' }}>
   <Image source={{uri:'https://png.pngtree.com/png-vector/20220826/ourmid/pngtree-gold-congratulations-lettering-graduate-sticker-with-confetti-transparent-background-png-image_6109456.png'}} style={{width:150,height:150}} />
-
+<ScrollView>
   <View style={{ paddingHorizontal: 20 }}>
   <View style={styles.inputRow}>
     <Text style={[styles.label,{textAlign:'right'}]}><Text style={styles.required}>*</Text> email:</Text>
@@ -114,7 +124,7 @@ export const SignUp = () => {
     </TouchableOpacity>
   </View>
 </View>
-
+</ScrollView>
 </View>
 
         
@@ -140,6 +150,9 @@ export const SignUp = () => {
           borderWidth: 1,
           borderColor: '#9b9b9b',
           marginLeft: 5, 
-          borderRadius:2
+          borderRadius:2,
+          height:36 ,
+          borderRadius: 8, 
+          color:'black',
         },
       });

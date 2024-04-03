@@ -17,7 +17,7 @@ const Services = (props) => {
         if (token) {
 
           axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-          const response = await fetch('http://focusmore.codelive.info/api/shop/services', {
+          const response = await fetch('https://focusmore.codelive.info/api/shop/services', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ const Services = (props) => {
 
               <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
                 <Text style={{ color: '#34a3ff', fontWeight: '900', fontSize: 11 }}>Description:</Text>
-                <Text style={{ fontWeight: '900', fontSize: 11 }}>
+                <Text style={{ fontWeight: '900', fontSize: 11 , color:'black'}}>
                   Samsung TV's, Washing machines, Micro Ovens, Refrigerators can
                   be repaired by our authorized Samsung Company Engineer. This
                   is a home Service you can send your request for further details/services.
@@ -79,7 +79,7 @@ const Services = (props) => {
             </View>
           ))}
         </>
-      ) : <Text style={{ alignSelf: 'center', marginTop: 200 }}>No Data Found</Text>}
+      ) : <Text style={{ alignSelf: 'center', marginTop: 200,color:'black' }}>No Data Found</Text>}
 
     </>)
 }

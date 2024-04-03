@@ -6,31 +6,11 @@ import LogoImg from "../images/blog.png"
 import Icon from 'react-native-vector-icons/AntDesign';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import { ActivityIndicator } from 'react-native-paper';
 
 const ExploreNearServices = () => {
     const [data, setData] = React.useState(null);
 
-    // useEffect(() => {
-    //     const fecthdata = async () => {
-    //         try {
-    //             const result = await fetch('http://focusmore.codelive.info/api/service/list', {
-    //                 method: 'GET',
-    //                 headers: {
-    //                     'Authorization': 'Bearer 13|PmgqcSMWjH1KmGs9yTdSLX6Nr3xIoocPOEzZgxkJc655b6bb'
-    //                 }
-    //             });
-
-    //             const response = await result.json();
-    //             setData(response.data)
-    //         } catch (e) {
-    //             console.log(JSON.stringify(e),);
-    //         }
-    //     }
-    //     fecthdata()
-    // }, [])
-
-
-    
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,7 +18,7 @@ const ExploreNearServices = () => {
         const token = await AsyncStorage.getItem('token');
         if (token) {
           axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-          const response = await axios.post('http://focusmore.codelive.info/api/service/list');
+          const response = await axios.post('https://focusmore.codelive.info/api/service/list');
           setData(response.data.data);
           console.warn('explore shop= ', response);
         }
@@ -100,7 +80,7 @@ const ExploreNearServices = () => {
                                 </View>
                             ))}
                         </>
-                    ) : <Text>Loading</Text>}
+                    ) : <ActivityIndicator size="large" color="black" style={{marginLeft: 160, marginTop: 200}}  />}
 
                 </View>
 

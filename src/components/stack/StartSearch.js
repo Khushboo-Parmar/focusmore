@@ -1,51 +1,21 @@
-
 import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
 import NearByShop from './NearByShop';
 import NearByServices from './NearByServices';
 import NearByClassified from './NearByClassified';
 import Dropdown from './Dropdown';
 
 const StartSearch = () => {
-  const [text, onChangeText] = React.useState('Useless Text');
-  const [number, onChangeNumber] = React.useState('');
-
+  const [text, onChangeText] = useState('Useless Text');
+  const [number, onChangeNumber] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
 
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
-    // Handle category selection logic here
   };
 
-
-  useEffect(() => {
-    const fetchOptions = async () => {
-      try {
-        0
-        const token = await AsyncStorage.getItem('token');
-        if (token) {
-          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-          const response = await axios.post('http://focusmore.codelive.info/api/category/list');
-          setOptions(response.data.data);
-          console.warn(response)
-        }
-      } catch (error) {
-        console.error('Error fetching options:', error);
-      }
-    };
-
-    fetchOptions();
-  }, []);
-
-  // const handleOptionSelect = (option) => {
-  //   setSelectedValue(option);
-  //   setIsDropdownOpen(false);
-  // };
-
   return (
-    <ScrollView style={{marginBottom:20}}>
+    <ScrollView style={{ marginBottom: 20 }}>
       <View style={styles.maincontainer}>
         <View style={{ display: 'flex', alignItems: 'flex-end', marginRight: 15, marginTop: 10 }}>
           <TouchableOpacity>
@@ -60,23 +30,21 @@ const StartSearch = () => {
               <TextInput
                 style={styles.input}
                 onChangeText={onChangeText}
-                value={number}
                 keyboardType="text"
               />
             </View>
 
             <View style={styles.flex2}>
-              <Text style={styles.label}>Category:</Text>
-              <View >
+              <Text style={[styles.label,{marginLeft:10}]}>Category:</Text>
+              <View>
                 <Dropdown onSelect={handleCategorySelect} />
               </View>
 
             </View>
-            {selectedCategory !== '' && (
+            {/* {selectedCategory !== '' && (
               <Text style={styles.selectedCategoryText}>Selected Category: {selectedCategory}</Text>
-            )}
+            )} */}
           </View>
-
         </View>
         <NearByShop />
         <NearByServices />
@@ -94,7 +62,6 @@ const styles = StyleSheet.create({
   },
   container: {
     alignItems: 'center',
-    // marginTop: 15,
   },
   searchheader: {
     color: '#b51e3b',
@@ -103,7 +70,6 @@ const styles = StyleSheet.create({
   label: {
     color: '#525355',
     fontSize: 20,
-
   },
   input: {
     margin: 12,
@@ -113,6 +79,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 10,
     borderWidth: 0.5,
+    color:'black'
   },
   flex: {
     display: 'flex',
@@ -123,10 +90,7 @@ const styles = StyleSheet.create({
   flex2: {
     display: 'flex',
     flexDirection: 'row',
-
   },
-
-
 });
 
 export default StartSearch;
