@@ -4,28 +4,51 @@ import React, { useEffect } from 'react';
 import { Text, View, Image, TouchableOpacity } from "react-native";
 import LogoImg from "../images/blog.png"
 import Icon from 'react-native-vector-icons/AntDesign';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 
 const ExploreNearServices = () => {
     const [data, setData] = React.useState(null);
 
-    useEffect(() => {
-        const fecthdata = async () => {
-            try {
-                const result = await fetch('http://focusmore.codelive.info/api/service/list', {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': 'Bearer 13|PmgqcSMWjH1KmGs9yTdSLX6Nr3xIoocPOEzZgxkJc655b6bb'
-                    }
-                });
+    // useEffect(() => {
+    //     const fecthdata = async () => {
+    //         try {
+    //             const result = await fetch('http://focusmore.codelive.info/api/service/list', {
+    //                 method: 'GET',
+    //                 headers: {
+    //                     'Authorization': 'Bearer 13|PmgqcSMWjH1KmGs9yTdSLX6Nr3xIoocPOEzZgxkJc655b6bb'
+    //                 }
+    //             });
 
-                const response = await result.json();
-                setData(response.data)
-            } catch (e) {
-                console.log(JSON.stringify(e),);
-            }
+    //             const response = await result.json();
+    //             setData(response.data)
+    //         } catch (e) {
+    //             console.log(JSON.stringify(e),);
+    //         }
+    //     }
+    //     fecthdata()
+    // }, [])
+
+
+    
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = await AsyncStorage.getItem('token');
+        if (token) {
+          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+          const response = await axios.post('http://focusmore.codelive.info/api/service/list');
+          setData(response.data.data);
+          console.warn('explore shop= ', response);
         }
-        fecthdata()
-    }, [])
+      } catch (error) {
+        console.error('Error fetching nearby shops:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
     return (
 
         <View style={{ backgroundColor: "#f2f2f2", width: 400, height: 800 }}>

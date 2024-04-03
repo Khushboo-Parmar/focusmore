@@ -63,7 +63,11 @@ const NearByServices = () => {
           <>
           {data.slice(0, 3).map((i)=>(
         <View style={styles.imagesbox} key={i.id}>
-        <Image source={require('../images/bajaj.png')} style={styles.nearbyimg} />
+       
+       <Image
+                    source={{ uri: i.image }}
+                    style={styles.nearbyimg}
+                  />
         <View>
           <Text style={styles.textCenter}>{i.name}</Text>
           <Text style={styles.textCenter}>0.5 kms</Text>
@@ -117,6 +121,8 @@ const styles = StyleSheet.create({
   },
   nearbyimg: {
     marginBottom: 10,
+    width:80,
+    height:80,
   },
   textCenter: {
     textAlign: 'center',

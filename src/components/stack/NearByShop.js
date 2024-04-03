@@ -15,7 +15,7 @@ const NearByShop = () => {
           axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
           const response = await axios.post('https://focusmore.codelive.info/api/shop/list');
           setData(response.data.data);
-          console.warn(response)
+          console.warn(response);
         }
       } catch (error) {
         console.error('Error fetching nearby shops:', error);
@@ -31,9 +31,6 @@ const NearByShop = () => {
     navigation.navigate('ExploreNearShop');
   };
 
-  const handleImgClick = () => {
-    navigation.navigate('DetailPage');
-  };
 
   return (
     <View style={styles.componentr2}>
@@ -43,36 +40,21 @@ const NearByShop = () => {
           <>
             {data.slice(0, 3).map((shop) => (
               <View style={styles.imagesbox} key={shop.id}>
-                {/* <TouchableOpacity onPress={handleImgClick}> */}
 
-                  {/* <Image source={{ uri: shop.image_url }} style={styles.nearbyimg} />
-                   */}
-                <TouchableOpacity onPress={() => navigation.navigate('BottomNavPage', { data: [{ id: shop.id, name: shop.name, address: shop.address, phone: shop.phone }] })}>
-
-
-                  <Image source={require('../images/bajaj.png')} style={styles.nearbyimg} />
+                <TouchableOpacity onPress={() =>
+                  navigation.navigate('BottomNavPage', {
+                    screen: 'StackAndBottom',
+                    params: {
+                      screen: 'DetailPage',
+                      params: { data: [{ id: shop.id, name: shop.name, address: shop.address, phone: shop.phone,description:shop.description }] }
+                    }
+                  })}>
+         
+                  <Image
+                    source={{ uri: shop.image }}
+                    style={styles.nearbyimg}
+                  />
                 </TouchableOpacity>
-
-
-{/* const handleImgClick = () => {
-  navigation.navigate('StackAndBottom', { screen: 'DetailPage', params: { data: [{ id: shop.id, name: shop.name, address: shop.address, phone: shop.phone }] } });
-}; */}
-
-
-{/* 
-<TouchableOpacity onPress={() => 
-  navigation.navigate('TestingBottom', {
-    screen: 'StackAndBottom', 
-    params: {
-      screen: 'DetailPage', 
-      params: { data: [{ id: shop.id, name: shop.name, address: shop.address, phone: shop.phone }] }
-    }
-  })}>
-  <Image source={require('../images/bajaj.png')} style={styles.nearbyimg} />
-</TouchableOpacity> */}
-
-
-
 
                 <View>
                   <Text style={styles.textCenter}>{shop.name}</Text>
@@ -124,7 +106,9 @@ const styles = StyleSheet.create({
   },
   nearbyimg: {
     marginBottom: 10,
-  
+    width:80,
+    height:80,
+
   },
   textCenter: {
     textAlign: 'center',

@@ -86,8 +86,15 @@ import React from "react";
 import { Text, View, Image } from "react-native";
 import LogoImg from "../images/blog.png"
 import  AwesomeIcon  from "react-native-vector-icons/FontAwesome5"; 
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { useNavigation } from '@react-navigation/native';
 
 const ExploreClassified = () => {
+    const navigation = useNavigation();
+
+    const handlePress=()=>{
+navigation.navigate('RealState')
+    }
     return (
 
         <View style={{ backgroundColor: "#f2f2f2", width: 400, height: 800 }}>
@@ -129,7 +136,9 @@ const ExploreClassified = () => {
             <View style={{borderBottomWidth:1, borderTopWidth:1,borderTopColor:"#d6d5d5",  borderBottomColor:"#d6d5d5",width: 400, display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection:"row" }}>
                 <View style={{display:"flex" ,alignItems:"center",flexDirection:"row" ,width:200}} >
                    
-                    <Text style={{ fontSize:12, color:"black" , paddingLeft:25}}>Real Estate</Text>
+                   <TouchableOpacity onPress={handlePress}
+                   
+                   ><Text style={{ fontSize:12, color:"black" , paddingLeft:25}}>Real Estate</Text> </TouchableOpacity>
                 </View>
 
                 <View  style={{ marginRight:30,display:"flex" ,alignItems:"center",justifyContent:"space-between",flexDirection:"row", width:80}}>
