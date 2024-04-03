@@ -21,6 +21,7 @@ import ServiceTiming from './components/tab/stackbottom/Timing';
 import BusinessAdd from './components/stack/BusinessAdd';
 import { SignUp } from './components/stack/SingUpSingIn';
 import RealState from './components/stack/RealState';
+import Rent from './components/stack/Rent';
 
 // import Product from './components/stack/Product';
 
@@ -164,6 +165,19 @@ const AppNavigator = () => {
             ),
           }}
         />
+
+<Stack.Screen name="Rent" component={Rent}
+          options={{
+            headerTitle: '',
+            headerRight: () => (
+              <>
+                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+                <Icon name="location-pin" size={20} color="#fff" />
+              </>
+            ),
+          }}
+        />
+
 
         <Stack.Screen name="BottomNavPage" component={BottomNavPage} options={{
           headerTitle: '',

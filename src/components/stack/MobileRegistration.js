@@ -16,7 +16,7 @@ import { useNavigation } from '@react-navigation/native'
                 <View style={{ flexDirection: 'row', width: '100%', alignItems: 'center' }}>
                     <Text style={{ color: '#5e5e61', fontSize: 17 }}>Mobile Number:</Text>
                     <TextInput
-                        style={{ borderWidth: 1, borderColor: '#9b9b9b', marginLeft: 10, width: '60%' }}
+                        style={{ borderWidth: 1, borderColor: '#9b9b9b', marginLeft: 10, width: '60%',height:36 ,borderRadius: 8}}
                         placeholder=''
                     />
                 </View>

@@ -132,7 +132,7 @@ const Product = (props) => {
                 if (token) {
               
                     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-                    const response = await fetch('http://focusmore.codelive.info/api/shop/product', {
+                    const response = await fetch('https://focusmore.codelive.info/api/shop/product', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -185,10 +185,10 @@ const Product = (props) => {
                      </View>
 
                      <View>
-                         <Text style={{ fontWeight: '900', fontSize: 11 }}>{i?.name}</Text>
-                         <Text style={{ fontWeight: '900', marginBottom: 5, fontSize: 11 }}>Rs. <Text style={{ color: 'red', fontWeight: '900' }}>{i?.price}</Text></Text>
-                         <Text style={{ fontWeight: '900', fontSize: 11 }}>Availability: <Text style={{ color: '#1fb965', fontWeight: '900' }}>{i?.in_stock > 1 ? 'In stock' : 'Out Of Stock'}</Text></Text>
-                         <Text style={{ fontWeight: '900', fontSize: 11 }}>Delivery Charges: <Text style={{ color: '#0076ba', fontWeight: '900' }}> Free Delivery</Text></Text>
+                         <Text style={{ fontWeight: '900', fontSize: 11,color:'black' }}>{i?.name}</Text>
+                         <Text style={{ fontWeight: '900', marginBottom: 5, fontSize: 11,color:'black' }}>Rs. <Text style={{ color: 'red', fontWeight: '900' }}>{i?.price}</Text></Text>
+                         <Text style={{ fontWeight: '900', fontSize: 11,color:'black' }}>Availability: <Text style={{ color: '#1fb965', fontWeight: '900' }}>{i?.in_stock > 1 ? 'In stock' : 'Out Of Stock'}</Text></Text>
+                         <Text style={{ fontWeight: '900', fontSize: 11 ,color:'black'}}>Delivery Charges: <Text style={{ color: '#0076ba', fontWeight: '900' }}> Free Delivery</Text></Text>
                          <View style={[styles.products, { marginTop: 5, marginBottom: 5 }]}>
                              <Text style={{ color: '#0076ba', fontWeight: '900', fontSize: 11 }}>Add to Wishlist</Text>
                              <Text style={{ color: 'red', fontWeight: '900', marginLeft: 20, fontSize: 11 }}>Interest on Product</Text>
@@ -196,9 +196,9 @@ const Product = (props) => {
                          </View>
                          <Text style={{ color: '#017b76', fontWeight: '900', fontSize: 11 }}>Offers:</Text>
                          <View style={{ marginTop: 7 }}>
-                             <Text style={{ fontWeight: '900', fontSize: 11 }}>Bajaj Finserv No Cost EMI PLANS</Text>
-                             <Text style={{ fontWeight: '900', fontSize: 11 }}>3 EMIs Rs. 14,430.00/month</Text>
-                             <Text style={{ fontWeight: '900', fontSize: 11 }}>6 EMIs Rs. 7,215.00/month</Text>
+                             <Text style={{ fontWeight: '900', fontSize: 11 ,color:'black'}}>Bajaj Finserv No Cost EMI PLANS</Text>
+                             <Text style={{ fontWeight: '900', fontSize: 11 ,color:'black'}}>3 EMIs Rs. 14,430.00/month</Text>
+                             <Text style={{ fontWeight: '900', fontSize: 11,color:'black' }}>6 EMIs Rs. 7,215.00/month</Text>
 
 
                          </View>
@@ -208,7 +208,7 @@ const Product = (props) => {
                  </View>
                    ))}
                 </>
-            ) : <Text style={{alignSelf:'center',marginTop:200}}>No Data Found</Text>}
+            ) : <Text style={{alignSelf:'center',marginTop:200,color:'black'}}>No Data Found</Text>}
 </ScrollView>
 
         </>

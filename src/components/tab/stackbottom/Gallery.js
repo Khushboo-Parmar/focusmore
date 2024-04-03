@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, View, Image } from "react-native";
-// import LogoImg from "../imagestab/blog.png";
+import LogoImg from "../imagestab/blog.png";
 import  AwesomeIcon  from "react-native-vector-icons/FontAwesome5"; 
 
 const Gallery = () => {

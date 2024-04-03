@@ -68,6 +68,8 @@ const NearByServices = () => {
                     source={{ uri: i.image }}
                     style={styles.nearbyimg}
                   />
+                   
+   
         <View>
           <Text style={styles.textCenter}>{i.name}</Text>
           <Text style={styles.textCenter}>0.5 kms</Text>

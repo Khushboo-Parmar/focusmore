@@ -4,7 +4,8 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
+import Toast from 'react-native-toast-message';
+import { ActivityIndicator } from 'react-native-paper';
 export default function Login() {
   const navigation = useNavigation();
 
@@ -21,18 +22,28 @@ export default function Login() {
       });
       const token = response.data.data.token;
       await AsyncStorage.setItem('token', token);
+      
+      Toast.show({
+        type: 'success',
+        text1:  `${response.data.message}`,
+        text2: `Welcome ${response.data.data.name} 👋`
+      });
+
       navigation.navigate('StartSearch');
     } catch (error) {
-      console.error('Login error:', error);
+      Toast.show({
+        type: 'error',
+        text1:  `Not A User Please Field A Valid Information 📦`,
+      });
     } finally {
       setLoading(false);
     }
   };
 
 
-  // const handleLogin = () => {
-  //   navigation.navigate('StartSearch');
-  // }
+if(loading){
+  return <ActivityIndicator size="large" color="black" style={{ marginTop: 200}} />
+}else{
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Welcome </Text>
@@ -75,6 +86,7 @@ export default function Login() {
       </View>
     </View>
   );
+}
 }
 
 const styles = StyleSheet.create({

@@ -30,8 +30,6 @@ const NearByShop = () => {
   const handleExplore = () => {
     navigation.navigate('ExploreNearShop');
   };
-
-
   return (
     <View style={styles.componentr2}>
       <Text style={styles.nearbyboxr}>Nearby Shop</Text>

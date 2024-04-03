@@ -4,14 +4,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export async function fetchProducts(id) {
     const token = await AsyncStorage.getItem('token');
     try {
-        const result = await fetch('http://focusmore.codelive.info/api/shop/product', {
+        const result = await fetch('https://focusmore.codelive.info/api/shop/product', {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}` ,
                 'Content-Type':'application/json'
             },
             body:JSON.stringify({
-                search: id,
+                shop_id: id,
               }),
         });
         const response = await result.json();
@@ -26,7 +26,7 @@ export async function fetchProducts(id) {
 export async function fetchServices(id) {
     const token = await AsyncStorage.getItem('token');
     try {
-        const result = await fetch('http://focusmore.codelive.info/api/shop/services', {
+        const result = await fetch('https://focusmore.codelive.info/api/shop/services', {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}` ,

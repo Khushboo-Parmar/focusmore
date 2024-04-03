@@ -46,9 +46,13 @@ const NearByClassified = () => {
           <>
             {data.slice(0, 3).map((i) => (
               <View style={styles.imagesbox} key={i.id}>
-                <Image
+                {/* <Image
                   source={{ uri: i.image }}
                   style={styles.nearbyimg}
+                /> */}
+                    <Image
+                    source={{ uri:"https://www.galvanandgardner.com/wp-content/uploads/2018/12/things-to-know-when-you-rent-a-home-or-apartment.jpeg" }}
+                    style={styles.nearbyimg}
                 />
                 <View>
                   <Text style={styles.textCenter}>{i.title}</Text>

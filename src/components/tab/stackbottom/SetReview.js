@@ -4,10 +4,12 @@ import AwesomeIcon from "react-native-vector-icons/FontAwesome5";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { TouchableOpacity } from "react-native-gesture-handler";
 import axios from 'axios';
+import Toast from 'react-native-toast-message';
 
-const SetReviews = (props) => {
+
+const SetReviews = ({ props }) => {
   const [rating, setRating] = useState(0);
-  const [reviewTitle, setReviewTitle] = useState(""); 
+  const [reviewTitle, setReviewTitle] = useState("");
 
   const [data, setData] = React.useState(null);
 
@@ -23,28 +25,38 @@ const SetReviews = (props) => {
 
   const handelsumbit = async () => {
     try {
-        const token = await AsyncStorage.getItem('token');
-        if (token) {
-            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-            const response = await fetch('https://focusmore.codelive.info/api/addrating', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}` 
-                },
-                body: JSON.stringify({
-                  rating:rating,
-                  shop_id: props.route.params?.id ,
-                  review:reviewTitle
-                }),
-            });
+      const token = await AsyncStorage.getItem('token');
+      if (token) {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        const response = await fetch('https://focusmore.codelive.info/api/addrating', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            rating: rating,
+            shop_id: props.route.params.params.params?.id,
+            review: reviewTitle
+          }),
+        });
 
-            const responseData = await response.json();
-            setData(responseData.data);
-            console.warn(responseData)
+        const responseData = await response.json();
+        setData(responseData.data);
+        if (responseData.status <= 200) {
+          Toast.show({
+            type: 'success',
+            text1: `${responseData.message} 🚀`
+          })
+        } else {
+          Toast.show({
+            type: 'error',
+            text1: `${responseData.details?.review} 📦`,
+          });
         }
+      }
     } catch (error) {
-        console.log('Error fetching data:', error);
+      console.log('Error fetching data:', error);
     }
   }
 
@@ -61,13 +73,14 @@ const SetReviews = (props) => {
           }}
         >
           <TextInput
-          onChangeText={(e)=>{setReviewTitle(e)}}
+            onChangeText={(e) => { setReviewTitle(e) }}
             style={{
               borderRadius: 7,
               backgroundColor: "#d6d5d5",
               width: 200,
               marginLeft: 10,
               padding: 5,
+              color:'black'
             }}
             placeholder="Review Title"
           />
@@ -87,7 +100,7 @@ const SetReviews = (props) => {
                 justifyContent: "space-between",
                 width: 80,
                 marginLeft: 10,
-                alignItems:'center'
+                alignItems: 'center'
               }}
             >
               {[1, 2, 3, 4, 5].map((index) => (
@@ -111,6 +124,7 @@ const SetReviews = (props) => {
             margin: 8,
             paddingLeft: 20,
             fontSize: 17,
+            color:'black',
           }}
           multiline={true}
           numberOfLines={4}
@@ -123,13 +137,13 @@ const SetReviews = (props) => {
             marginLeft: 293,
             marginTop: 10,
             borderRadius: 10,
-            position:'absolute',
-            bottom:8,
-            right:0
-            }}
+            position: 'absolute',
+            bottom: 8,
+            right: 0
+          }}
         >
           <TouchableOpacity
-               onPress={handelsumbit}
+            onPress={handelsumbit}
             style={{
               color: "white",
               fontSize: 17,
@@ -137,7 +151,7 @@ const SetReviews = (props) => {
               lineHeight: 25,
             }}
           >
-            <Text style={{textAlign:'center'}}>Post</Text>
+            <Text style={{ textAlign: 'center' }}>Post</Text>
           </TouchableOpacity>
         </View>
       </View>
