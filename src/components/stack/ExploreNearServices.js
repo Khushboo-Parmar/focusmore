@@ -12,32 +12,33 @@ const ExploreNearServices = () => {
     const [data, setData] = React.useState(null);
 
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const token = await AsyncStorage.getItem('token');
-        if (token) {
-          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-          const response = await axios.post('https://focusmore.codelive.info/api/service/list');
-          setData(response.data.data);
-          console.warn('explore shop= ', response);
-        }
-      } catch (error) {
-        console.error('Error fetching nearby shops:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const token = await AsyncStorage.getItem('token');
+                if (token) {
+                    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+                    const response = await axios.post('https://focusmore.codelive.info/api/service/list');
+                    setData(response.data.data);
+                    console.warn('explore shop= ', response);
+                }
+            } catch (error) {
+                console.error('Error fetching nearby shops:', error);
+            }
+        };
+        fetchData();
+    }, []);
     return (
 
         <View style={{ backgroundColor: "#f2f2f2", width: 400, height: 800 }}>
 
             <View>
 
-                <View style={{ backgroundColor: "white", display: "flex", alignItems: "flex-end", marginRight:10 }}>
-                <Icon name="search1" size={24} color="blue" />
+                <View style={{ backgroundColor: "white", display: "flex", alignItems: "flex-end", marginRight: 20 }}>
+                    <Icon name="search1" size={24} color="blue" />
                 </View>
+
+
 
                 <View style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "row" }}>
 
@@ -50,7 +51,7 @@ const ExploreNearServices = () => {
                     </View>
 
 
-                    <View style={{ backgroundColor: "white", borderTopWidth: 1, height: 28, width: 100, display: "flex", alignItems: "center" }}>
+                    <View style={{ borderColor: '#a5a5a5', backgroundColor: "white", borderTopWidth: 1, height: 28, width: 50, paddingHorizontal: 10 }}>
                         <TouchableOpacity>
                             <Image source={require('../images/radius.jpg')} />
                         </TouchableOpacity>
@@ -60,27 +61,29 @@ const ExploreNearServices = () => {
 
 
                     <View>
-                        <View style={{ backgroundColor: "white", borderTopWidth: 1, height: 28, width: 200, borderWidth: 1, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "row" }}>
-                            <Text style={{ fontSize: 15 }}>Select Category</Text>
-                            <Image source={LogoImg} style={{ width: 20, height: 20, marginLeft: 10 }} />
+                        <View style={{ borderColor: '#a5a5a5', backgroundColor: "white", borderTopWidth: 1, height: 29, width: 250, borderWidth: 1, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "row" }}>
+                            <Text style={{ fontSize: 15, color: '#a5a5a5', fontWeight: '400', marginRight: 20 }}>Select Category</Text>
+                            <Icon name="caretdown" size={15} color="#a5a5a5" />
 
                         </View>
                     </View>
                 </View>
+
+
                 <View style={{ display: "flex", alignItems: "center", justifyContent: "start", flexDirection: "row", flexWrap: "wrap" }}>
 
                     {data ? (
                         <>
                             {data.map((i) => (
                                 <View style={{ display: "flex", alignItems: "center", justifyContent: "center", }}>
-                                    <Image source={LogoImg} style={{ width: 80, height: 80, margin: 10 }} />
-                                    <Text style={{ fontSize: 15, color: "black" }}>
+                                    <Image source={{ uri: 'https://www.pngitem.com/pimgs/m/329-3295625_mechanic-png-transparent-png.png' }} style={{ width: 80, height: 80, margin: 10 }} />
+                                    <Text style={{ fontSize: 10, color: "black", fontWeight: '500' }}>
                                         {i.name}
                                     </Text>
                                 </View>
                             ))}
                         </>
-                    ) : <ActivityIndicator size="large" color="black" style={{marginLeft: 160, marginTop: 200}}  />}
+                    ) : <ActivityIndicator size="large" color="black" style={{ marginLeft: 160, marginTop: 200 }} />}
 
                 </View>
 
@@ -90,4 +93,5 @@ const ExploreNearServices = () => {
 
     )
 }
+
 export default ExploreNearServices;

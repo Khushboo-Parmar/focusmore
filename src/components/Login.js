@@ -6,12 +6,19 @@ import axios from 'axios';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Toast from 'react-native-toast-message';
 import { ActivityIndicator } from 'react-native-paper';
+import { add } from '../store/auth/Slice';
+import { UseDispatch, useDispatch } from 'react-redux';
+
+
 export default function Login() {
   const navigation = useNavigation();
+  const dispatch =useDispatch();
 
   const [emailOrMobile, setEmailOrMobile] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+
+
 
   const handleLogin = async () => {
     try {
@@ -28,7 +35,8 @@ export default function Login() {
         text1:  `${response.data.message}`,
         text2: `Welcome ${response.data.data.name} 👋`
       });
-
+      
+      dispatch(add(token))
       navigation.navigate('StartSearch');
     } catch (error) {
       Toast.show({
@@ -116,13 +124,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     letterSpacing: 3,
   },
-  // logo: {
-  //   color: 'aqua',
-  //   fontSize: 45,
-  //   fontWeight: '500',
-  //   textAlign: 'center',
-  //   letterSpacing: 3,
-  // },
   textfour: {
     color: 'aqua',
   },

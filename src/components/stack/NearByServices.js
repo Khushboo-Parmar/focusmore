@@ -20,7 +20,7 @@ const NearByServices = () => {
   //       'Authorization' : 'Bearer 13|PmgqcSMWjH1KmGs9yTdSLX6Nr3xIoocPOEzZgxkJc655b6bb'
   //      }
   //     });
-      
+
   //     const response = await result.json();
   //     setData(response.data)
   //   }catch(e){
@@ -46,9 +46,9 @@ const NearByServices = () => {
 
     fetchData();
   }, []);
-  const navigation=useNavigation();
+  const navigation = useNavigation();
 
-  const handleExplore=()=>{
+  const handleExplore = () => {
     navigation.navigate('ExploreNearServices');
 
   }
@@ -59,30 +59,30 @@ const NearByServices = () => {
       <Text style={styles.nearbyboxr}>Near by Services</Text>
       <View style={styles.flexboxr}>
 
-      {data ? (
+        {data ? (
           <>
-          {data.slice(0, 3).map((i)=>(
-        <View style={styles.imagesbox} key={i.id}>
-       
-       <Image
-                    source={{ uri: i.image }}
-                    style={styles.nearbyimg}
-                  />
-                   
-   
-        <View>
-          <Text style={styles.textCenter}>{i.name}</Text>
-          <Text style={styles.textCenter}>0.5 kms</Text>
-        </View>
-      </View>
-      
-          ))}
+            {data.slice(0, 3).map((i) => (
+              <View style={styles.imagesbox} key={i.id}>
+
+                <Image
+                  source={{ uri: i.image }}
+                  style={styles.nearbyimg}
+                />
+
+
+                <View>
+                  <Text style={styles.textCenter}>{i.name}</Text>
+                  <Text style={styles.textCenter}>0.5 kms</Text>
+                </View>
+              </View>
+
+            ))}
           </>
-        ):<Text>'Loading'</Text>}
+        ) : <Text>'Loading'</Text>}
 
         <View>
           <TouchableOpacity onPress={handleExplore}>
-          <Text style={styles.exploretext}>Explore More</Text>
+            <Text style={styles.exploretext}>Explore More</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -123,8 +123,8 @@ const styles = StyleSheet.create({
   },
   nearbyimg: {
     marginBottom: 10,
-    width:80,
-    height:80,
+    width: 80,
+    height: 80,
   },
   textCenter: {
     textAlign: 'center',

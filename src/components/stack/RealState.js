@@ -2,6 +2,7 @@ import React from "react";
 import { Text, View, Image, TouchableOpacity, ScrollView } from "react-native";
 import AwesomeIcon from "react-native-vector-icons/FontAwesome5";
 import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 const RealState = () => {
     const navigation = useNavigation();
@@ -19,7 +20,7 @@ const RealState = () => {
             <View style={{ display: 'flex', alignItems: 'flex-end', marginRight: 8 }}>
                 <AwesomeIcon name="search" color="#73fdea" size={25} />
             </View>
-
+{/* 
             <View style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "row" }}>
                 <View style={{}}>
                     <View style={{ backgroundColor: "#61d836", height: 30, width: 160, display: "flex", alignItems: "center" }}>
@@ -39,12 +40,40 @@ const RealState = () => {
                         <AwesomeIcon name="play" color="#d6d5d5" size={20} marginLeft={18} />
                     </View>
                 </View>
-            </View>
+            </View> */}
+            <View style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "row" }}>
+
+
+
+<View >
+    <View style={{ backgroundColor: "#61d836", height: 30, width: 160, display: "flex", alignItems: "center" }}>
+        <Text style={{ color: "white", fontSize: 14, padding: 3, paddingLeft: 20 , width:160 }}>Near by Classified</Text>
+    </View>
+</View>
+
+
+<View style={{ borderColor: '#a5a5a5', backgroundColor: "white", borderTopWidth: 1, height: 28, width: 50, paddingHorizontal: 10 }}>
+    <TouchableOpacity>
+        <Image source={require('../images/radius.jpg')} />
+    </TouchableOpacity>
+</View>
+
+
+
+
+<View>
+    <View style={{ borderColor: '#a5a5a5', backgroundColor: "white", borderTopWidth: 1, height: 29, width: 200, borderWidth: 1, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "row" }}>
+        <Text style={{ fontSize: 15, color: '#a5a5a5', fontWeight: '400', marginRight: 20 , color:'black'}}>Select Category</Text>
+        <Icon name="caretdown" size={15} color="#a5a5a5" />
+
+    </View>
+</View>
+</View>
 
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                 <Text style={{ marginHorizontal: 20, fontSize: 12, fontWeight: '500',color:'black' }}>Real Estate</Text>
                 <View>
-                    <Text style={{ marginHorizontal: 20, fontSize: 12, fontWeight: '500' }}>12</Text>
+                    <Text style={{ marginHorizontal: 20, fontSize: 12, fontWeight: '500' ,color:'black'}}>12</Text>
                 </View>
             </View>
 

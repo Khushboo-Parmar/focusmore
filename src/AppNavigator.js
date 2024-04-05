@@ -14,21 +14,20 @@ import ExploreClassified from './components/stack/ExploreClassified';
 import Location from './components/stack/Location';
 import MobileRegistration from './components/stack/MobileRegistration';
 import OtpRegistration from './components/stack/OtpRegistration';
-import SocialMedia from './components/tab/stackbottom/SocilaMedia'
-import Broucher from './components/tab/stackbottom/Brouchere';
-import ServiceTiming from './components/tab/stackbottom/Timing';
-
+import { UseSelector, useSelector } from 'react-redux';
 import BusinessAdd from './components/stack/BusinessAdd';
 import { SignUp } from './components/stack/SingUpSingIn';
 import RealState from './components/stack/RealState';
+import Map from './components/stack/Map';
 import Rent from './components/stack/Rent';
 
 // import Product from './components/stack/Product';
 
 const AppNavigator = () => {
-
+  const item = useSelector((state)=> state.token)
   const Stack = createNativeStackNavigator();
   const navigation = useNavigation();
+  console.log(item)
   return (
     <>
       <Stack.Navigator
@@ -51,12 +50,14 @@ const AppNavigator = () => {
             );
           },
         }}
-
-
       >
-        <Stack.Screen name="Welcome" component={Welcome} options={{ headerShown: false }} />
-        <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-        <Stack.Screen
+<Stack.Screen name="Welcome" component={Welcome} options={{ headerShown: false }} />
+        {!item?.length  ? (
+          <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+        ):(
+          <>
+                  
+                  <Stack.Screen
           name="StartSearch"
           component={StartSearch}
           options={{
@@ -100,6 +101,17 @@ const AppNavigator = () => {
           }} />
 
         <Stack.Screen name="Location" component={Location}
+          options={{
+            headerTitle: '',
+            headerRight: () => (
+              <>
+                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+                <Icon name="location-pin" size={20} color="#fff" />
+              </>
+            ),
+          }} />
+
+<Stack.Screen name="Map" component={Map}
           options={{
             headerTitle: '',
             headerRight: () => (
@@ -165,8 +177,7 @@ const AppNavigator = () => {
             ),
           }}
         />
-
-<Stack.Screen name="Rent" component={Rent}
+        <Stack.Screen name="Rent" component={Rent}
           options={{
             headerTitle: '',
             headerRight: () => (
@@ -178,7 +189,6 @@ const AppNavigator = () => {
           }}
         />
 
-
         <Stack.Screen name="BottomNavPage" component={BottomNavPage} options={{
           headerTitle: '',
           headerRight: () => (
@@ -188,6 +198,8 @@ const AppNavigator = () => {
             </>
           ),
         }} />
+          </>
+        )}
       </Stack.Navigator>
     </>
   )

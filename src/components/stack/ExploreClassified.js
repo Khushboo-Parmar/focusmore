@@ -15,11 +15,11 @@ const ExploreClassified = () => {
 
     return (
         <View style={{ backgroundColor: "#f2f2f2", width: 400, height: 800 }}>
-            <View style={{ display: 'flex', alignItems: 'flex-end', marginRight: 8 }}>
-                <AwesomeIcon name="search" color="#73fdea" size={25} />
+            <View style={{ backgroundColor: "white", display: "flex", alignItems: "flex-end", marginRight: 20 }}>
+                <Icon name="search1" size={24} color="blue" />
             </View>
 
-            <View style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "row" }}>
+            {/* <View style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "row" }}>
                 <View style={{}}>
                     <View style={{ backgroundColor: "#61d836", height: 30, width: 160, display: "flex", alignItems: "center" }}>
                         <Text style={{ color: "white", fontSize: 15, padding: 5, paddingLeft: 5 }}>Near by Classifieds</Text>
@@ -38,6 +38,34 @@ const ExploreClassified = () => {
                         <AwesomeIcon name="play" color="#d6d5d5" size={20} marginLeft={18} />
                     </View>
                 </View>
+            </View> */}
+            <View style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "row" }}>
+
+
+
+                <View >
+                    <View style={{ backgroundColor: "#61d836", height: 30, width: 160, display: "flex", alignItems: "center" }}>
+                        <Text style={{ color: "white", fontSize: 14, padding: 3, paddingLeft: 20 , width:160 }}>Near by Classified</Text>
+                    </View>
+                </View>
+
+
+                <View style={{ borderColor: '#a5a5a5', backgroundColor: "white", borderTopWidth: 1, height: 28, width: 50, paddingHorizontal: 10 }}>
+                    <TouchableOpacity>
+                        <Image source={require('../images/radius.jpg')} />
+                    </TouchableOpacity>
+                </View>
+
+
+
+
+                <View>
+                    <View style={{ borderColor: '#a5a5a5', backgroundColor: "white", borderTopWidth: 1, height: 29, width: 200, borderWidth: 1, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "row" }}>
+                        <Text style={{ fontSize: 15, color: '#a5a5a5', fontWeight: '400', marginRight: 20 , color:'black'}}>Select Category</Text>
+                        <Icon name="caretdown" size={15} color="#a5a5a5" />
+
+                    </View>
+                </View>
             </View>
 
             <View style={{ backgroundColor: " #e0e0d1", padding: 3 }}>
@@ -47,7 +75,7 @@ const ExploreClassified = () => {
             <View style={{ borderBottomWidth: 1, borderTopWidth: 1, borderTopColor: "#d6d5d5", borderBottomColor: "#d6d5d5", width: 400, display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row" }}>
                 <View style={{ display: "flex", alignItems: "center", flexDirection: "row", width: 200 }}>
                     <TouchableOpacity onPress={handlePress}>
-                        <Text style={{ fontSize: 13, color: "black", paddingLeft: 25 ,letterSpacing:0.5}}>Real Estate</Text>
+                        <Text style={{ fontSize: 13, color: "black", paddingLeft: 25, letterSpacing: 0.5 }}>Real Estate</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -59,7 +87,7 @@ const ExploreClassified = () => {
 
             <View style={{ borderBottomWidth: 1, borderBottomColor: "#d6d5d5", width: 400, height: 28, display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row" }}>
                 <View style={{ display: "flex", alignItems: "center", flexDirection: "row", width: 200 }}>
-                    <Text style={{ fontSize: 13, color: "black", paddingLeft: 25,letterSpacing:0.5}}>Job openings</Text>
+                    <Text style={{ fontSize: 13, color: "black", paddingLeft: 25, letterSpacing: 0.5 }}>Job openings</Text>
                 </View>
 
                 <View style={{ marginRight: 30, display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row", width: 80 }}>
@@ -70,7 +98,7 @@ const ExploreClassified = () => {
 
             <View style={{ borderBottomWidth: 1, borderBottomColor: "#d6d5d5", width: 400, height: 28, display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row" }}>
                 <View style={{ display: "flex", alignItems: "center", flexDirection: "row", width: 200 }}>
-                    <Text style={{ fontSize: 13, color: "black", paddingLeft: 25,letterSpacing:0.5 }}>Business offers</Text>
+                    <Text style={{ fontSize: 13, color: "black", paddingLeft: 25, letterSpacing: 0.5 }}>Business offers</Text>
                 </View>
 
                 <View style={{ marginRight: 30, display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row", width: 80 }}>
