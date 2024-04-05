@@ -2,10 +2,8 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { Text, View, Image, TouchableOpacity, StyleSheet, TextInput } from "react-native";
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-
 import productIcon from '../images/cart.jpg';
 import callIcon from '../images/call.png'
 import chatIcon from '../images/chat.png';
@@ -13,14 +11,11 @@ import mailIcon from '../images/mail.png';
 import websiteIcon from '../images/web.png';
 import star from '../images/star.png';
 import Icon from 'react-native-vector-icons/AntDesign';
-
 import { SelectList } from 'react-native-dropdown-select-list'
 import { ScrollView } from 'react-native-gesture-handler';
 import { ActivityIndicator } from 'react-native-paper';
-import CustomDropdown from './CustumDropdown';
-
-
-
+// import CustomDropdown from './CustumDropdown';
+import Dropdown from './Dropdown';
 
 const ExploreNearShop = () => {
   const [data, setData] = React.useState(null);
@@ -35,7 +30,6 @@ const ExploreNearShop = () => {
     { key: '5', value: 'Test' },
     { key: '6', value: 'Test' },
   ]
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -73,7 +67,7 @@ const ExploreNearShop = () => {
         <View style={{ backgroundColor: "#61d836", margin: 0, height: 40 }}>
           <Text style={{ color: 'white', fontSize: 20, padding: 8 }}>Near by Shops</Text>
         </View>
-        <View style={{position:'relative',right:210 ,top:10, zIndex:9999}}>
+        <View style={{ position: 'relative', right: 210, top: 10, zIndex: 9999 }}>
           <TouchableOpacity>
             <Image source={require('../images/radius.jpg')} />
           </TouchableOpacity>
@@ -84,13 +78,15 @@ const ExploreNearShop = () => {
             setSelected={(val) => setSelected(val)}
             data={datadropdown}
             save="value"
-            // style={styles.selectlist}
-            // textStyle={{ color: 'red' }}
             style={{ color: 'red' }}
           />
-     
+
 
         </View>
+
+        {/* <View style={styles.selectlistContainer}>
+        <Dropdown />
+        </View> */}
       </View>
 
 
@@ -101,7 +97,6 @@ const ExploreNearShop = () => {
 
               <View style={{ display: 'flex', flexDirection: 'row', padding: 10, justifyContent: 'space-between' }}>
 
-
                 <View style={{ alignItems: 'center' }}>
                   <TouchableOpacity>
                     <Image
@@ -109,34 +104,33 @@ const ExploreNearShop = () => {
                       style={{ width: 100, height: 80 }}
                     />
                   </TouchableOpacity>
-                  <Text style={{color:'black', fontSize: 15, textAlign: 'center', width: 80, }}>{i.name} </Text>
-                  <Text style={{ fontSize: 15,color:'black' }}> 0.5 Kms</Text>
+                  <Text style={{ fontSize: 10, textAlign: 'center', width: 80, fontWeight: '600', color: 'black' }}>{i.name} </Text>
+                  <Text style={{ fontSize: 10, fontWeight: '600', color: 'black' }}> 0.5 Kms</Text>
                 </View>
-
 
                 <TouchableOpacity onPress={() =>
                   navigation.navigate('BottomNavPage', {
                     screen: 'StackAndBottom',
                     params: {
                       screen: 'DetailPage',
-                      params: { data: [{ id: i.id, name: i.name, address: i.address, phone: i.phone }] }
+                      params: { data: [{ id: i.id, name: i.name, address: i.address, phone: i.phone, description: i.description }] }
                     }
                   })}>
 
-                  <View style={{ backgroundColor: 'white', padding: 5 }}>
+                  <View style={{ backgroundColor: 'white', padding: 5, width: 260 }}>
                     <View style={{ display: "flex", justifyContent: 'space-between', flexDirection: 'row' }} >
                       <View>
-                        <Text style={{ fontSize: 14 ,color:'black'}}>ELECTRONICS & Home Appliance</Text>
-                        <Text style={{ fontSize: 18, color:'black'}}>{i.name}</Text>
-                        <View style={{ display: 'flex', flexDirection: 'row' }}>
-                          <Image source={star} style={{ width: 15, height: 15 }} />
-                          <Image source={star} style={{ width: 15, height: 15 }} />
-                          <Image source={star} style={{ width: 15, height: 15 }} />
-                          <Image source={star} style={{ width: 15, height: 15 }} />
-                          <Image source={star} style={{ width: 15, height: 15 }} />
-                          <Image source={star} style={{ width: 15, height: 15 }} />
+                        <Text style={{ fontSize: 7, fontWeight: '500', color: 'black' }}>ELECTRONICS & Home Appliance</Text>
+                        <Text style={{ fontSize: 15, fontWeight: '500', color: 'black' }}>{i.name}</Text>
+                        <View style={{ display: 'flex', flexDirection: 'row', marginVertical: 6 }}>
+                          <Image source={star} style={{ width: 11, height: 11 }} />
+                          <Image source={star} style={{ width: 11, height: 11, marginHorizontal: 5 }} />
+                          <Image source={star} style={{ width: 11, height: 11 }} />
+                          <Image source={star} style={{ width: 11, height: 11, marginHorizontal: 5 }} />
+                          <Image source={star} style={{ width: 11, height: 11 }} />
+                          <Image source={star} style={{ width: 11, height: 11, marginHorizontal: 5 }} />
                         </View>
-                        <Text style={{ fontSize: 16,color:'black' }}>{i.address}</Text>
+                        <Text style={{ fontSize: 12,color: 'black' }}>{i.address}</Text>
 
                       </View>
                       <View style={{ alignSelf: 'center' }}>
@@ -149,41 +143,33 @@ const ExploreNearShop = () => {
 
                       <View style={{ display: "flex", alignItems: "center" }}>
                         <Image source={productIcon} style={{ width: 25, height: 20 }} />
-                        <Text style={{ fontSize: 10,color:'black' }}>Products</Text>
+                        <Text style={{ fontSize: 10, color: 'black' }}>Products</Text>
                       </View>
 
 
                       <View style={{ display: "flex", alignItems: "center" }} >
                         <Image source={callIcon} style={{ width: 20, height: 20 }} />
-                        <Text style={{ fontSize: 10,color:'black' }}>Call</Text>
+                        <Text style={{ fontSize: 10, color: 'black' }}>Call</Text>
                       </View>
 
                       <View style={{ display: "flex", alignItems: "center" }}>
                         <Image source={chatIcon} style={{ width: 20, height: 20 }} />
-                        <Text style={{ fontSize: 10 ,color:'black'}}>Chat</Text>
+                        <Text style={{ fontSize: 10, color: 'black' }}>Chat</Text>
                       </View>
 
                       <View style={{ display: "flex", alignItems: "center" }}>
                         <Image source={mailIcon} style={{ width: 20, height: 20 }} />
-                        <Text style={{ fontSize: 10 }}>Mail</Text>
+                        <Text style={{ fontSize: 10, color: 'black' }}>Mail</Text>
                       </View>
 
                       <View style={{ display: "flex", alignItems: "center" }}>
                         <Image source={websiteIcon} style={{ width: 20, height: 20 }} />
-                        <Text style={{ fontSize: 10,color:'black'}}>Website</Text>
+                        <Text style={{ fontSize: 10, color: 'black' }}>Website</Text>
                       </View>
-
-
                     </View>
-
                   </View>
                 </TouchableOpacity>
-
-
-
-
               </View>
-
             ))}
           </>
         ) : <ActivityIndicator size="large" color="black" style={{ marginTop: 200 }} />}
@@ -199,19 +185,19 @@ export default ExploreNearShop;
 
 const styles = StyleSheet.create({
   selectlistContainer: {
-    width: '50%',
+    width: 180,
     zIndex: 999,
-    position:'absolute',
-    right:0,
-    backgroundColor:'white',
-    color:'black'
+    position: 'absolute',
+    right: 0,
+    backgroundColor: 'white',
+    color: 'black'
   },
 
 
 
-   
 
-    
 
-  
+
+
+
 });

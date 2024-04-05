@@ -81,7 +81,7 @@ const DetailPage = (props) => {
                         </View>
                         <Text style={{ fontSize: 14, color: "#929292", borderBottomWidth: 1 }}>5Reviews</Text>
                         <View>
-                            <Text style={{ marginTop: 5, paddingLeft: 20, color: "white", padding: 8, backgroundColor: "#61d836", alignItems: "center", fontSize: 18, borderWidth: 1, borderRadius: 10, marginRight: 10, borderColor: 'none' }} onPress={() => { navigation.navigate('Location') }}>
+                            <Text style={{ marginTop: 5, paddingLeft: 20, color: "white", padding: 8, backgroundColor: "#61d836", alignItems: "center", fontSize: 18, borderWidth: 1, borderRadius: 10, marginRight: 10, borderColor: 'none' }} onPress={() => { navigation.navigate('Map') }}>
                                 Directions
                             </Text>
                         </View>

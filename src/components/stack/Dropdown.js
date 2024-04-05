@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, Image, FlatList } from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useDispatch, useSelector } from 'react-redux';
+import { remove } from '../../store/auth/Slice';
 
 
 const Dropdown = ({ onSelect }) => {
   const [clicked, setClicked] = useState(false);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
+  const dispatch=useDispatch();
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -18,6 +21,11 @@ const Dropdown = ({ onSelect }) => {
           const response = await axios.get('https://focusmore.codelive.info/api/category/list');
           setCategories(response.data.data);
           console.log('ex= ', response);
+
+          // For Token Expire 
+          if(response.data.status == 401){
+            dispatch(remove())
+          }
         }
       } catch (error) {
         console.error('Error fetching categories:', error);
