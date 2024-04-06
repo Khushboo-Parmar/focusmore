@@ -121,8 +121,8 @@ const styles = StyleSheet.create({
   },
   flexboxr: {
     backgroundColor: '#edeaea',
-    // height: 'windowHeight',
-    width: 390,
+    height: 'windowHeight',
+    // width: 490,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',

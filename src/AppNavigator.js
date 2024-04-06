@@ -20,6 +20,7 @@ import { SignUp } from './components/stack/SingUpSingIn';
 import RealState from './components/stack/RealState';
 import Map from './components/stack/Map';
 import Rent from './components/stack/Rent';
+import AddBusiness from './components/stack/AddBusiness';
 
 // import Product from './components/stack/Product';
 
@@ -144,6 +145,18 @@ const AppNavigator = () => {
         />
 
         <Stack.Screen name="BusinessAdd" component={BusinessAdd}
+          options={{
+            headerTitle: '',
+            headerRight: () => (
+              <>
+                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+                <Icon name="location-pin" size={20} color="#fff" />
+              </>
+            ),
+          }} />
+
+          
+        <Stack.Screen name="AddBusiness" component={AddBusiness}
           options={{
             headerTitle: '',
             headerRight: () => (

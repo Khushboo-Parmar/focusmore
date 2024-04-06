@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   },
   flexboxr: {
     backgroundColor: '#edeaea',
-    width: 390,
+    // width: 390,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     paddingBottom: 25,
     paddingLeft: 30,
     // paddingRight: 30,
-    gap: 40,
+    // gap: 40,
   },
   nearbyimg: {
     marginBottom: 10,

@@ -30,7 +30,7 @@ const ExploreNearServices = () => {
     }, []);
     return (
 
-        <View style={{ backgroundColor: "#f2f2f2", width: 400, height: 800 }}>
+        <View style={{ backgroundColor: "#f2f2f2" , flex:1}}>
 
             <View>
 
@@ -70,13 +70,13 @@ const ExploreNearServices = () => {
                 </View>
 
 
-                <View style={{ display: "flex", alignItems: "center", justifyContent: "start", flexDirection: "row", flexWrap: "wrap" }}>
+                <View style={{ display: "flex", alignItems: "center",flexDirection: "row", flexWrap: "wrap" }}>
 
                     {data ? (
                         <>
                             {data.map((i) => (
-                                <View style={{ display: "flex", alignItems: "center", justifyContent: "center", }}>
-                                    <Image source={{ uri: 'https://www.pngitem.com/pimgs/m/329-3295625_mechanic-png-transparent-png.png' }} style={{ width: 80, height: 80, margin: 10 }} />
+                                <View style={{ display: "flex", alignItems: "center"  , flexWrap:"wrap"}}>
+                                    <Image source={{ uri: 'https://www.pngitem.com/pimgs/m/329-3295625_mechanic-png-transparent-png.png' }} style={{ width: 90, height: 90, margin: 10 }} />
                                     <Text style={{ fontSize: 10, color: "black", fontWeight: '500' }}>
                                         {i.name}
                                     </Text>
