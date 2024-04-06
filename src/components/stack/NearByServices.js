@@ -94,12 +94,13 @@ const NearByServices = () => {
 const styles = StyleSheet.create({
   componentr2: {
     marginTop: 30,
+  
   },
   nearbyboxr: {
     backgroundColor: '#61d836',
     fontSize: 18,
     color: '#fff',
-    width: '38%',
+    width: '42%',
     paddingLeft: 2,
     paddingRight: 2,
     paddingTop: 7,
@@ -109,8 +110,8 @@ const styles = StyleSheet.create({
   },
   flexboxr: {
     backgroundColor: '#edeaea',
-    // height: 'windowHeight',
-    width: 390,
+    height: 'windowHeight',
+    // width: 390,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',

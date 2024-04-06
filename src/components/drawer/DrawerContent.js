@@ -13,11 +13,11 @@ import { remove } from '../../store/auth/Slice';
 
 const DrawerList = [
   {icon: 'file-document-outline', label: 'Register', navigateTo: 'MobileRegistration'},
-  {icon: 'login', label: 'Login', navigateTo: 'Login'},
+  // {icon: 'login', label: 'Login', navigateTo: 'Login'},
   {icon: 'home-outline', label: 'Home', navigateTo: 'Home'},
   {icon: 'border-none', label: 'Categories', navigateTo: 'Categories'},
   {icon: 'home-city-outline', label: 'Add Business', navigateTo: 'BusinessAdd'},
-  {icon: 'account-search', label: 'Add Services', navigateTo: 'AddServices'},
+  {icon: 'account-search', label: 'Add Services', navigateTo: 'AddBusiness'},
   {icon: 'text-box-search-outline', label: 'Add Classifieds', navigateTo: 'AddClassifieds'},
   {icon: 'briefcase-account-outline', label: 'Find Job', navigateTo: ''},
   {icon: 'wrench-clock', label: 'Setting', navigateTo: ''},

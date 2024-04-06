@@ -1,4 +1,3 @@
-
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { Text, View, Image, TouchableOpacity, StyleSheet, TextInput } from "react-native";
@@ -51,7 +50,7 @@ const ExploreNearShop = () => {
   return (
     <View style={{ flex: 1 }}>
 
-      <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%', height: 30, backgroundColor: 'white', justifyContent: 'space-between' }}>
+      <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%', height: 30, backgroundColor: 'white', justifyContent: 'space-between',marginRight:10 }}>
 
         <TextInput>
 
@@ -59,15 +58,12 @@ const ExploreNearShop = () => {
         <TouchableOpacity>
           <Icon name="search1" size={24} color="blue" />
         </TouchableOpacity>
-
       </View>
-
-
       <View style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row', }}>
         <View style={{ backgroundColor: "#61d836", margin: 0, height: 40 }}>
           <Text style={{ color: 'white', fontSize: 20, padding: 8 }}>Near by Shops</Text>
         </View>
-        <View style={{ position: 'relative', right: 210, top: 10, zIndex: 9999 }}>
+        <View >
           <TouchableOpacity>
             <Image source={require('../images/radius.jpg')} />
           </TouchableOpacity>
@@ -117,10 +113,10 @@ const ExploreNearShop = () => {
                     }
                   })}>
 
-                  <View style={{ backgroundColor: 'white', padding: 5, width: 260 }}>
+                  <View style={{ backgroundColor: 'white', padding: 8, width: 260,flex:1 }}>
                     <View style={{ display: "flex", justifyContent: 'space-between', flexDirection: 'row' }} >
                       <View>
-                        <Text style={{ fontSize: 7, fontWeight: '500', color: 'black' }}>ELECTRONICS & Home Appliance</Text>
+                        <Text style={{ fontSize: 8, fontWeight: '500', color: 'black' }}>ELECTRONICS & Home Appliance</Text>
                         <Text style={{ fontSize: 15, fontWeight: '500', color: 'black' }}>{i.name}</Text>
                         <View style={{ display: 'flex', flexDirection: 'row', marginVertical: 6 }}>
                           <Image source={star} style={{ width: 11, height: 11 }} />
@@ -130,7 +126,7 @@ const ExploreNearShop = () => {
                           <Image source={star} style={{ width: 11, height: 11 }} />
                           <Image source={star} style={{ width: 11, height: 11, marginHorizontal: 5 }} />
                         </View>
-                        <Text style={{ fontSize: 12,color: 'black' }}>{i.address}</Text>
+                        <Text style={{ fontSize: 12, color: 'black' }}>{i.address}</Text>
 
                       </View>
                       <View style={{ alignSelf: 'center' }}>
