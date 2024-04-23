@@ -76,6 +76,7 @@ android {
 
     namespace "com.focusmore"
     defaultConfig {
+        vectorDrawables.useSupportLibrary = true
         applicationId "com.focusmore"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion

@@ -4,8 +4,6 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch, useSelector } from 'react-redux';
 import { remove } from '../../store/auth/Slice';
-
-
 const Dropdown = ({ onSelect }) => {
   const [clicked, setClicked] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -40,6 +38,9 @@ const Dropdown = ({ onSelect }) => {
     setClicked(false);
     onSelect(category);
   };
+
+  // console.warn('category id =' , selectedCategory?.id)
+
 
   return (
     <View style={{position:'absolute', zIndex:999,}}>
@@ -96,7 +97,7 @@ const Dropdown = ({ onSelect }) => {
                   style={{
                     width: '85%',
                     alignSelf: 'center',
-                    height: 50,
+                    // height: 50,
                     justifyContent: 'center',
                     borderBottomWidth: 0.5,
                     borderColor: '#8e8e8e',
