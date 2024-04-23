@@ -18,6 +18,37 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
+ const handleForgetPassword = async(emailOrMobile) => {
+
+try{
+  const response= await axios.post(`https://focusmore.codelive.info/api/forget-password` ,{
+    email:emailOrMobile
+  });
+
+  if (response.data.status === 200){
+    const newPassword = response.data.new_password;
+
+    Toast.show({
+      type: 'success',
+      text1:`${response.data.message}`,
+      text2: `your new password is ${newPassword}` ,
+    });
+  }
+  else{
+    Toast.show({
+      type:'error',
+      text1:'Failed to reset password',
+    });
+  }
+}
+catch(error){
+  Toast.show({
+    type:'error',
+    text1: `Failed to reset Password`,
+  })
+}
+
+ }
 
 
   const handleLogin = async () => {
@@ -48,10 +79,10 @@ export default function Login() {
     }
   };
 
-
 if(loading){
   return <ActivityIndicator size="large" color="black" style={{ marginTop: 200}} />
 }else{
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Welcome </Text>
@@ -83,7 +114,7 @@ if(loading){
         <TouchableOpacity >
           <Text style={styles.newUser}>New user sign up</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => handleForgetPassword(emailOrMobile)}>
           <Text style={styles.newUser}>Forget Password?</Text>
         </TouchableOpacity>
       </View>

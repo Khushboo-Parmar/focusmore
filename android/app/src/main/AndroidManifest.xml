@@ -1,6 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.front" android:required="false" />
+    
 
     <application
       android:name=".MainApplication"
@@ -23,6 +28,7 @@
       </activity>
   <meta-data
      android:name="com.google.android.geo.API_KEY"
-     android:value="AIzaSyBYad7cSM6-_lG-wO9vfemLi_ojibWJK-w"/>
+     android:value="AIzaSyBhkpTMfI6A9Gp03KiC2zEqetFkxWHj0b8"/>
+     <!-- android:value="AIzaSyBYad7cSM6-_lG-wO9vfemLi_ojibWJK-w"/> -->
     </application>
 </manifest>

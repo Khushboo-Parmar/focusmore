@@ -21,6 +21,8 @@ import RealState from './components/stack/RealState';
 import Map from './components/stack/Map';
 import Rent from './components/stack/Rent';
 import AddBusiness from './components/stack/AddBusiness';
+import Search from './components/stack/Search';
+// import AddProduct from './components/stack/AddProduct';
 
 // import Product from './components/stack/Product';
 
@@ -52,12 +54,14 @@ const AppNavigator = () => {
           },
         }}
       >
-<Stack.Screen name="Welcome" component={Welcome} options={{ headerShown: false }} />
+
         {!item?.length  ? (
-          <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+          <><Stack.Screen name="Welcome" component={Welcome} options={{ headerShown: false }} />
+           <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} /></>
+         
         ):(
           <>
-                  
+                  {/* <Stack.Screen name="Welcome" component={Welcome} options={{ headerShown: false }} /> */}
                   <Stack.Screen
           name="StartSearch"
           component={StartSearch}
@@ -102,26 +106,11 @@ const AppNavigator = () => {
           }} />
 
         <Stack.Screen name="Location" component={Location}
-          options={{
-            headerTitle: '',
-            headerRight: () => (
-              <>
-                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
-                <Icon name="location-pin" size={20} color="#fff" />
-              </>
-            ),
-          }} />
+     options={{ headerShown: false }}
+           />
 
 <Stack.Screen name="Map" component={Map}
-          options={{
-            headerTitle: '',
-            headerRight: () => (
-              <>
-                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
-                <Icon name="location-pin" size={20} color="#fff" />
-              </>
-            ),
-          }} />
+         options={{ headerShown: false }} />
         <Stack.Screen name="MobileRegistration" component={MobileRegistration}
           options={{
             headerTitle: '',
@@ -166,6 +155,8 @@ const AppNavigator = () => {
               </>
             ),
           }} />
+          
+     
 
 <Stack.Screen name="resgistration" component={SignUp}
           options={{
@@ -201,7 +192,17 @@ const AppNavigator = () => {
             ),
           }}
         />
-
+   <Stack.Screen name="Search" component={Search}
+          options={{
+            headerTitle: '',
+            headerRight: () => (
+              <>
+                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+                <Icon name="location-pin" size={20} color="#fff" />
+              </>
+            ),
+          }}
+        />
         <Stack.Screen name="BottomNavPage" component={BottomNavPage} options={{
           headerTitle: '',
           headerRight: () => (

@@ -13,7 +13,6 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import { SelectList } from 'react-native-dropdown-select-list'
 import { ScrollView } from 'react-native-gesture-handler';
 import { ActivityIndicator } from 'react-native-paper';
-// import CustomDropdown from './CustumDropdown';
 import Dropdown from './Dropdown';
 
 const ExploreNearShop = () => {
@@ -96,11 +95,11 @@ const ExploreNearShop = () => {
                 <View style={{ alignItems: 'center' }}>
                   <TouchableOpacity>
                     <Image
-                      source={{ uri: i.image }}
+                      source={{ uri: i.image_path }}
                       style={{ width: 100, height: 80 }}
                     />
                   </TouchableOpacity>
-                  <Text style={{ fontSize: 10, textAlign: 'center', width: 80, fontWeight: '600', color: 'black' }}>{i.name} </Text>
+                  <Text style={{ fontSize: 10, textAlign: 'center', width: 80, fontWeight: '600', color: 'black' }}>{i.title} </Text>
                   <Text style={{ fontSize: 10, fontWeight: '600', color: 'black' }}> 0.5 Kms</Text>
                 </View>
 
@@ -109,7 +108,7 @@ const ExploreNearShop = () => {
                     screen: 'StackAndBottom',
                     params: {
                       screen: 'DetailPage',
-                      params: { data: [{ id: i.id, name: i.name, address: i.address, phone: i.phone, description: i.description }] }
+                      params: { data: [{ id: i.id, name: i.title, address: i.address, phone: i.phone, description: i.description }] }
                     }
                   })}>
 
@@ -117,7 +116,7 @@ const ExploreNearShop = () => {
                     <View style={{ display: "flex", justifyContent: 'space-between', flexDirection: 'row' }} >
                       <View>
                         <Text style={{ fontSize: 8, fontWeight: '500', color: 'black' }}>ELECTRONICS & Home Appliance</Text>
-                        <Text style={{ fontSize: 15, fontWeight: '500', color: 'black' }}>{i.name}</Text>
+                        <Text style={{ fontSize: 15, fontWeight: '500', color: 'black' }}>{i.title}</Text>
                         <View style={{ display: 'flex', flexDirection: 'row', marginVertical: 6 }}>
                           <Image source={star} style={{ width: 11, height: 11 }} />
                           <Image source={star} style={{ width: 11, height: 11, marginHorizontal: 5 }} />
@@ -188,12 +187,5 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     color: 'black'
   },
-
-
-
-
-
-
-
 
 });

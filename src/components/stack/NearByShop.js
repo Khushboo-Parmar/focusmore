@@ -44,18 +44,18 @@ const NearByShop = () => {
                     screen: 'StackAndBottom',
                     params: {
                       screen: 'DetailPage',
-                      params: { data: [{ id: shop.id, name: shop.name, address: shop.address, phone: shop.phone,description:shop.description }] }
+                      params: { data: [{ id: shop.id, name: shop.title, address: shop.address, phone: shop.phone,description:shop.description }] }
                     }
                   })}>
          
                   <Image
-                    source={{ uri: shop.image }}
+                    source={{ uri: shop.image_path }}
                     style={styles.nearbyimg}
                   />
                 </TouchableOpacity>
 
                 <View>
-                  <Text style={styles.textCenter}>{shop.name}</Text>
+                  <Text style={styles.textCenter}>{shop.title}</Text>
                   <Text style={styles.textCenter}>0.5 kms</Text>
                 </View>
               </View>
@@ -90,21 +90,35 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginLeft: 20,
   },
+  // flexboxr: {
+  //   backgroundColor: '#edeaea',
+  //   // width: 390,
+  //   display: 'flex',
+  //   flexDirection: 'row',
+  //   justifyContent: 'space-around',
+  //   paddingTop: 25,
+  //   paddingBottom: 25,
+  //   paddingLeft: 30,
+  //   // paddingRight: 30,
+  //   gap: 40,
+  // },
   flexboxr: {
     backgroundColor: '#edeaea',
+    height: 'windowHeight',
     // width: 390,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
+    // alignItems: 'center',
     paddingTop: 25,
     paddingBottom: 25,
     paddingLeft: 30,
     // paddingRight: 30,
-    // gap: 40,
+    gap: 40,
   },
   nearbyimg: {
     marginBottom: 10,
-    width:90,
+    width:80,
     height:80,
 
   },

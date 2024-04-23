@@ -7,9 +7,11 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { ActivityIndicator } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
 
 const ExploreNearServices = () => {
     const [data, setData] = React.useState(null);
+    const navigation = useNavigation();
 
 
     useEffect(() => {
@@ -57,9 +59,6 @@ const ExploreNearServices = () => {
                         </TouchableOpacity>
                     </View>
 
-
-
-
                     <View>
                         <View style={{ borderColor: '#a5a5a5', backgroundColor: "white", borderTopWidth: 1, height: 29, width: 250, borderWidth: 1, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "row" }}>
                             <Text style={{ fontSize: 15, color: '#a5a5a5', fontWeight: '400', marginRight: 20 }}>Select Category</Text>
@@ -75,12 +74,23 @@ const ExploreNearServices = () => {
                     {data ? (
                         <>
                             {data.map((i) => (
+
+<TouchableOpacity onPress={() =>
+    navigation.navigate('BottomNavPage', {
+      screen: 'StackAndBottom',
+      params: {
+        screen: 'DriverDetailPage',
+        params: { data: [{ id: i.id, name: i.title, address: i.address, phone: i.phone, description: i.description }] }
+      }
+    })}>
                                 <View style={{ display: "flex", alignItems: "center"  , flexWrap:"wrap"}}>
-                                    <Image source={{ uri: 'https://www.pngitem.com/pimgs/m/329-3295625_mechanic-png-transparent-png.png' }} style={{ width: 90, height: 90, margin: 10 }} />
+                                    <Image source={{ uri: i.image_path }} style={{ width: 90, height: 90, margin: 10 }} />
                                     <Text style={{ fontSize: 10, color: "black", fontWeight: '500' }}>
-                                        {i.name}
+                                        {i.title}
                                     </Text>
                                 </View>
+</TouchableOpacity>
+
                             ))}
                         </>
                     ) : <ActivityIndicator size="large" color="black" style={{ marginLeft: 160, marginTop: 200 }} />}

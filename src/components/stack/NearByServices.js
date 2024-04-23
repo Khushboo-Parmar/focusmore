@@ -10,25 +10,6 @@ const NearByServices = () => {
   const [number, onChangeNumber] = React.useState('');
   const [data, setData] = React.useState(null);
 
-
-  // useEffect(()=>{
-  //   const fecthdata = async ()=>{
-  //     try{
-  //     const result = await fetch('http://focusmore.codelive.info/api/service/list',{
-  //      method:'GET',
-  //      headers:{
-  //       'Authorization' : 'Bearer 13|PmgqcSMWjH1KmGs9yTdSLX6Nr3xIoocPOEzZgxkJc655b6bb'
-  //      }
-  //     });
-
-  //     const response = await result.json();
-  //     setData(response.data)
-  //   }catch(e){
-  //     console.log(JSON.stringify(e),);
-  //   }
-  //  }
-  //  fecthdata()
-  // },[])
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -65,13 +46,13 @@ const NearByServices = () => {
               <View style={styles.imagesbox} key={i.id}>
 
                 <Image
-                  source={{ uri: i.image }}
+                  source={{ uri: i.image_path }}
                   style={styles.nearbyimg}
                 />
 
 
                 <View>
-                  <Text style={styles.textCenter}>{i.name}</Text>
+                  <Text style={styles.textCenter}>{i.title}</Text>
                   <Text style={styles.textCenter}>0.5 kms</Text>
                 </View>
               </View>
