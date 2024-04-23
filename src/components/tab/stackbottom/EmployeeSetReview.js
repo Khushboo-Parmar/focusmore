@@ -5,11 +5,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { TouchableOpacity } from "react-native-gesture-handler";
 import axios from 'axios';
 import Toast from 'react-native-toast-message';
-const SetProductReview = ({ productId }) => {
+
+
+const EmployeeSetReviewjs = ({ props }) => {
   const [rating, setRating] = useState(0);
   const [reviewTitle, setReviewTitle] = useState("");
   const [data, setData] = React.useState(null);
-
   const handleRatingClick = (value) => {
     if (value === rating) {
       setRating(0);
@@ -17,70 +18,37 @@ const SetProductReview = ({ productId }) => {
       setRating(value);
     }
   };
-  // const handelsumbit = async () => {
-  //   try {
-  //     const token = await AsyncStorage.getItem('token');
-  //     if (token) {
-  //       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  //       // const response = await fetch('https://focusmore.codelive.info/api/addrating', {
-  //       const response = await fetch(`http://focusmore.codelive.info/api/add-product-ratings`, {
-  //         method: 'POST',
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //           'Authorization': `Bearer ${token}`
-  //         },
-  //         body: JSON.stringify({
-  //           rating: rating,
-  //           product_id: productId,
-  //           review: reviewTitle
-  //         }),
-  //       }
-  //   );
-  //   console.log('reviewTitle=', reviewTitle);
-  //   console.log('rating=', rating);
-  //   console.log('productId=', productId);
 
-
-  //       const responseData = await response.json();
-  //       setData(responseData.data);
-  //       if (responseData.status <= 200) {
-  //         Toast.show({
-  //           type: 'success',
-  //           text1: `${responseData.message} 🚀`
-  //         })
-  //       } else {
-  //         Toast.show({
-  //           type: 'error',
-  //           text1: `${responseData.details?.review} 📦`,
-  //         });
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.log('Error fetching data:', error);
-  //   }
-  // }
 
   const handelsumbit = async () => {
     try {
       const token = await AsyncStorage.getItem('token');
       if (token) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-        console.log('handle submit=', token)
-        const response = await axios.post(`https://focusmore.codelive.info/api/add-product-ratings`, {
-          rating: rating,
-          product_id: productId,
-          review: reviewTitle,
+        // const response = await fetch('https://focusmore.codelive.info/api/addrating', {
+        const response = await fetch('https://focusmore.codelive.info/api/add-employee-service-rating', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({
+              rating: rating,
+              employee_id:37,
+              review: reviewTitle
+          }),
+    
+        }
+      
+    
+    );
+    console.log('reviewTitle=', reviewTitle);
+    console.log('rating=', rating);
+    console.log('props.route.params.params.params?.id=', props.route.params.params.params?.id);
 
-        });
-
-        console.log('reviewTitle=', reviewTitle);
-        console.log('rating=', rating);
-        console.log('productId=', productId);
-
-        const responseData = response.data; 
+        const responseData = await response.json();
         setData(responseData.data);
-        
-        if (response.status === 200) {
+        if (responseData.status <= 200) {
           Toast.show({
             type: 'success',
             text1: `${responseData.message} 🚀`
@@ -96,10 +64,8 @@ const SetProductReview = ({ productId }) => {
       console.log('Error fetching data:', error);
     }
   }
-
-
   return (
-    <View style={{flex:1}}>
+    <View>
       <View style={{ marginTop: 20 }}>
         <View
           style={{
@@ -155,7 +121,7 @@ const SetProductReview = ({ productId }) => {
         <TextInput
           style={{
             backgroundColor: "#d6d5d5",
-            width: 335,
+            width: 375,
             height: 80,
             borderRadius: 10,
             margin: 8,
@@ -171,9 +137,14 @@ const SetProductReview = ({ productId }) => {
             backgroundColor: "#00a2ff",
             width: 80,
             height: 30,
+            // marginLeft: 293,
+            // marginTop: 10,
             borderRadius: 10,
+            // position: 'absolute',
+            // bottom: 8,
+            // right: 0
+            // padding:5,
             alignSelf:'center',
-            paddingTop:5,
           }}
         >
           <TouchableOpacity
@@ -182,9 +153,11 @@ const SetProductReview = ({ productId }) => {
               color: "white",
               fontSize: 18,
               textAlign: "center",
+             
+              // lineHeight: 25,
             }}
           >
-            <Text style={{ alignSelf: 'center',color: 'white' }}>Post</Text>
+            <Text style={{ textAlign: 'center' }}>Post</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -192,4 +165,4 @@ const SetProductReview = ({ productId }) => {
   );
 };
 
-export default SetProductReview;
+export default EmployeeSetReviewjs;

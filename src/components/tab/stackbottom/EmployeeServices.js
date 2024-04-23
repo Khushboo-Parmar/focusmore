@@ -1,189 +1,210 @@
-import React from "react";
-import { SafeAreaView, StyleSheet, Text, View, Image, Button, TouchableOpacity, TextInput } from 'react-native';
+
+import React, { useState, useEffect }  from "react";
+import { Text, View, Image } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { ScrollView } from "react-native-gesture-handler";
+import AwesomeIcon from "react-native-vector-icons/FontAwesome5";
 
+const EmployeeServices = () => {
 
-const EmployeeServices = (props) => {
-  const [data, setData] = React.useState(null);
+    const [data, setData] = React.useState(null);
+    React.useEffect(() => {
+        const fetchData = async () => {
+            try {
 
-  React.useEffect(() => {
-    const fetchData = async () => {
-      try {
+                const token = await AsyncStorage.getItem('token');
+                if (token) {
 
-        const token = await AsyncStorage.getItem('token');
-        if (token) {
+                    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+                    const response = await fetch('https://focusmore.codelive.info/api/get-employees-services', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({
+                            employee_id: 21
+                        }),
+                    });
 
-          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-          const response = await fetch('https://focusmore.codelive.info/api/get-employees-services', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({
-              employee_id:21
-            }),
-          });
+                    const responseData = await response.json();
+                    setData(responseData.data);
+                    console.warn(responseData)
+                }
+            } catch (error) {
+                console.log('Error fetching data:', error);
+            }
+        };
 
-          const responseData = await response.json();
-          setData(responseData.data);
-          console.warn(responseData)
-        }
-      } catch (error) {
-        console.log('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-
-  // const handleServiceWishlist = async (serviceId) => {
-  //   try {
-  //     const token = await AsyncStorage.getItem('token');
-  //     if (token) {
-  //       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
-  //       const response = await axios.post('https://focusmore.codelive.info/api/add-service-wishlist', {
-  //         service_id: serviceId,
-  //         action: 1
-  //       });
-
-  //       if (response.data.status === 200) {
-  //         console.warn('Service added to wishlist successfully');
-
-  //       } else {
-  //         console.warn('Failed to add service to wishlist:', response.data.message);
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.log('Error adding service to wishlist:', error);
-  //   }
-  // }
+        fetchData();
+    }, []);
 
 
 
-  // const handleRequestService = async () => {
-  //   try {
-  //     const token = await AsyncStorage.getItem('token');
-  //     if (token) {
-  //       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-  //       const response = await axios.post('https://focusmore.codelive.info/api/add-services-request', {
-  //         shop_id:1,
-  //         employee_id:37,
-  //         service_id:6,
-  //         action:1
-  //       });
 
-  //       if (response.data.status === 200) {
-  //         console.warn(' Reguest Service added successfully');
 
-  //       } else {
-  //         console.warn('Failed to add Request service', response.data.message);
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.log('Error adding service to wishlist:', error);
-  //   }
+    return (
 
-  // }
-  return (
-    <>
-      <View style={styles.container}>
+        <View style={{ backgroundColor: "#f2f2f2", width: 400, height: 800 }}>
 
-        <View style={styles.header}>
-          <Text>Services</Text>
+            <View>
+
+
+                <View style={{
+                    backgroundColor: "#73fdea", height: 43, display: "flex",
+                    alignItems: "center", justifyContent: "space-between", flexDirection: "row"
+                }}>
+
+
+                    <View style={{ display: "flex", alignItems: "center", flexDirection: "row" }}>
+                        <AwesomeIcon name="search" color="white" size={20} marginLeft={5} />
+
+                        <Text style={{ color: "black", marginLeft: 5, fontSize: 17, marginLeft: 2 }}>
+                            Services</Text>
+
+                    </View>
+                    <AwesomeIcon name="search" color="white" size={20} marginRight={12} />
+
+                </View>
+
+                {data?.length ? (
+                    <>
+                        {data.map((i) => (
+                            <View style={{ borderBottomWidth: 2, borderBottomColor: "#d6d5d5" }}>
+                                <View style={{ padding: 12, width: 230, height: 200 }}>
+                                    <Text style={{ color: "red", fontWeight: 600, fontSize: 8 }}>
+                                        Services1
+                                    </Text>
+                                    <View>
+                                        <View style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row", margin: 6 }}>
+                                            <Text style={{ color: "#00a2ff", fontSize: 8 }}>
+                                                Service Type:
+                                            </Text>
+                                            <Text style={{ color: "black", fontSize: 8 }}>
+                                                {/* Diesel Mechanic */}
+                                                {i.service_description}
+                                            </Text>
+                                        </View>
+
+                                        <View style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row", margin: 6 }}>
+                                            <Text style={{ color: "#00a2ff", fontSize: 8, paddingRight: 40 }}>
+                                                Service Expericence:
+                                            </Text>
+                                            <Text style={{ color: "black", fontSize: 10 }}>
+                                            {i.service_experience}
+                                            </Text>
+                                        </View>
+
+                                        <View style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row", margin: 6 }}>
+                                            <Text style={{ color: "#00a2ff", fontSize: 8, paddingRight: 40 }}>
+                                                Service area:
+                                            </Text>
+                                            <Text style={{ color: "black", fontSize: 8 }}>
+                                            {i.service_areas}
+                                            </Text>
+                                        </View>
+
+                                        <View style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row", margin: 6 }}>
+                                            <Text style={{ color: "#00a2ff", fontSize: 8, paddingRight: 40 }}>
+                                                Visiting Charges:
+                                            </Text>
+                                            <Text style={{ color: "black", fontSize: 8 }}>
+                                               {i.visiting_charge}
+                                            </Text>
+                                        </View>
+
+                                        <View style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row", margin: 6 }}>
+                                            <Text style={{ color: "#00a2ff", fontSize: 8, paddingRight: 40 }}>
+                                                Service charge:
+                                            </Text>
+                                            <Text style={{ color: "black", fontSize: 8 }}>
+                                                {i.service_charge}
+                                            </Text>
+                                        </View>
+
+
+
+                                        <View style={{ marginLeft: 150, marginTop: 18, width: 200, display: "flex", alignItems: "end", justifyContent: "flex-end", flexDirection: "row", }}>
+                                            <AwesomeIcon name="user" color="gray" size={11} marginRight={2} />
+                                            <Text style={{ borderBottomColor: "red", borderBottomWidth: 1, color: "red", fontSize: 8 }}>Request Service</Text>
+                                        </View>
+
+
+
+                                    </View>
+                                </View>
+                            </View>
+
+                        ))}
+                    </>
+                ) : <Text style={{ alignSelf: 'center', marginTop: 200, color: 'black' }}>No Data Found</Text>
+                }
+                {/* <View style={{ borderBottomWidth: 2 , borderBottomColor:"#d6d5d5"}}>
+                    <View style={{ padding: 12, width: 230, height: 200 }}>
+                        <Text style={{ color: "red", fontWeight: 600, fontSize:8  }}>
+                            Services1
+                        </Text>
+                        <View>
+                            <View style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row", margin: 6 }}>
+                                <Text style={{ color: "#00a2ff", fontSize: 8 }}>
+                                    Service Type:
+                                </Text>
+                                <Text style={{ color: "black", fontSize: 8 }}>
+                                    Diesel Mechanic
+                                </Text>
+                            </View>
+
+                            <View style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row", margin: 6 }}>
+                                <Text style={{ color: "#00a2ff", fontSize: 8, paddingRight: 40 }}>
+                                    Service Expericence:
+                                </Text>
+                                <Text style={{ color: "black", fontSize: 8 }}>
+                                    5 Year
+                                </Text>
+                            </View>
+
+                            <View style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row", margin: 6 }}>
+                                <Text style={{ color: "#00a2ff", fontSize: 8, paddingRight: 40 }}>
+                                    Service area:
+                                </Text>
+                                <Text style={{ color: "black", fontSize: 8 }}>
+                                    Hyderabad, Secunderabad
+                                </Text>
+                            </View>
+
+                            <View style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row", margin: 6 }}>
+                                <Text style={{ color: "#00a2ff", fontSize: 8, paddingRight: 40 }}>
+                                    Visiting Charges:
+                                </Text>
+                                <Text style={{ color: "black", fontSize: 8 }}>
+                                    Free
+                                </Text>
+                            </View>
+
+                            <View style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row", margin: 6 }}>
+                                <Text style={{ color: "#00a2ff", fontSize: 8, paddingRight: 40 }}>
+                                    Service charge:
+                                </Text>
+                                <Text style={{ color: "black", fontSize: 8 }}>
+                                    800/Day
+                                </Text>
+                                </View>
+
+                                <View style={{marginLeft:150,marginTop:18, width:200, display: "flex", alignItems: "end", justifyContent: "flex-end", flexDirection: "row", }}>
+                                <AwesomeIcon name="user" color="gray" size={11} marginRight={2   }/> 
+                                    <Text style={{borderBottomColor:"red", borderBottomWidth: 1, color: "red", fontSize:8 }}>Request Service</Text>
+                                </View>
+                         
+
+                       </View>
+                    </View>
+                </View> */}
+            </View>
         </View>
 
-        <View>
-          <Text>
-            Search
-          </Text>
-        </View>
 
-      </View>
-      <ScrollView>
-
-        {data?.length ? (
-          <>
-            {data.map((i) => (
-
-
-
-              <View style={{ padding: 10, borderBottomWidth: 2, borderBottomColor: '#ababab' }}>
-               
-                <View style={{ flexDirection: 'row', gap: 5,alignItems:'center' }}>
-                <Text style={{ color: 'black', fontSize: 12, marginBottom: 15, letterSpacing:0.5}}>Service name: </Text>
-                <Text style={{ color: 'red', fontWeight: '900', fontSize: 15, marginBottom: 15 }}>{i.service_name}</Text>
-                </View>
-                
-
-                <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 5 ,marginTop:5}}>
-                  <Text style={{ color: '#34a3ff', fontWeight: '500', fontSize: 12,letterSpacing:0.5 }}>Service Description:</Text>
-                  <Text style={{ fontWeight: '900', fontSize: 12, color: 'black' }}>
-                    {i.service_description}
-                  </Text>
-                </View>
-
-                <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 5 ,marginTop:5}}>
-                  <Text style={{ color: '#34a3ff', fontWeight: '500', fontSize: 12,letterSpacing:0.5 }}>Service Experience:</Text>
-                  <Text style={{ fontWeight: '900', fontSize: 12, color: 'black' }}>
-                    {i.service_experience}
-                  </Text>
-                </View>
-                <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 5 ,marginTop:5 }}>
-                  <Text style={{ color: '#34a3ff', fontWeight: '500', fontSize: 12,letterSpacing:0.5 }}>Service area:</Text>
-                  <Text style={{ fontWeight: '900', fontSize: 12, color: 'black' }}>
-                    {i.service_areas}
-                  </Text>
-                </View>
-                <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 5 ,marginTop:5 }}>
-                  <Text style={{ color: '#34a3ff', fontWeight: '500', fontSize: 12,letterSpacing:0.5 }}>Visiting charge:</Text>
-                  <Text style={{ fontWeight: '900', fontSize: 12, color: 'black' }}>
-                    {i.visiting_charge}
-                  </Text>
-                </View>
-                <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 5 ,marginTop:5 }}>
-                  <Text style={{ color: '#34a3ff', fontWeight: '500', fontSize: 12,letterSpacing:0.5 }}>Service charge:</Text>
-                  <Text style={{ fontWeight: '900', fontSize: 12, color: 'black' }}>
-                    {i.service_charge}
-                  </Text>
-                </View>
-
-                <View style={[styles.products, { marginTop: 5, marginBottom: 5, justifyContent: 'flex-end', marginTop: 30 }]}>
-                  <TouchableOpacity 
-                  // onPress={() => handleServiceWishlist(i.id)}
-                  >
-                    <Text style={{ color: '#0076ba', fontWeight: '900', fontSize: 11 }}>Add to Wishlist</Text>
-                  </TouchableOpacity>
-
-                  <TouchableOpacity 
-                  // onPress={() => handleRequestService(i.id)}
-                  >
-                    <Text style={{ color: 'red', fontWeight: '900', marginLeft: 20, fontSize: 11 }}>Request Service</Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            ))}
-          </>
-        ) : <Text style={{ alignSelf: 'center', marginTop: 200, color: 'black' }}>No Data Found</Text>
-        }
-      </ScrollView>
-    </>)
+    )
 }
 export default EmployeeServices;
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#73fdea',
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    paddingHorizontal: 10
-  },
-  products: {
-    flexDirection: 'row',
-  }
-});

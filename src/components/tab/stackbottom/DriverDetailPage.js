@@ -7,20 +7,53 @@ import { fetchAllData } from "../../stack/handeldetailpage/server";
 import { useNavigation } from '@react-navigation/native';
 import AwesomeIcon from "react-native-vector-icons/FontAwesome5";
 import Icon from 'react-native-vector-icons/AntDesign';
+import { Picker } from '@react-native-picker/picker';
+
 const DriverDetailPage = (props) => {
     const [detailData, setDetailData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [otherdata, setOtherdata] = useState(null);
     const navigation = useNavigation();
-    // const { id } = props.route.params.data[0];
+    const [languages, setLanguages] = useState([]);
+    const [selectedLanguage, setSelectedLanguage] = useState(null); 
+    
+    const [showPicker, setShowPicker] = useState(false);
 
-    // console.warn("id =", props.route.params.data[0].id);
+
+    const togglePicker = () => {
+        setShowPicker(!showPicker);
+    };
+
+    useEffect(() => {
+        const fetchLanguages = async () => {
+            const token = await AsyncStorage.getItem('token');
+            try {
+                const result = await fetch('https://focusmore.codelive.info/api/get-languages', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                const response = await result.json();
+                setLanguages(response.data);
+                // Set default selected language, e.g., the first language from the list
+                setSelectedLanguage(response.data[0]?.name || null);
+            } catch (error) {
+                console.log('Error fetching languages:', JSON.stringify(error));
+                throw error;
+            }
+        };
+    
+        fetchLanguages();
+    }, []);
+    
 
     useEffect(() => {
         const fetchData = async () => {
             const token = await AsyncStorage.getItem('token');
             try {
-                // const result = await fetch(`https://focusmore.codelive.info/api/shop/get-employees-detail/43/${props.route.params.data[0].id}`
+    
                 const result = await fetch(`https://focusmore.codelive.info/api/get-employees-detail/43`
                     , {
                         method: 'POST',
@@ -101,7 +134,7 @@ const DriverDetailPage = (props) => {
                         </View>
                         <Text style={{ fontSize: 14, color: "#929292", borderBottomWidth: 1 }}>Review:  {detailData.info?.review}</Text>
                         <View>
-                            <Text style={{ marginTop: 5, paddingLeft: 20, color: "white", padding: 8, backgroundColor: "#61d836", alignItems: "center", fontSize: 18, borderWidth: 1, borderRadius: 10, marginRight: 10, borderColor: 'none' }} onPress={() => { navigation.navigate('Map') }}>
+                            <Text style={{ marginTop: 5, paddingLeft: 20, color: "white", padding: 8, backgroundColor: "#61d836", alignItems: "center", fontSize: 18, borderWidth: 1, borderRadius: 10, marginRight: 10, borderColor: 'none' }} onPress={() => { navigation.navigate('Location') }}>
                                 Directions
                             </Text>
                         </View>
@@ -122,7 +155,7 @@ const DriverDetailPage = (props) => {
                     </Text>
                 </View>
 
-                <TouchableOpacity onPress={() => { navigation.navigate('Product', { id: detailData.info?.id }); }}>
+                <TouchableOpacity onPress={() => { navigation.navigate('Experience', { id: detailData.info?.id }); }}>
                     <View style={{ borderBottomWidth: 1, borderBottomColor: "#dddcdc", borderTopWidth: 1, borderTopColor: "#dddcdc", width: 400, display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row" }}>
                         <View style={{ paddingVertical: 5, display: "flex", alignItems: "center", flexDirection: "row", width: 200, paddingHorizontal: 10 }} >
 
@@ -150,7 +183,7 @@ const DriverDetailPage = (props) => {
                     </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => { navigation.navigate('ShopGallery') }} style={{ borderBottomWidth: 1, borderBottomColor: "#dddcdc", width: 400, height: 25, display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row" }}>
+                <TouchableOpacity onPress={() => { navigation.navigate('ServiceGallery') }} style={{ borderBottomWidth: 1, borderBottomColor: "#dddcdc", width: 400, height: 25, display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row" }}>
                     <View style={{ display: "flex", alignItems: "center", flexDirection: "row", width: 200, paddingHorizontal: 10 }} >
 
                         <AwesomeIcon name="image" color="#8c8c8c" size={15} />
@@ -163,18 +196,37 @@ const DriverDetailPage = (props) => {
                     </View>
                 </TouchableOpacity>
 
+
                 <View style={{ borderBottomWidth: 1, borderBottomColor: "#dddcdc", width: 400, height: 25, display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row" }}>
-                    <View style={{ display: "flex", alignItems: "center", flexDirection: "row", width: 200, paddingHorizontal: 10 }} >
-
-                        <AwesomeIcon name="language" color="#8c8c8c" size={15} />
-                        <Text style={{ fontSize: 13, color: "black", marginLeft: 3 }}>Language</Text>
-                    </View>
-
-                    <View style={{ marginRight: 30, display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row", width: 80 }}>
-                        <Text style={{ fontSize: 13, color: "black" }}>{detailData.other?.Languages} </Text>
-                        <Icon name="right" size={10} color="#000" />
-                    </View>
+            <View style={{ display: "flex", alignItems: "center", flexDirection: "row", width: 200, paddingHorizontal: 10 }} >
+                <AwesomeIcon name="language" color="#8c8c8c" size={15} />
+                <Text style={{ fontSize: 13, color: "black", marginLeft: 3 }}>Language</Text>
+            </View>
+            
+            <TouchableOpacity onPress={togglePicker}>
+                <View style={{ marginRight: 30, display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row", width: 80 }}>
+                    <Text style={{ fontSize: 13, color: "black" }}>
+                        {/* {selectedLanguage} */}
+                        {detailData.other?.Languages}
+                        </Text>
+                    <Icon name={showPicker ? "down" : "right"} size={10} color="#000" />
                 </View>
+            </TouchableOpacity>
+        </View>
+
+        {showPicker && (
+            <View style={{ width: 150 }}>
+                <Picker
+                    selectedValue={selectedLanguage}
+                    style={{ height: 50, width: 150 }}
+                    onValueChange={(itemValue) => setSelectedLanguage(itemValue)}
+                >
+                    {languages.map((language) => (
+                        <Picker.Item key={language.id} label={language.name} value={language.name} />
+                    ))}
+                </Picker>
+            </View>
+        )}
 
                 <View style={{ borderBottomWidth: 1, borderBottomColor: "#dddcdc", width: 400, height: 25, display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row" }}>
                     <TouchableOpacity onPress={() => { navigation.navigate('SocialMedia') }}>
@@ -226,7 +278,7 @@ const DriverDetailPage = (props) => {
                 </TouchableOpacity>
 
                 <View style={{ borderBottomWidth: 1, borderBottomColor: "#dddcdc", width: 400, height: 25, display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row" }}>
-                    <TouchableOpacity onPress={() => { navigation.navigate('Reviews', { screen: 'StackAndBottom', params: { screen: 'Reviews', params: { id: detailData.info?.id } } }) }}>
+                    <TouchableOpacity onPress={() => { navigation.navigate('EmployeeReview', { screen: 'StackAndBottom', params: { screen: 'Reviews', params: { id: detailData.info?.id } } }) }}>
                         <View style={{ display: "flex", alignItems: "center", flexDirection: "row", width: 200, paddingHorizontal: 10 }} >
 
                             <AwesomeIcon name="square" color="#8c8c8c" size={15} />

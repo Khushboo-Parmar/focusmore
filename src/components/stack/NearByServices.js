@@ -44,12 +44,19 @@ const NearByServices = () => {
           <>
             {data.slice(0, 3).map((i) => (
               <View style={styles.imagesbox} key={i.id}>
-
-                <Image
-                  source={{ uri: i.image_path }}
-                  style={styles.nearbyimg}
-                />
-
+                <TouchableOpacity onPress={() =>
+                  navigation.navigate('BottomNavPage', {
+                    screen: 'StackAndBottom',
+                    params: {
+                      screen: 'DriverDetailPage',
+                      params: { data: [{ id: i.id, name: i.title, address: i.address, phone: i.phone, description: i.description }] }
+                    }
+                  })}>
+                  <Image
+                    source={{ uri: i.image_path }}
+                    style={styles.nearbyimg}
+                  />
+                </TouchableOpacity>
 
                 <View>
                   <Text style={styles.textCenter}>{i.title}</Text>
@@ -75,7 +82,7 @@ const NearByServices = () => {
 const styles = StyleSheet.create({
   componentr2: {
     marginTop: 30,
-  
+
   },
   nearbyboxr: {
     backgroundColor: '#61d836',

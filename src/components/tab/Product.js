@@ -171,7 +171,9 @@ const Product = (props) => {
                                         <Text style={{ fontWeight: '900', fontSize: 11, color: 'black' }}>3 EMIs Rs. 14,430.00/month</Text>
                                         <Text style={{ fontWeight: '900', fontSize: 11, color: 'black' }}>6 EMIs Rs. 7,215.00/month</Text>
                                     </View>
-
+                                    <TouchableOpacity onPress={() => { navigation.navigate('AddShopOffer', { id: i?.id, shopid: props.route.params?.id }) }}>
+                                        <Text style={{ color: '#017b76', fontWeight: '900', fontSize: 11 }}>ADD Offers</Text>
+                                    </TouchableOpacity>
                                     <Modal
                                         animationType="slide"
                                         transparent={true}
