@@ -22,9 +22,11 @@ import Map from './components/stack/Map';
 import Rent from './components/stack/Rent';
 import AddBusiness from './components/stack/AddBusiness';
 import Search from './components/stack/Search';
-// import AddProduct from './components/stack/AddProduct';
-
-// import Product from './components/stack/Product';
+import AddClasified from './components/stack/Vendore/AddClassified';
+import AddServices from './components/stack/Vendore/AddServcices';
+import AddShopOffer from './components/stack/Vendore/AddShopOffer';
+import AddShopGallery from './components/stack/Vendore/AddShopGallery';
+import AddBrouche from './components/stack/Vendore/AddShopBrouchre';
 
 const AppNavigator = () => {
   const item = useSelector((state)=> state.token)
@@ -212,6 +214,62 @@ const AppNavigator = () => {
             </>
           ),
         }} />
+        <Stack.Screen name="AddClassifieds" component={AddClasified} options={{
+          headerTitle: '',
+          headerRight: () => (
+            <>
+              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+              <Icon name="location-pin" size={20} color="#fff" />
+            </>
+          ),
+        }} />
+
+<Stack.Screen name="AddServices" component={AddServices} options={{
+          headerTitle: '',
+          headerRight: () => (
+            <>
+              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+              <Icon name="location-pin" size={20} color="#fff" />
+            </>
+          ),
+        }} />
+
+<Stack.Screen name="AddShopOffer" component={AddShopOffer} options={{
+          headerTitle: '',
+          headerRight: () => (
+            <>
+              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+              <Icon name="location-pin" size={20} color="#fff" />
+            </>
+          ),
+        }} />
+
+<Stack.Screen name="AddShopGallery" component={AddShopGallery} options={{
+          headerTitle: '',
+          headerRight: () => (
+            <>
+              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+              <Icon name="location-pin" size={20} color="#fff" />
+            </>
+          ),
+        }} />
+
+<Stack.Screen name="AddBrouche" component={AddBrouche} options={{
+          headerTitle: '',
+          headerRight: () => (
+            <>
+              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+              <Icon name="location-pin" size={20} color="#fff" />
+            </>
+          ),
+        }} />
+
+
+
+
+
+
+
           </>
         )}
       </Stack.Navigator>
