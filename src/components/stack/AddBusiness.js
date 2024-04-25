@@ -15,6 +15,7 @@ import { PermissionsAndroid } from 'react-native';
 import GetLocation from 'react-native-get-location';
 
 const AddBusiness = () => {
+    const [currentLocationText, setCurrentLocationText] = useState('');
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -62,35 +63,151 @@ const AddBusiness = () => {
             });
     };
 
-    useEffect(() => {
-        _getLocationPermission();
-        fetchCategories();
-      }, []);
-      
+    // useEffect(() => {
+    //     _getLocationPermission();
+    //     fetchCategories();
+    //   }, []);
+
+
+
       async function _getLocationPermission() {
         try {
             const granted = await PermissionsAndroid.request(
-              PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-              {
-                title: 'Geolocation Permission',
-                message: 'Can we access your location?',
-                buttonNeutral: 'Ask Me Later',
-                buttonNegative: 'Cancel',
-                buttonPositive: 'OK',
-              },
+                PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+                {
+                    title: 'Geolocation Permission',
+                    message: 'Can we access your location?',
+                    buttonNeutral: 'Ask Me Later',
+                    buttonNegative: 'Cancel',
+                    buttonPositive: 'OK',
+                },
             );
-            console.log('granted', granted);
-            if (granted === 'granted') {
-              console.log('You can use Geolocation');
-              return true;
+            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                console.log('You can use Geolocation');
+                return true;
             } else {
-              console.log('You cannot use Geolocation');
-              return false;
+                console.log('Geolocation permission denied');
+                return false;
             }
-          } catch (err) {
+        } catch (err) {
+            console.error('Error getting location permission:', err);
             return false;
-          }
-      }
+        }
+    }
+    const getLocationDetails = async (latitude, longitude) => {
+        try {
+            const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&result_type=street_address|locality&key=AIzaSyBhkpTMfI6A9Gp03KiC2zEqetFkxWHj0b8`);
+            
+            console.log("Geocoding API Response:", response.data);
+    
+            if (response.data.results.length > 0) {
+                // Filter results to find the most relevant one
+                const relevantResult = response.data.results.find(result => result.types.includes('street_address') || result.types.includes('locality'));
+    
+                if (relevantResult) {
+                    const addressComponents = relevantResult.address_components;
+                    const city = addressComponents.find(component => component.types.includes('locality'))?.long_name || '';
+                    const state = addressComponents.find(component => component.types.includes('administrative_area_level_1'))?.long_name || '';
+                    const locationName = addressComponents.find(component => component.types.includes('point_of_interest'))?.long_name || '';
+    
+                    const locationDetails = `${locationName}, ${city}, ${state}`;
+                    setCurrentLocationText(locationDetails);
+                } else {
+                    setCurrentLocationText('Location details not found');
+                }
+            } else {
+                setCurrentLocationText('Location details not found');
+            }
+        } catch (error) {
+            console.error('Error fetching location details:', error);
+            setCurrentLocationText('Error fetching location details');
+        }
+    };
+    
+    
+
+    // const getLocationDetails = async (latitude, longitude) => {
+    //     try {
+    //         const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyBhkpTMfI6A9Gp03KiC2zEqetFkxWHj0b8`);
+            
+    //         if (response.data.results.length > 0) {
+    //             const addressComponents = response.data.results[0].address_components;
+    //             const city = addressComponents.find(component => component.types.includes('locality'))?.long_name || '';
+    //             const state = addressComponents.find(component => component.types.includes('administrative_area_level_1'))?.long_name || '';
+    //             const locationName = addressComponents.find(component => component.types.includes('point_of_interest'))?.long_name || '';
+        
+    //             const locationDetails = `${locationName}, ${city}, ${state}`;
+    //             setCurrentLocationText(locationDetails); // Set the location details here
+    //         } else {
+    //             setCurrentLocationText('Location details not found');
+    //         }
+    //     } catch (error) {
+    //         console.error('Error fetching location details:', error);
+    //         setCurrentLocationText('Error fetching location details');
+    //     }
+    // };
+    
+    
+//  print only lat long value 
+    // const getCurrentLocation = async () => {
+    //     try {
+    //         const location = await GetLocation.getCurrentPosition({
+    //             enableHighAccuracy: true,
+    //             timeout: 15000,
+    //         });
+    //         setLat(location.latitude.toString());
+    //         setLan(location.longitude.toString());
+    //         setCurrentLocationText(`${location.latitude.toString()}, ${location.longitude.toString()}`);
+    //     } catch (error) {
+    //         const { code, message } = error;
+    //         console.warn(code, message);
+    //         Toast.show({
+    //             type: 'error',
+    //             text1: 'Error getting location',
+    //         });
+    //     }
+    // };
+    
+//  convert lat long to city name 
+
+const getCurrentLocation = async () => {
+    try {
+        const location = await GetLocation.getCurrentPosition({
+            enableHighAccuracy: true,
+            timeout: 15000,
+        });
+        setLat(location.latitude.toString());
+        setLan(location.longitude.toString());
+
+        await getLocationDetails(location.latitude, location.longitude); // Call getLocationDetails here
+
+
+        console.warn("currentLocationText=" , currentLocationText);
+    } catch (error) {
+        const { code, message } = error;
+        console.warn(code, message);
+        Toast.show({
+            type: 'error',
+            text1: 'Error getting location',
+        });
+    }
+};
+
+
+    
+    
+    useEffect(() => {
+        const fetchLocation = async () => {
+            const hasPermission = await _getLocationPermission();
+            if (hasPermission) {
+                await getCurrentLocation();
+            }
+        };
+    
+        fetchLocation();
+        fetchCategories();
+    }, []);
+    
 
 
     const fetchCategories = async () => {
@@ -148,8 +265,8 @@ const AddBusiness = () => {
             formData.append('contact', phone);
             formData.append('email', email);
             formData.append('website', website);
-            formData.append('latitude', 28.7041);
-            formData.append('longitude', 77.1025);
+            formData.append('latitude', lat);
+            formData.append('longitude', lan);            
             formData.append('days', JSON.stringify(daysArray));
             formData.append('home_delivery', 1);
             formData.append('business_image', {
@@ -280,8 +397,10 @@ const AddBusiness = () => {
                                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                         <View style={{ borderColor: '#218a86', borderWidth: 1, borderRadius: 1, width: 13, height: 13, justifyContent: 'center', marginRight: 10 }}></View>
                                         <View>
+                                        <TouchableOpacity onPress={getCurrentLocation}>
                                             <Text style={{ fontWeight: '600', marginLeft: 10, color: 'black' }}>Use my current location</Text>
-                                            <Text style={{ color: '#747d85', fontSize: 10, marginLeft: 10, color: 'black' }}>(KPHB main road, Madhapur)</Text>
+                                            </TouchableOpacity>
+                                            <Text style={{ color: '#747d85', fontSize: 10, marginLeft: 10, color: 'black' }}>{currentLocationText}</Text>
                                         </View>
                                     </View>
 
@@ -340,6 +459,7 @@ const AddBusiness = () => {
                                     style={[styles.time_input]}
                                     placeholder=''
                                     maxLength={5}
+                                    
                                 />
 
                                 <Text style={{ fontSize: 11, fontWeight: '600', marginLeft: 2, marginTop: 5, color: 'black' }}>pm</Text>

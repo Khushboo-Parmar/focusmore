@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/Entypo';
 import { Text } from 'react-native';
 import ExploreNearShop from './components/stack/ExploreNearShop';
 import ExploreNearServices from './components/stack/ExploreNearServices';
-import ExploreClassified from './components/stack/ExploreClassified';
+import ExploreClassified from './components/stack/ClassifiedDetails';
 import Location from './components/stack/Location';
 import MobileRegistration from './components/stack/MobileRegistration';
 import OtpRegistration from './components/stack/OtpRegistration';
@@ -27,7 +27,18 @@ import AddServices from './components/stack/Vendore/AddServcices';
 import AddShopOffer from './components/stack/Vendore/AddShopOffer';
 import AddShopGallery from './components/stack/Vendore/AddShopGallery';
 import AddBrouche from './components/stack/Vendore/AddShopBrouchre';
-
+import AddEmployee from './components/stack/AddEmployee';
+import ClassifiedDetails from './components/stack/ClassifiedDetails';
+import ExploreClassifiedList from './components/stack/ExploreClassifiedList';
+import AddCategory from './components/stack/Vendore/AddCategory';
+import AddLanguage from './components/stack/Vendore/Addlanguage';
+// import AddCategory from './components/tab/stackbottom/AddCategory';
+import Dashboard from './components/stack/Vendore/DashBoard';
+import AddEmployeServices from './components/stack/Vendore/AddEmployeServices';
+import AddEmployeExpirence from './components/stack/Vendore/AddEmployeExpirence';
+import AddVendoreOffer from './components/stack/Vendore/AddVenoreOffer';
+import AddCertiffect from './components/stack/Vendore/AddCertiffect';
+import AddHomeBanner from './components/stack/Vendore/AddHomeBanner';
 const AppNavigator = () => {
   const item = useSelector((state)=> state.token)
   const Stack = createNativeStackNavigator();
@@ -96,7 +107,18 @@ const AppNavigator = () => {
             </>
           ),
         }} />
-        <Stack.Screen name="ExploreClassified" component={ExploreClassified}
+ 
+        <Stack.Screen name="ExploreClassifiedList" component={ExploreClassifiedList}
+          options={{
+            headerTitle: '',
+            headerRight: () => (
+              <>
+                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+                <Icon name="location-pin" size={20} color="#fff" />
+              </>
+            ),
+          }} />
+        <Stack.Screen name="ClassifiedDetails" component={ClassifiedDetails}
           options={{
             headerTitle: '',
             headerRight: () => (
@@ -264,7 +286,102 @@ const AppNavigator = () => {
           ),
         }} />
 
+       
+<Stack.Screen name="AddEmployee" component={AddEmployee}
+          options={{
+            headerTitle: '',
+            headerRight: () => (
+              <>
+                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+                <Icon name="location-pin" size={20} color="#fff" />
+              </>
+            ),
+          }} />
+<Stack.Screen name="AddCategory" component={AddCategory}
+          options={{
+            headerTitle: '',
+            headerRight: () => (
+              <>
+                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+                <Icon name="location-pin" size={20} color="#fff" />
+              </>
+            ),
+          }} />
 
+
+
+
+
+<Stack.Screen name="AddLanguage" component={AddLanguage} options={{
+          headerTitle: '',
+          headerRight: () => (
+            <>
+              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+              <Icon name="location-pin" size={20} color="#fff" />
+            </>
+          ),
+        }} />
+
+
+<Stack.Screen name="Dashboard" component={Dashboard} options={{
+          headerTitle: '',
+          headerRight: () => (
+            <>
+              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+              <Icon name="location-pin" size={20} color="#fff" />
+            </>
+          ),
+        }} />
+
+<Stack.Screen name="AddEmployeServices" component={AddEmployeServices} options={{
+          headerTitle: '',
+          headerRight: () => (
+            <>
+              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+              <Icon name="location-pin" size={20} color="#fff" />
+            </>
+          ),
+        }} />
+
+<Stack.Screen name="AddEmployeExpirence" component={AddEmployeExpirence} options={{
+          headerTitle: '',
+          headerRight: () => (
+            <>
+              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+              <Icon name="location-pin" size={20} color="#fff" />
+            </>
+          ),
+        }} />
+
+<Stack.Screen name="AddVendoreOffer" component={AddVendoreOffer} options={{
+          headerTitle: '',
+          headerRight: () => (
+            <>
+              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+              <Icon name="location-pin" size={20} color="#fff" />
+            </>
+          ),
+        }} />
+
+<Stack.Screen name="AddCertiffect" component={AddCertiffect} options={{
+          headerTitle: '',
+          headerRight: () => (
+            <>
+              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+              <Icon name="location-pin" size={20} color="#fff" />
+            </>
+          ),
+        }} />
+        
+        <Stack.Screen name="AddHomeBanner" component={AddHomeBanner} options={{
+          headerTitle: '',
+          headerRight: () => (
+            <>
+              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+              <Icon name="location-pin" size={20} color="#fff" />
+            </>
+          ),
+        }} />
 
 
 

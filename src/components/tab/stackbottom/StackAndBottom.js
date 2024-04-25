@@ -22,6 +22,7 @@ import EmployeeServices from './EmployeeServices';
 import EmployeeReview from './EmployeeReview';
 import ServiceGallery from './ServiceGallery';
 import Employees from './Employees';
+import EmpList from './EmpList';
 const StackAndBottom = () => {
 
   const Stack = createNativeStackNavigator();
@@ -35,6 +36,7 @@ const StackAndBottom = () => {
         <Stack.Screen name="DriverDetailPage" component={DriverDetailPage}/>
         <Stack.Screen name="Services" component={Services}/>
         <Stack.Screen name="EmployeeServices" component={EmployeeServices}/>
+        <Stack.Screen name="EmpList" component={EmpList}/>
 
         {/* <Stack.Screen name="DriverService" component={DriverService} /> */}
         <Stack.Screen name="ShopGallery" component={ShopGallery}/>

@@ -31,10 +31,10 @@ const NearByClassified = () => {
 
   const navigation = useNavigation();
 
-  const handleExplore = () => {
-    navigation.navigate('ExploreClassified');
+  // const handleExplore = () => {
+  //   navigation.navigate('ExploreClassified');
 
-  }
+  // }
 
   return (
     <View style={styles.componentr2}>
@@ -45,20 +45,25 @@ const NearByClassified = () => {
         {data ? (
           <>
             {data.slice(0, 3).map((i) => (
-              <View style={styles.imagesbox} key={i.id}>
-                {/* <Image
+
+
+<TouchableOpacity onPress={() => navigation.navigate('ClassifiedDetails')}>
+
+                <View style={styles.imagesbox} key={i.id}>
+                  {/* <Image
                   source={{ uri: i.image }}
                   style={styles.nearbyimg}
                 /> */}
-                    <Image
-                    source={{ uri:"https://www.galvanandgardner.com/wp-content/uploads/2018/12/things-to-know-when-you-rent-a-home-or-apartment.jpeg" }}
+                  <Image
+                    source={{ uri: i.image_path }}
                     style={styles.nearbyimg}
-                />
-                <View>
-                  <Text style={styles.textCenter}>{i.title}</Text>
-                  <Text style={styles.textCenter}>0.5 kms</Text>
+                  />
+                  <View>
+                    <Text style={styles.textCenter}>{i.title}</Text>
+                    <Text style={styles.textCenter}>0.5 kms</Text>
+                  </View>
                 </View>
-              </View>
+              </TouchableOpacity>
             ))}
           </>
         ) : <Text>'Loading'</Text>}
@@ -93,7 +98,7 @@ const NearByClassified = () => {
         </View> */}
 
         <View>
-          <TouchableOpacity onPress={handleExplore}>
+          <TouchableOpacity onPress={() => navigation.navigate('ExploreClassifiedList')}>
             <Text style={styles.exploretext}>Explore More</Text>
           </TouchableOpacity>
         </View>

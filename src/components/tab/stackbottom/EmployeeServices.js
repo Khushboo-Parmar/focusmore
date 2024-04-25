@@ -1,6 +1,6 @@
 
-import React, { useState, useEffect }  from "react";
-import { Text, View, Image } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Text, View, Image, TouchableOpacity } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { ScrollView } from "react-native-gesture-handler";
@@ -41,6 +41,32 @@ const EmployeeServices = () => {
     }, []);
 
 
+    const handleRequestService = async () => {
+        try {
+          const token = await AsyncStorage.getItem('token');
+          if (token) {
+            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    
+            const response = await axios.post('https://focusmore.codelive.info/api/add-services-request', {
+              shop_id:1,
+              employee_id:37,
+              service_id:6,
+              action:1
+            });
+    
+            if (response.data.status === 200) {
+              console.warn(' Reguest Service added successfully');
+    
+            } else {
+              console.warn('Failed to add Request service', response.data.message);
+            }
+          }
+        } catch (error) {
+          console.log('Error adding service to wishlist:', error);
+        }
+    
+      }
+
 
 
 
@@ -63,7 +89,6 @@ const EmployeeServices = () => {
 
                         <Text style={{ color: "black", marginLeft: 5, fontSize: 17, marginLeft: 2 }}>
                             Services</Text>
-
                     </View>
                     <AwesomeIcon name="search" color="white" size={20} marginRight={12} />
 
@@ -93,46 +118,43 @@ const EmployeeServices = () => {
                                                 Service Expericence:
                                             </Text>
                                             <Text style={{ color: "black", fontSize: 10 }}>
-                                            {i.service_experience}
+                                                {i.service_experience}
                                             </Text>
                                         </View>
 
                                         <View style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row", margin: 6 }}>
-                                            <Text style={{ color: "#00a2ff", fontSize: 8, paddingRight: 40 }}>
+                                            <Text style={{ color: "#00a2ff", fontSize: 10, paddingRight: 40 }}>
                                                 Service area:
                                             </Text>
                                             <Text style={{ color: "black", fontSize: 8 }}>
-                                            {i.service_areas}
+                                                {i.service_areas}
                                             </Text>
                                         </View>
 
                                         <View style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row", margin: 6 }}>
-                                            <Text style={{ color: "#00a2ff", fontSize: 8, paddingRight: 40 }}>
+                                            <Text style={{ color: "#00a2ff", fontSize: 10, paddingRight: 40 }}>
                                                 Visiting Charges:
                                             </Text>
                                             <Text style={{ color: "black", fontSize: 8 }}>
-                                               {i.visiting_charge}
+                                                {i.visiting_charge}
                                             </Text>
                                         </View>
 
                                         <View style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row", margin: 6 }}>
-                                            <Text style={{ color: "#00a2ff", fontSize: 8, paddingRight: 40 }}>
+                                            <Text style={{ color: "#00a2ff", fontSize: 10, paddingRight: 40 }}>
                                                 Service charge:
                                             </Text>
                                             <Text style={{ color: "black", fontSize: 8 }}>
                                                 {i.service_charge}
                                             </Text>
                                         </View>
-
-
-
                                         <View style={{ marginLeft: 150, marginTop: 18, width: 200, display: "flex", alignItems: "end", justifyContent: "flex-end", flexDirection: "row", }}>
                                             <AwesomeIcon name="user" color="gray" size={11} marginRight={2} />
-                                            <Text style={{ borderBottomColor: "red", borderBottomWidth: 1, color: "red", fontSize: 8 }}>Request Service</Text>
+                                            <TouchableOpacity onPress={() => handleRequestService(i.id)}>
+
+                                                <Text  style={{ borderBottomColor: "red", borderBottomWidth: 1, color: "red", fontSize: 10 }}>Request Service</Text>
+                                            </TouchableOpacity>
                                         </View>
-
-
-
                                     </View>
                                 </View>
                             </View>
@@ -141,70 +163,8 @@ const EmployeeServices = () => {
                     </>
                 ) : <Text style={{ alignSelf: 'center', marginTop: 200, color: 'black' }}>No Data Found</Text>
                 }
-                {/* <View style={{ borderBottomWidth: 2 , borderBottomColor:"#d6d5d5"}}>
-                    <View style={{ padding: 12, width: 230, height: 200 }}>
-                        <Text style={{ color: "red", fontWeight: 600, fontSize:8  }}>
-                            Services1
-                        </Text>
-                        <View>
-                            <View style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row", margin: 6 }}>
-                                <Text style={{ color: "#00a2ff", fontSize: 8 }}>
-                                    Service Type:
-                                </Text>
-                                <Text style={{ color: "black", fontSize: 8 }}>
-                                    Diesel Mechanic
-                                </Text>
-                            </View>
-
-                            <View style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row", margin: 6 }}>
-                                <Text style={{ color: "#00a2ff", fontSize: 8, paddingRight: 40 }}>
-                                    Service Expericence:
-                                </Text>
-                                <Text style={{ color: "black", fontSize: 8 }}>
-                                    5 Year
-                                </Text>
-                            </View>
-
-                            <View style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row", margin: 6 }}>
-                                <Text style={{ color: "#00a2ff", fontSize: 8, paddingRight: 40 }}>
-                                    Service area:
-                                </Text>
-                                <Text style={{ color: "black", fontSize: 8 }}>
-                                    Hyderabad, Secunderabad
-                                </Text>
-                            </View>
-
-                            <View style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row", margin: 6 }}>
-                                <Text style={{ color: "#00a2ff", fontSize: 8, paddingRight: 40 }}>
-                                    Visiting Charges:
-                                </Text>
-                                <Text style={{ color: "black", fontSize: 8 }}>
-                                    Free
-                                </Text>
-                            </View>
-
-                            <View style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row", margin: 6 }}>
-                                <Text style={{ color: "#00a2ff", fontSize: 8, paddingRight: 40 }}>
-                                    Service charge:
-                                </Text>
-                                <Text style={{ color: "black", fontSize: 8 }}>
-                                    800/Day
-                                </Text>
-                                </View>
-
-                                <View style={{marginLeft:150,marginTop:18, width:200, display: "flex", alignItems: "end", justifyContent: "flex-end", flexDirection: "row", }}>
-                                <AwesomeIcon name="user" color="gray" size={11} marginRight={2   }/> 
-                                    <Text style={{borderBottomColor:"red", borderBottomWidth: 1, color: "red", fontSize:8 }}>Request Service</Text>
-                                </View>
-                         
-
-                       </View>
-                    </View>
-                </View> */}
             </View>
         </View>
-
-
     )
 }
 export default EmployeeServices;

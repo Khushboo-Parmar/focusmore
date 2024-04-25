@@ -60,14 +60,8 @@ const Employees = (props) => {
 ) : <ActivityIndicator size="large" color="black" style={{ marginLeft: 160, marginTop: 200 }} />}
 
 </View>
-
         </ScrollView>
-
-                
-
-           
         </View>
-
 
     )
 }

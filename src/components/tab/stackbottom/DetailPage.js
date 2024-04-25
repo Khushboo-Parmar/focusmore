@@ -148,7 +148,7 @@ const DetailPage = (props) => {
                     </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => { navigation.navigate('ShopGallery') }} style={{ borderBottomWidth: 1, borderBottomColor: "#dddcdc", width: 400, height: 25, display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row" }}>
+                <TouchableOpacity onPress={() => { navigation.navigate('ShopGallery', { id: detailData.info?.id }) }} style={{ borderBottomWidth: 1, borderBottomColor: "#dddcdc", width: 400, height: 25, display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row" }}>
                     <View style={{ display: "flex", alignItems: "center", flexDirection: "row", width: 200, paddingHorizontal: 10 }} >
 
                         <AwesomeIcon name="image" color="#8c8c8c" size={15} />
@@ -160,7 +160,7 @@ const DetailPage = (props) => {
                         <Icon name="right" size={10} color="#000" />
                     </View>
                 </TouchableOpacity>
-
+                <TouchableOpacity onPress={() => { navigation.navigate('Offer', { id: detailData.info?.id }) }} style={{ borderBottomWidth: 1, borderBottomColor: "#dddcdc", width: 400, height: 25, display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row" }}>
                 <View style={{ borderBottomWidth: 1, borderBottomColor: "#dddcdc", width: 400, height: 25, display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row" }}>
                     <View style={{ display: "flex", alignItems: "center", flexDirection: "row", width: 200, paddingHorizontal: 10 }} >
 
@@ -173,6 +173,7 @@ const DetailPage = (props) => {
                         <Icon name="right" size={10} color="#000" />
                     </View>
                 </View>
+                </TouchableOpacity>
 
                 <View style={{ borderBottomWidth: 1, borderBottomColor: "#dddcdc", width: 400, height: 25, display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row" }}>
                     <TouchableOpacity onPress={() => { navigation.navigate('SocialMedia') }}>
@@ -289,6 +290,21 @@ const DetailPage = (props) => {
 
                             <AwesomeIcon name="briefcase" color="#8c8c8c" size={15} />
                             <Text style={{ fontSize: 13, color: "black", marginLeft: 3 }}>Add Brouche</Text>
+                        </View>
+
+                        <View style={{ marginRight: 30, display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row", width: 80 }}>
+
+                        </View>
+                    </View>
+                </TouchableOpacity>
+
+
+                <TouchableOpacity onPress={() => { navigation.navigate('AddCategory', { id: detailData.info?.id }) }}>
+                    <View style={{ borderBottomWidth: 1, borderBottomColor: "#dddcdc", borderTopWidth: 1, borderTopColor: "#dddcdc", width: 400, display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row" }}>
+                        <View style={{ paddingVertical: 5, display: "flex", alignItems: "center", flexDirection: "row", width: 200, paddingHorizontal: 10 }} >
+
+                            <AwesomeIcon name="briefcase" color="#8c8c8c" size={15} />
+                            <Text style={{ fontSize: 13, color: "black", marginLeft: 3 }}>Add category</Text>
                         </View>
 
                         <View style={{ marginRight: 30, display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row", width: 80 }}>
