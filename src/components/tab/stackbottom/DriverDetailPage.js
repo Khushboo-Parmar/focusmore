@@ -9,7 +9,9 @@ import AwesomeIcon from "react-native-vector-icons/FontAwesome5";
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Picker } from '@react-native-picker/picker';
 
-const DriverDetailPage = (props) => {
+const DriverDetailPage = ({route}) => {
+    const { employee } = route.params;
+console.warn('employee.idddddd=',employee.id);
     const [detailData, setDetailData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [otherdata, setOtherdata] = useState(null);
@@ -54,7 +56,7 @@ const DriverDetailPage = (props) => {
             const token = await AsyncStorage.getItem('token');
             try {
     
-                const result = await fetch(`https://focusmore.codelive.info/api/get-employees-detail/43`
+                const result = await fetch(`https://focusmore.codelive.info/api/get-employees-detail/${employee.employee_id}`
                     , {
                         method: 'POST',
                         headers: {
@@ -70,7 +72,7 @@ const DriverDetailPage = (props) => {
                 const response = await result.json();
                 setDetailData(response.data)
                 setLoading(false)
-                console.warn('Driver detailspage=', response)
+                // console.warn('Driver detailspage=', response)
             } catch (error) {
                 console.log('Error fetching products:', JSON.stringify(error));
                 throw error;
@@ -87,7 +89,7 @@ const DriverDetailPage = (props) => {
             </View>
         );
     }
-    console.warn(otherdata)
+    // console.warn(otherdata)
 
     if (!detailData) {
         return (
@@ -227,6 +229,11 @@ const DriverDetailPage = (props) => {
                 </Picker>
             </View>
         )}
+
+
+
+
+        
 
                 <View style={{ borderBottomWidth: 1, borderBottomColor: "#dddcdc", width: 400, height: 25, display: "flex", alignItems: "center", justifyContent: "space-between", flexDirection: "row" }}>
                     <TouchableOpacity onPress={() => { navigation.navigate('SocialMedia') }}>

@@ -177,14 +177,13 @@ const SetProductReview = ({ productId }) => {
           }}
         >
           <TouchableOpacity
-            onPress={handelsumbit}
             style={{
               color: "white",
               fontSize: 18,
               textAlign: "center",
             }}
           >
-            <Text style={{ alignSelf: 'center',color: 'white' }}>Post</Text>
+            <Text onPress={handelsumbit} style={{ alignSelf: 'center',color: 'white' }}>Post</Text>
           </TouchableOpacity>
         </View>
       </View>

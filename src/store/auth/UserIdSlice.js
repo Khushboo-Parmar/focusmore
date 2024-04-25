@@ -1,10 +1,11 @@
 import {createSlice} from "@reduxjs/toolkit"
 const useridSlice= createSlice({
     name:'userid',
-    initialState:null,
+    initialState:[],
     reducers:{
         userid(state, action){
-            return action.payload; //directly assign payload to state
+            state.push()
+            state.push(action.payload)
         }
 
     }

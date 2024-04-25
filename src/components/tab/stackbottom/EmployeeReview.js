@@ -78,17 +78,11 @@ const EmployeeReview = (props) => {
                         </View>
 
                     ))}
-
-
                 </View>
             </ScrollView>
-
-
             <View>
                 <SetReviews props={props} />
             </View>
-
-
         </View>
     )
 }

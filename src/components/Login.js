@@ -8,6 +8,7 @@ import Toast from 'react-native-toast-message';
 import { ActivityIndicator } from 'react-native-paper';
 import { add } from '../store/auth/Slice';
 import { UseDispatch, useDispatch } from 'react-redux';
+import { userid } from '../store/auth/UserIdSlice';
 
 
 export default function Login() {
@@ -68,6 +69,7 @@ catch(error){
       });
       
       dispatch(add(token))
+      dispatch(userid(response.data.data.user[0].id))
       navigation.navigate('StartSearch');
     } catch (error) {
       Toast.show({

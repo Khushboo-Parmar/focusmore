@@ -48,7 +48,7 @@ const NearByServices = () => {
                   navigation.navigate('BottomNavPage', {
                     screen: 'StackAndBottom',
                     params: {
-                      screen: 'DriverDetailPage',
+                      screen: 'EmpList',
                       params: { data: [{ id: i.id, name: i.title, address: i.address, phone: i.phone, description: i.description }] }
                     }
                   })}>

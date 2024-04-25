@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Text, View, Image } from "react-native";
 import AwesomeIcon from "react-native-vector-icons/FontAwesome5";
-import axios from 'axios'; 
-import AsyncStorage from '@react-native-async-storage/async-storage'; 
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useSelector } from "react-redux";
 
-const Broucher = () => {
+
+const Broucher = (props) => {
     const [broucherImage, setBroucherImage] = useState(null);
-
+    const userId = useSelector((state) => state.uId)
+    console.log('u id=', userId[0])
+    console.warn('s id=', props.route.params.id)
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -14,12 +18,12 @@ const Broucher = () => {
                 if (token) {
                     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
                     const response = await axios.post('https://focusmore.codelive.info/api/get-shop-brochure', {
-                        shop_id: 5,
-                        user_id: 3
+                        shop_id: props.route.params?.id,
+                        user_id: userId[0]
                     });
+                    console.warn('data=', response.data.data)
                     if (response.data.status === 200 && response.data.data.length > 0) {
                         setBroucherImage(response.data.data[0].shop_gallery);
-                        // console.warn('Broucher= ', response);
                     } else {
                         console.warn('No Brouchers found');
                     }
