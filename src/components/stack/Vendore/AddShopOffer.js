@@ -137,7 +137,7 @@ export default function AddShopOffer(props){
             {shops.map(shop => (
               <TouchableOpacity key={shop?.id} onPress={() => handleShopSelection(shop)}>
                 <View style={styles.dropdownItem}>
-                  <Text>{shop.title}</Text>
+                  <Text style={styles.heading}>{shop.title}</Text>
                 </View>
               </TouchableOpacity>
             ))}
@@ -158,7 +158,7 @@ export default function AddShopOffer(props){
             {products.map(shop => (
               <TouchableOpacity key={shop?.id} onPress={() => handleProductSelection(shop)}>
                 <View style={styles.dropdownItem}>
-                  <Text>{shop.name}</Text>
+                  <Text style={styles.heading}>{shop.name}</Text>
                 </View>
               </TouchableOpacity>
             ))}
@@ -167,11 +167,13 @@ export default function AddShopOffer(props){
       <TextInput
         style={styles.input}
         placeholder="Offer name"
+        placeholderTextColor="gray"
         onChangeText={(text) => setTitle(text)}
       />
             <TextInput
         style={styles.input}
         placeholder="Offer Tittle"
+        placeholderTextColor="gray"
         onChangeText={(text) => setDescription(text)}
       />
       <TouchableOpacity onPress={pickImage}>
@@ -181,7 +183,7 @@ export default function AddShopOffer(props){
         ) : (
           <View>
             {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
-            {!image && <Text style={{fontSize:12,marginBottom:10}}>No image selected</Text>}
+            {!image && <Text style={{fontSize:12,marginBottom:10 ,color:'black'}}>No image selected</Text>}
 
           </View>
         )}
@@ -264,4 +266,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+  heading:{
+    color: 'black',
+  }
 });

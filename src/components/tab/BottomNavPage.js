@@ -7,6 +7,7 @@ import Mail from './Mail';
 import Website from './Website';
 import { Image } from 'react-native';
 import productIcon from '../images/cart.jpg';
+import homeIcon from '../images/home.png';
 import callIcon from '../images/call.png'
 import chatIcon from '../images/chat.png';
 import mailIcon from '../images/mail.png';
@@ -22,6 +23,9 @@ const BottomNavPage = () => {
           let iconSource;
 
           switch (route.name) {
+            case 'StackAndBottom':
+              iconSource = focused ? homeIcon : homeIcon;
+              break;
             case 'StackAndBottom':
               iconSource = focused ? productIcon : productIcon;
               break;
@@ -45,7 +49,11 @@ const BottomNavPage = () => {
         },
       })}
     >
-      <Tab.Screen name="StackAndBottom" component={StackAndBottom}
+      <Tab.Screen
+            options={{
+              tabBarLabel: 'Home',
+            
+            }} name="StackAndBottom" component={StackAndBottom}
      />
 
       <Tab.Screen name="Product" component={Product}

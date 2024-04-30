@@ -12,7 +12,7 @@ export default function AddLanguage() {
     formData.append('name', title);
 
     try {
-      const response = await fetch('http://focusmore.codelive.info/api/add-languages', {
+      const response = await fetch('https://focusmore.codelive.info/api/add-languages', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -50,6 +50,7 @@ if(result.status <=200){
       <TextInput
         style={styles.input}
         placeholder="Language name"
+        placeholderTextColor="gray"
         value={title}
         onChangeText={setTitle}
       />

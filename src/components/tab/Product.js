@@ -138,7 +138,8 @@ const Product = (props) => {
                 {data?.length >= 1 ? (
                     <>
                         {data.map((i) => (
-                            <View key={i.id} style={[styles.products, { padding: 10, borderBottomWidth: 2, borderBottomColor: '#ababab' }]}>
+                            <TouchableOpacity onPress={()=>{navigation.navigate('ProductDetail',{id:i.id})}}
+                            key={i.id} style={[styles.products, { padding: 10, borderBottomWidth: 2, borderBottomColor: '#ababab' }]}>
 
                                 <View style={{ marginRight: 10 }}>
                                     <Image
@@ -202,7 +203,7 @@ const Product = (props) => {
                                         <Text style={styles.textStyle}>Add Rating</Text>
                                     </Pressable>
                                 </View>
-                            </View>
+                            </TouchableOpacity>
                         ))}
                     </>
                 ) : <Text style={{ alignSelf: 'center', marginTop: 200, color: 'black' }}>No Data Found</Text>}

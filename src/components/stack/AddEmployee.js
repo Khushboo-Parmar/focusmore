@@ -5,8 +5,12 @@ import Toast from 'react-native-toast-message';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import axios from 'axios';
 import ImagePicker from 'react-native-image-crop-picker';
+import { PermissionsAndroid } from 'react-native';
+import GetLocation from 'react-native-get-location';
 
 const AddEmployee = () => {
+    // const Location = useSelector((state) => state.location);
+    const [currentLocationText, setCurrentLocationText] = useState('');
     const [loading, setLoading] = useState(false);
     const [name, setName] = useState('');
     const [lastname, setLastname] = useState('');
@@ -91,17 +95,19 @@ const AddEmployee = () => {
             formData.append('password', password);
             formData.append('city', city);
             formData.append('state', state);
-            formData.append('Pin_code', pincode);
+            formData.append('pin_code', pincode);
             formData.append('profile_pic', {
                 uri: image,
                 type: `image/${ext}`,
                 name: filename
             });
             formData.append('latitude', lat);
+            // formData.append('latitude',Location[0][0]?.lat);
             formData.append('longitude', lan);
+            // formData.append('longitude', Location[0][0]?.lat);
             formData.append('shop_id', '1');
             formData.append('service_id', JSON.stringify([5, 6, 7]));
-            formData.append('experience', experience);
+            formData.append('exprience', experience);
             formData.append('employee_language_id', JSON.stringify([1, 2]));
             formData.append('days', JSON.stringify(daysArray));
             formData.append('start_time', start);
@@ -134,12 +140,114 @@ const AddEmployee = () => {
     }
 
 
+
+
+
+
+
+    async function _getLocationPermission() {
+        try {
+            const granted = await PermissionsAndroid.request(
+                PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+                {
+                    title: 'Geolocation Permission',
+                    message: 'Can we access your location?',
+                    buttonNeutral: 'Ask Me Later',
+                    buttonNegative: 'Cancel',
+                    buttonPositive: 'OK',
+                },
+            );
+            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                console.log('You can use Geolocation');
+                return true;
+            } else {
+                console.log('Geolocation permission denied');
+                return false;
+            }
+        } catch (err) {
+            console.error('Error getting location permission:', err);
+            return false;
+        }
+    }
+    const getLocationDetails = async (latitude, longitude) => {
+        try {
+            const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&result_type=street_address|locality&key=AIzaSyBhkpTMfI6A9Gp03KiC2zEqetFkxWHj0b8`);
+
+            console.log("Geocoding API Response:", response.data);
+
+            if (response.data.results.length > 0) {
+
+                const relevantResult = response.data.results.find(result => result.types.includes('street_address') || result.types.includes('locality'));
+
+                if (relevantResult) {
+                    const addressComponents = relevantResult.address_components;
+                    const city = addressComponents.find(component => component.types.includes('locality'))?.long_name || '';
+                    const state = addressComponents.find(component => component.types.includes('administrative_area_level_1'))?.long_name || '';
+                    const locationName = addressComponents.find(component => component.types.includes('point_of_interest'))?.long_name || '';
+
+                    const locationDetails = `${locationName}, ${city}, ${state}`;
+                    setCurrentLocationText(locationDetails);
+                } else {
+                    setCurrentLocationText('Location details not found');
+                }
+            } else {
+                setCurrentLocationText('Location details not found');
+            }
+        } catch (error) {
+            console.error('Error fetching location details:', error);
+            setCurrentLocationText('Error fetching location details');
+        }
+    };
+
+    const getCurrentLocation = async () => {
+        try {
+            const location = await GetLocation.getCurrentPosition({
+                enableHighAccuracy: true,
+                timeout: 15000,
+            });
+            setLat(location.latitude.toString());
+            setLan(location.longitude.toString());
+            setCurrentLocationText(`${location.latitude.toString()}, ${location.longitude.toString()}`);
+            await getLocationDetails(location.latitude, location.longitude);
+        } catch (error) {
+            const { code, message } = error;
+            console.warn(code, message);
+            Toast.show({
+                type: 'error',
+                text1: 'Error getting location',
+            });
+        }
+    };
+    
+
+
+
+
+    useEffect(() => {
+        const fetchLocation = async () => {
+            const hasPermission = await _getLocationPermission();
+            if (hasPermission) {
+                await getCurrentLocation();
+            }
+        };
+
+        fetchLocation();
+    
+    }, []);
+
+    const handlePlaceSelected = (latitude, longitude) => {
+        setLat(latitude.toString());
+        setLan(longitude.toString());
+        setCurrentLocationText(`${latitude.toString()}, ${longitude.toString()}`);
+    };
     return (
         <>
             <ScrollView>
 
                 <View style={{ alignItems: 'center', marginTop: 20, paddingHorizontal: 20 }}>
-                    {/* name */}
+                <Text style={{ textAlign: 'center', fontWeight: '600', color: 'black' }} >
+                               Add Employee 
+                            </Text>
                     <View style={{ marginTop: 30 }}>
                         <View style={{ flexDirection: 'row', marginBottom: 10 }}>
                             <Text style={{ textAlign: 'left', width: '40%', fontWeight: '600', color: 'black' }} >
@@ -233,7 +341,7 @@ const AddEmployee = () => {
                                         ) : (
                                             <View>
                                                 {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
-                                                {!image && <Text>No image selected</Text>}
+                                                {!image && <Text style={{ color:'black'}}>No image selected</Text>}
                                             </View>
                                         )}
                                     </TouchableOpacity>
@@ -254,19 +362,43 @@ const AddEmployee = () => {
                                 <View style={{ paddingHorizontal: 20, marginTop: 10 }}>
 
                                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                        <View style={{ borderColor: '#218a86', borderWidth: 1, borderRadius: 1, width: 13, height: 13, justifyContent: 'center', marginRight: 10 }}></View>
+                                        {/* <View style={{ borderColor: '#218a86', borderWidth: 1, borderRadius: 1, width: 13, height: 13, justifyContent: 'center', marginRight: 10 }}></View> */}
                                         <View>
-                                            <Text style={{ fontWeight: '600', marginLeft: 10, color: 'black' }}>Use my current location</Text>
-                                            <Text style={{ color: '#747d85', fontSize: 10, marginLeft: 10, color: 'black' }}>(KPHB main road, Madhapur)</Text>
+                                            <TouchableOpacity onPress={getCurrentLocation}>
+                                                <Text style={{ fontWeight: '600', marginLeft: 30, color: 'black' }}>Use my current location</Text>
+                                            </TouchableOpacity>
+                                            <Text style={{ color: '#747d85', fontSize: 10, marginLeft: 30, color: 'black' }}>{currentLocationText}</Text>
                                         </View>
                                     </View>
 
 
 
-                                    <Text style={{ textAlign: 'center', color: '#0c81d2', fontSize: 12, marginBottom: 10, color: 'black' }}>(OR)</Text>
+                                    {/* <Text style={{ textAlign: 'center', color: '#0c81d2', fontSize: 12, marginBottom: 10, color: 'black' }}>(OR)</Text> */}
                                 </View>
 
 
+
+                                {/* <View style={{ flexDirection: 'row', marginBottom: 10 }}>
+
+                                    <Text style={{ textAlign: 'left', width: '15%', fontWeight: '600', color: 'black' }} >
+                                        select yours
+                                    </Text>
+                                    <Places onPlaceSelected={handlePlaceSelected} />
+
+
+                                </View> */}
+
+                                <View style={{ flexDirection: 'row', marginBottom: 10,marginTop:20 }}>
+                                    <Text style={{ textAlign: 'left', width: '15%', fontWeight: '600', color: 'black' }} >
+                                        LAN:
+                                    </Text>
+                                    <TextInput
+                                        onChangeText={(e) => { setLan(e) }}
+                                        value={lan}
+                                        style={[styles.input, { width: 200 }]}
+                                        placeholder=''
+                                    />
+                                </View>
 
                                 <View style={{ flexDirection: 'row', marginBottom: 10 }}>
                                     <Text style={{ textAlign: 'left', width: '15%', fontWeight: '600', color: 'black' }} >
@@ -274,18 +406,7 @@ const AddEmployee = () => {
                                     </Text>
                                     <TextInput
                                         onChangeText={(e) => { setLat(e) }}
-                                        style={[styles.input, { width: 200 }]}
-                                        placeholder=''
-
-                                    />
-                                </View>
-
-                                <View style={{ flexDirection: 'row', marginBottom: 10 }}>
-                                    <Text style={{ textAlign: 'left', width: '15%', fontWeight: '600', color: 'black' }} >
-                                        LAN:
-                                    </Text>
-                                    <TextInput
-                                        onChangeText={(e) => { setLan(e) }}
+                                        value={lat}
                                         style={[styles.input, { width: 200 }]}
                                         placeholder=''
                                     />
@@ -333,7 +454,7 @@ const AddEmployee = () => {
                             </View>
                         </View> */}
                         {/* Days Selection */}
-                        <View style={styles.daysContainer}>
+                        {/* <View style={styles.daysContainer}>
                             <Text style={styles.label}>Days:</Text>
                             <View style={styles.daysWrapper}>
                                 {Object.keys(selectedDays).map(day => (
@@ -346,6 +467,27 @@ const AddEmployee = () => {
                                             {selectedDays[day] && <Icon name="check" size={14} color="black" />}
                                         </View>
                                         <Text style={styles.dayText}>{day}</Text>
+                                    </TouchableOpacity>
+                                ))}
+                            </View>
+                        </View> */}
+                           <View style={{ flexDirection: 'row', marginTop: 15 }}>
+                            <Text style={{ textAlign: 'left', width: '32%', fontWeight: '600', color: 'black' }}>
+                                Business Days:
+                            </Text>
+                            <View style={{ flexDirection: 'row', flexWrap: 'wrap', flex: 1, width: 100 , gap:8}}>
+                                {Object.keys(selectedDays).map(day => (
+                                    <TouchableOpacity
+                                        key={day}
+                                        onPress={() => toggleDaySelection(day)}
+                                        style={{ flexDirection: 'row', alignItems: 'center', gap:8 }}>
+                                        <View
+                                            style={[styles.checkbox, selectedDays[day] && styles.checkedBox]}>
+                                            {selectedDays[day] && <Icon name="check" size={14} color="black" />}
+                                        </View>
+                                        <Text style={{ fontSize: 13, fontWeight: '600', color: 'black' }}>
+                                            {day}
+                                        </Text>
                                     </TouchableOpacity>
                                 ))}
                             </View>
@@ -433,25 +575,39 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginRight: 10,
     },
-    checkbox: {
-        borderColor: '#218a86',
-        borderWidth: 1,
-        borderRadius: 1,
-        width: 13,
-        height: 13,
-        justifyContent: 'center',
-        marginRight: 10,
-    },
-    checkedBox: {
-        backgroundColor: '#218a86',
-    },
+    // checkbox: {
+    //     borderColor: '#218a86',
+    //     borderWidth: 1,
+    //     borderRadius: 1,
+    //     width: 13,
+    //     height: 13,
+    //     justifyContent: 'center',
+    //     marginRight: 10,
+    // },
+    // checkedBox: {
+    //     backgroundColor: '#218a86',
+    // },
     dayText: {
         fontSize: 11,
         fontWeight: '600',
         color: 'black',
     },
 
-
+    selectedOption: {
+        backgroundColor: '#007bff',
+        borderColor: '#007bff',
+    },
+    optionText: {
+        fontSize: 14,
+        fontWeight: '600',
+        color: 'black',
+    },
+    checkbox:{
+        borderWidth: 1,
+        borderColor: '#9b9b9b',
+        borderRadius: 5,
+        padding:3
+    }
 
 
 

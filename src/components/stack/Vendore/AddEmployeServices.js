@@ -154,7 +154,7 @@ export default function AddEmployeServices() {
                         {shops.map(shop => (
                             <TouchableOpacity key={shop?.id} onPress={() => handleShopSelection(shop)}>
                                 <View style={styles.dropdownItem}>
-                                    <Text>{shop.title}</Text>
+                                    <Text style={styles.heading}>{shop.title}</Text>
                                 </View>
                             </TouchableOpacity>
                         ))}
@@ -174,7 +174,7 @@ export default function AddEmployeServices() {
                         {services.map(shop => (
                             <TouchableOpacity key={shop?.id} onPress={() => handleServiceSelection(shop)}>
                                 <View style={styles.dropdownItem}>
-                                    <Text>{shop.title}</Text>
+                                    <Text style={styles.heading}>{shop.title}</Text>
                                 </View>
                             </TouchableOpacity>
                         ))}
@@ -197,7 +197,7 @@ export default function AddEmployeServices() {
                                 {employe.map(shop => (
                                     <TouchableOpacity key={shop?.id} onPress={() => handleEmployeSelection(shop)}>
                                         <View style={styles.dropdownItem}>
-                                            <Text>{shop.employee_name}</Text>
+                                            <Text style={styles.heading}>{shop.employee_name}</Text>
                                         </View>
                                     </TouchableOpacity>
                                 ))}
@@ -209,6 +209,7 @@ export default function AddEmployeServices() {
                 <TextInput
                     style={styles.input}
                     placeholder="Service Expirence"
+                    placeholderTextColor="gray"
                     value={expierence}
                     keyboardType="numeric"
                     onChangeText={setExpirence}
@@ -217,12 +218,14 @@ export default function AddEmployeServices() {
                 <TextInput
                     style={styles.input}
                     placeholder="Service Area"
+                    placeholderTextColor="gray"
                     value={area}
                     onChangeText={setArea}
                 />
                 <TextInput
                     style={styles.input}
                     placeholder="Visiting Charge"
+                    placeholderTextColor="gray"
                     keyboardType="numeric"
                     value={cahrges}
                     onChangeText={setCharges}
@@ -231,6 +234,7 @@ export default function AddEmployeServices() {
                 <TextInput
                     style={styles.input}
                     placeholder="Service Charge"
+                    placeholderTextColor="gray"
                     keyboardType="numeric"
                     value={servicecharges}
                     onChangeText={setServicesCharges}
@@ -316,4 +320,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
     },
+    heading:{
+        color: 'black',
+      }
 });

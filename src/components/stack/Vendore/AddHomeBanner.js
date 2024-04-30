@@ -85,6 +85,7 @@ export default function AddHomeBanner(){
                 <TextInput
                     style={styles.input}
                     placeholder="title"
+                    placeholderTextColor="gray"
                     value={title}
                     onChangeText={setTitle}
                 />
@@ -92,6 +93,7 @@ export default function AddHomeBanner(){
                 <TextInput
                     style={styles.input}
                     placeholder="URL..."
+                    placeholderTextColor="gray"
                     value={url}
                     onChangeText={setUrl}
                 />
@@ -103,7 +105,7 @@ export default function AddHomeBanner(){
         ) : (
           <View>
             {image && <Image source={{ uri: image }} style={styles.image} />}
-            {!image && <Text style={{fontSize:12,marginBottom:10}}>No image selected</Text>}
+            {!image && <Text style={{fontSize:12,marginBottom:10, color:'black'}}>No image selected</Text>}
 
           </View>
         )}

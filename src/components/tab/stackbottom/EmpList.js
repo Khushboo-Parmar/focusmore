@@ -3,13 +3,17 @@ import { Text, View, Image, ScrollView, ActivityIndicator, StyleSheet, Touchable
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 
 const Employees = (props) => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const navigation = useNavigation();
-    const serviceId = props.route.params.data[0].id 
+    const serviceId = props.route.params.data[0].id ;
+
+    const Location = useSelector((state) => state.location);
+
  
     useEffect(() => {
         const fetchData = async () => {
@@ -20,14 +24,16 @@ const Employees = (props) => {
                     const response = await axios.post('https://focusmore.codelive.info/api/employees-service', {
                         service_id: "5",
                         // service_id: props.route.params.data[0].id,
-                        latitude: 22.9676,
-                        longitude: 76.0534,
+                        // latitude: Location[0][0]?.lat,
+                        // longitude: Location[0][1]?.long,
+                        latitude: 0,
+                        longitude: 0,
                         radius: 50000
                     });
                     console.warn('service id=', props.route.params.data[0].id)
                     setData(response.data.data);
                     setLoading(false);
-                    console.warn('employees service = ', response.data.data);
+                    console.warn('employees service list = ', response.data.data);
                 }
             } catch (error) {
                 setError('Error fetching employee list');

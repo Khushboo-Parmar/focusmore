@@ -237,15 +237,12 @@ import { useSelector } from 'react-redux';
 
 
 
-const DrawerList = [
+let DrawerList = [
   { icon: 'file-document-outline', label: 'Register', navigateTo: 'MobileRegistration' },
-  // {icon: 'login', label: 'Login', navigateTo: 'Login'},
-  { icon: 'home-outline', label: 'Home', navigateTo: 'Home' },
+  { icon: 'home-outline', label: 'Home', navigateTo: 'StartSearch' },
   { icon: 'border-none', label: 'Categories', navigateTo: 'Categories' },
-  // {icon: 'home-city-outline', label: 'Add Business', navigateTo: 'BusinessAdd'},
   { icon: 'home-city-outline', label: 'Add Business', navigateTo: 'AddBusiness' },
   { icon: 'account-search', label: 'Add Services', navigateTo: '' },
-  // {icon: 'account-search', label: 'Add Product', navigateTo: 'AddProduct'},
   { icon: 'text-box-search-outline', label: 'Add Classifieds', navigateTo: 'AddClassifieds' },
   { icon: 'briefcase-account-outline', label: 'Find Job', navigateTo: '' },
   { icon: 'wrench-clock', label: 'Setting', navigateTo: '' },
@@ -255,17 +252,10 @@ const DrawerList = [
   { icon: 'letter-outline', label: 'Add Languages', navigateTo: 'AddLanguage' },
   { icon: 'letter-outline', label: 'Add Category', navigateTo: 'AddCategory' },
   // { icon: 'letter-outline', label: 'Dashboard', navigateTo: 'Dashboard' },
+  { icon: 'information-outline', label: 'Add Employee', navigateTo: 'AddEmployee' },
 ]
-
-
-
-
-
 const DrawerLayout = ({ icon, label, navigateTo }) => {
   const navigation = useNavigation();
-
-
-
   return (
     <DrawerItem
       icon={({ color, size }) => <Icon name={icon} color={color} size={size} />}
@@ -301,18 +291,18 @@ function DrawerContent(props) {
 
   const [userData, setUserData] = React.useState(null);
 
-
-const chekRole = () =>{
-  if (isLoggedIn) {
-    console.warn('workingg')
-    DrawerList.unshift({ icon: 'text-box-search-outline', label: 'Dashboard', navigateTo: 'Dashboard' })
+  const chekRole = () =>{
+    DrawerList = DrawerList.filter(item => item.navigateTo !== 'Dashboard');
+  
+    if (isLoggedIn) {
+      DrawerList.unshift({ icon: 'text-box-search-outline', label: 'Dashboard', navigateTo: 'Dashboard' });
+    }
   }
-}
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        console.warn(isLoggedIn2,isLoggedIn3,isLoggedIn4)
+        console.warn(isLoggedIn2,!isLoggedIn3,isLoggedIn4)
         // DrawerList.shift()
         const token = await AsyncStorage.getItem('token');
         // console.warn(token)
@@ -361,7 +351,8 @@ const chekRole = () =>{
         <View style={styles.drawerContent}>
 
           <ImageBackground source={require('../images/bgimage.jpg')}>
-            <TouchableOpacity activeOpacity={0.8} style={styles.bgImage}>
+            <TouchableOpacity onPress={()=>{userData ? 
+            navigation.navigate('Profile',userData ? userData : null):''}} activeOpacity={0.8} style={styles.bgImage}>
 
               <View style={styles.userInfoSection}>
                 <View style={{ flexDirection: 'row', marginTop: 15 }}>

@@ -39,11 +39,15 @@ import AddEmployeExpirence from './components/stack/Vendore/AddEmployeExpirence'
 import AddVendoreOffer from './components/stack/Vendore/AddVenoreOffer';
 import AddCertiffect from './components/stack/Vendore/AddCertiffect';
 import AddHomeBanner from './components/stack/Vendore/AddHomeBanner';
+import Profile from './components/stack/Vendore/Profile';
+import ProductDetail from './components/stack/Productdetailpage';
 const AppNavigator = () => {
   const item = useSelector((state)=> state.token)
+  const location = useSelector((state)=> state.location)
   const Stack = createNativeStackNavigator();
   const navigation = useNavigation();
   console.log(item)
+  console.warn(location)
   return (
     <>
       <Stack.Navigator
@@ -82,7 +86,7 @@ const AppNavigator = () => {
             headerTitle: '',
             headerRight: () => (
               <>
-                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>{location ? (location[1]):('')}</Text>
                 <Icon name="location-pin" size={20} color="#fff" />
               </>
             ),
@@ -93,7 +97,7 @@ const AppNavigator = () => {
           headerTitle: '',
           headerRight: () => (
             <>
-              <Text style={{ color: '#fff', marginRight: 5 }}>Koti, Hyderabad</Text>
+              <Text style={{ color: '#fff', marginRight: 5 }}>{location ? (location[1]):('')}</Text>
               <Icon name="location-pin" size={20} color="#fff" />
             </>
           ),
@@ -102,7 +106,7 @@ const AppNavigator = () => {
           headerTitle: '',
           headerRight: () => (
             <>
-              <Text style={{ color: '#fff', marginRight: 5 }}>Koti, Hyderabad</Text>
+              <Text style={{ color: '#fff', marginRight: 5 }}>{location ? (location[1]):('')}</Text>
               <Icon name="location-pin" size={20} color="#fff" />
             </>
           ),
@@ -113,7 +117,7 @@ const AppNavigator = () => {
             headerTitle: '',
             headerRight: () => (
               <>
-                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>{location ? (location[1]):('')}</Text>
                 <Icon name="location-pin" size={20} color="#fff" />
               </>
             ),
@@ -123,7 +127,7 @@ const AppNavigator = () => {
             headerTitle: '',
             headerRight: () => (
               <>
-                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>{location ? (location[1]):('')}</Text>
                 <Icon name="location-pin" size={20} color="#fff" />
               </>
             ),
@@ -140,7 +144,7 @@ const AppNavigator = () => {
             headerTitle: '',
             headerRight: () => (
               <>
-                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>{location ? (location[1]):('')}</Text>
                 <Icon name="location-pin" size={20} color="#fff" />
               </>
             ),
@@ -150,7 +154,7 @@ const AppNavigator = () => {
             headerTitle: '',
             headerRight: () => (
               <>
-                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>{location ? (location[1]):('')}</Text>
                 <Icon name="location-pin" size={20} color="#fff" />
               </>
             ),
@@ -162,7 +166,7 @@ const AppNavigator = () => {
             headerTitle: '',
             headerRight: () => (
               <>
-                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>{location ? (location[1]):('')}</Text>
                 <Icon name="location-pin" size={20} color="#fff" />
               </>
             ),
@@ -174,7 +178,7 @@ const AppNavigator = () => {
             headerTitle: '',
             headerRight: () => (
               <>
-                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>{location ? (location[1]):('')}</Text>
                 <Icon name="location-pin" size={20} color="#fff" />
               </>
             ),
@@ -187,7 +191,7 @@ const AppNavigator = () => {
             headerTitle: '',
             headerRight: () => (
               <>
-                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>{location ? (location[1]):('')}</Text>
                 <Icon name="location-pin" size={20} color="#fff" />
               </>
             ),
@@ -199,7 +203,7 @@ const AppNavigator = () => {
             headerTitle: '',
             headerRight: () => (
               <>
-                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>{location ? (location[1]):('')}</Text>
                 <Icon name="location-pin" size={20} color="#fff" />
               </>
             ),
@@ -210,7 +214,7 @@ const AppNavigator = () => {
             headerTitle: '',
             headerRight: () => (
               <>
-                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>{location ? (location[1]):('')}</Text>
                 <Icon name="location-pin" size={20} color="#fff" />
               </>
             ),
@@ -221,7 +225,7 @@ const AppNavigator = () => {
             headerTitle: '',
             headerRight: () => (
               <>
-                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>{location ? (location[1]):('')}</Text>
                 <Icon name="location-pin" size={20} color="#fff" />
               </>
             ),
@@ -231,7 +235,7 @@ const AppNavigator = () => {
           headerTitle: '',
           headerRight: () => (
             <>
-              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>{location ? (location[1]):('')}</Text>
               <Icon name="location-pin" size={20} color="#fff" />
             </>
           ),
@@ -240,7 +244,7 @@ const AppNavigator = () => {
           headerTitle: '',
           headerRight: () => (
             <>
-              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>{location ? (location[1]):('')}</Text>
               <Icon name="location-pin" size={20} color="#fff" />
             </>
           ),
@@ -250,7 +254,7 @@ const AppNavigator = () => {
           headerTitle: '',
           headerRight: () => (
             <>
-              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>{location ? (location[1]):('')}</Text>
               <Icon name="location-pin" size={20} color="#fff" />
             </>
           ),
@@ -260,7 +264,7 @@ const AppNavigator = () => {
           headerTitle: '',
           headerRight: () => (
             <>
-              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>{location ? (location[1]):('')}</Text>
               <Icon name="location-pin" size={20} color="#fff" />
             </>
           ),
@@ -270,7 +274,7 @@ const AppNavigator = () => {
           headerTitle: '',
           headerRight: () => (
             <>
-              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>{location ? (location[1]):('')}</Text>
               <Icon name="location-pin" size={20} color="#fff" />
             </>
           ),
@@ -280,7 +284,7 @@ const AppNavigator = () => {
           headerTitle: '',
           headerRight: () => (
             <>
-              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>{location ? (location[1]):('')}</Text>
               <Icon name="location-pin" size={20} color="#fff" />
             </>
           ),
@@ -292,7 +296,7 @@ const AppNavigator = () => {
             headerTitle: '',
             headerRight: () => (
               <>
-                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>{location ? (location[1]):('')}</Text>
                 <Icon name="location-pin" size={20} color="#fff" />
               </>
             ),
@@ -302,7 +306,7 @@ const AppNavigator = () => {
             headerTitle: '',
             headerRight: () => (
               <>
-                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+                <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>{location ? (location[1]):('')}</Text>
                 <Icon name="location-pin" size={20} color="#fff" />
               </>
             ),
@@ -316,7 +320,7 @@ const AppNavigator = () => {
           headerTitle: '',
           headerRight: () => (
             <>
-              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>{location ? (location[1]):('')}</Text>
               <Icon name="location-pin" size={20} color="#fff" />
             </>
           ),
@@ -327,7 +331,7 @@ const AppNavigator = () => {
           headerTitle: '',
           headerRight: () => (
             <>
-              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>{location ? (location[1]):('')}</Text>
               <Icon name="location-pin" size={20} color="#fff" />
             </>
           ),
@@ -337,7 +341,7 @@ const AppNavigator = () => {
           headerTitle: '',
           headerRight: () => (
             <>
-              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>{location ? (location[1]):('')}</Text>
               <Icon name="location-pin" size={20} color="#fff" />
             </>
           ),
@@ -347,7 +351,7 @@ const AppNavigator = () => {
           headerTitle: '',
           headerRight: () => (
             <>
-              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>{location ? (location[1]):('')}</Text>
               <Icon name="location-pin" size={20} color="#fff" />
             </>
           ),
@@ -357,7 +361,7 @@ const AppNavigator = () => {
           headerTitle: '',
           headerRight: () => (
             <>
-              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>{location ? (location[1]):('')}</Text>
               <Icon name="location-pin" size={20} color="#fff" />
             </>
           ),
@@ -367,13 +371,31 @@ const AppNavigator = () => {
           headerTitle: '',
           headerRight: () => (
             <>
-              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>{location ? (location[1]):('')}</Text>
               <Icon name="location-pin" size={20} color="#fff" />
             </>
           ),
         }} />
         
         <Stack.Screen name="AddHomeBanner" component={AddHomeBanner} options={{
+          headerTitle: '',
+          headerRight: () => (
+            <>
+              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>{location ? (location[1]):('')}</Text>
+              <Icon name="location-pin" size={20} color="#fff" />
+            </>
+          ),
+        }} />
+                <Stack.Screen name="Profile" component={Profile} options={{
+          headerTitle: '',
+          headerRight: () => (
+            <>
+              <Text style={{ color: '#fff', marginRight: 5, fontSize: 16 }}>Koti, Hyderabad</Text>
+              <Icon name="location-pin" size={20} color="#fff" />
+            </>
+          ),
+        }} />
+        <Stack.Screen name="ProductDetail" component={ProductDetail} options={{
           headerTitle: '',
           headerRight: () => (
             <>

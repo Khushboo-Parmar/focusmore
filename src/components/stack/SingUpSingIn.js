@@ -8,6 +8,7 @@ import axios from 'axios';
 import ImagePicker from 'react-native-image-crop-picker';
 import { useDispatch } from 'react-redux';
 import { remove } from '../../store/auth/Slice';
+import Places from "./Places";
 
 export const SignUp = () => {
   const [email, setEmail] = React.useState(null)
@@ -57,32 +58,32 @@ export const SignUp = () => {
   const ext = match?.[1];
 
 
-const checkEmailExistence = async(email) => {
+  const checkEmailExistence = async (email) => {
 
-  try{
-    const response= await axios.post(`https://focusmore.codelive.info/api/check-email`,{
-      email: email
-    });
-    return response.data.status ===200;
-  }
-  catch(error){
-    console.warn('error checking email existence:', error);
-    return false;
-  }
+    try {
+      const response = await axios.post(`https://focusmore.codelive.info/api/check-email`, {
+        email: email
+      });
+      return response.data.status === 200;
+    }
+    catch (error) {
+      console.warn('error checking email existence:', error);
+      return false;
+    }
 
-}
+  }
 
 
   const handelsumbit = async () => {
 
-const isEmailExist = await checkEmailExistence(email)
-if (isEmailExist){
-  Toast.show({
-    type:'error',
-    text1:'Email already existes 📧'
-  });
-  return;
-}
+    const isEmailExist = await checkEmailExistence(email)
+    if (isEmailExist) {
+      Toast.show({
+        type: 'error',
+        text1: 'Email already existes 📧'
+      });
+      return;
+    }
 
 
 
@@ -197,11 +198,12 @@ if (isEmailExist){
             </View>
             <View style={styles.inputRow}>
               <Text style={[styles.label, { textAlign: 'right' }]}><Text style={styles.required}>*</Text> city/town/village:</Text>
-              <TextInput
+              {/* <TextInput
                 onChangeText={(e) => { setCity(e) }}
                 style={[styles.input, { width: 200 }]}
                 placeholder=''
-              />
+              /> */}
+              <Places />
             </View>
             <View style={styles.inputRow}>
               <Text style={[styles.label, { textAlign: 'right' }]}><Text style={styles.required}>*</Text> state:</Text>

@@ -86,6 +86,7 @@ const SetReviews = ({ props }) => {
               color:'black'
             }}
             placeholder="Review Title"
+            placeholderTextColor="gray"
           />
           <View
             style={{

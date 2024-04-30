@@ -9,8 +9,8 @@ import { useSelector } from "react-redux";
 const ShopGallery = (props) => {
     const [images, setImages] = useState([]);
     const userId = useSelector((state) => state.uId)
-    console.warn('u id=', userId[0])
-    console.warn('shop id=', props.route.params.id)
+    // console.warn('u id=', userId[0])
+    // console.warn('shop id=', props.route.params.id)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -19,9 +19,9 @@ const ShopGallery = (props) => {
                 if (token) {
                     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
                     const response = await axios.post('https://focusmore.codelive.info/api/get-shop-gallery', {
-                        shop_id: 5,
-                        user_id: 3
-                        // shop_id: props.route.params?.id,
+                        // shop_id: 5,
+                        user_id: 3,
+                        shop_id: props.route.params?.id,
                         // user_id: userId[0]
                     });
                     console.warn('Gallery API Response:', response); 

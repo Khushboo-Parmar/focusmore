@@ -140,7 +140,7 @@ export default function AddServices(props) {
           {categories.map(category => (
             <TouchableOpacity key={category?.id} onPress={() => handleCategorySelection(category)}>
               <View style={styles.dropdownItem}>
-                <Text>{category.name}</Text>
+                <Text style={styles.heading} >{category.name}</Text>
               </View>
             </TouchableOpacity>
           ))}
@@ -161,7 +161,7 @@ export default function AddServices(props) {
             {shops.map(shop => (
               <TouchableOpacity key={shop?.id} onPress={() => handleShopSelection(shop)}>
                 <View style={styles.dropdownItem}>
-                  <Text>{shop.title}</Text>
+                  <Text style={styles.heading} >{shop.title}</Text>
                 </View>
               </TouchableOpacity>
             ))}
@@ -171,6 +171,7 @@ export default function AddServices(props) {
         <TextInput
           style={styles.input}
           placeholder="Service title"
+          placeholderTextColor="gray"
           value={title}
           onChangeText={setTitle}
         />
@@ -182,7 +183,7 @@ export default function AddServices(props) {
           ) : (
             <View>
               {image && <Image source={{ uri: image }} style={styles.image} />}
-              {!image && <Text style={{fontSize:12,marginBottom:10}}>No image selected</Text>}
+              {!image && <Text style={{fontSize:12,marginBottom:10, color:'black'}}>No image selected</Text>}
             </View>
           )}
         </TouchableOpacity>
@@ -190,6 +191,7 @@ export default function AddServices(props) {
         <TextInput
           style={styles.input}
           placeholder="Description"
+          placeholderTextColor="gray"
           value={description}
           onChangeText={setDescription}
         />
@@ -282,4 +284,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontStyle:'italic'
   },
+  heading:{
+    color: 'black',
+  }
+
 });
