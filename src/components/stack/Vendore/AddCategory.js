@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Text, View, TextInput, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Toast from 'react-native-toast-message';
 
 const AddCategory = () => {
     const [name, setName] = useState('');
@@ -27,15 +28,13 @@ const AddCategory = () => {
         }
     };
 
-    // if (isLoading) {
-    //     return <ActivityIndicator size="large" color="#0000ff" />;
-    // }
 
     return (
         <View style={styles.container}>
             <TextInput
                 style={styles.input}
                 placeholder="name"
+                placeholderTextColor="gray"
                 value={name}
                 onChangeText={(text) => setName(text)}
             />
@@ -43,6 +42,7 @@ const AddCategory = () => {
             <TextInput
                 style={styles.input}
                 placeholder="type"
+                placeholderTextColor="gray"
                 value={type}
                 onChangeText={(text) => setType(text)}
             />

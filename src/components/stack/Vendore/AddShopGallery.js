@@ -110,7 +110,7 @@ export default function AddShopGallery(props){
             {shops.map(shop => (
               <TouchableOpacity key={shop?.id} onPress={() => handleShopSelection(shop)}>
                 <View style={styles.dropdownItem}>
-                  <Text>{shop.title}</Text>
+                  <Text style={styles.heading}>{shop.title}</Text>
                 </View>
               </TouchableOpacity>
             ))}
@@ -123,7 +123,7 @@ export default function AddShopGallery(props){
         ) : (
           <View>
             {image && <Image source={{ uri: image }} style={styles.image} />}
-            {!image && <Text style={{fontSize:12,marginBottom:10}}>No image selected</Text>}
+            {!image && <Text style={{fontSize:12,marginBottom:10 ,color:'black'}}>No image selected</Text>}
 
           </View>
         )}
@@ -207,4 +207,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+  heading:{
+    color: 'black',
+  }
+  
 });

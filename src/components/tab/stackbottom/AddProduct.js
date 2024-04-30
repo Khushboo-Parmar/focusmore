@@ -1,140 +1,259 @@
 
-import React, { useState } from "react";
-import { Text, View, ScrollView, TextInput, StyleSheet, Button, Alert } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Text, View, ScrollView, TextInput, StyleSheet, Button, Image, TouchableOpacity, ActivityIndicator } from "react-native";
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from 'axios';
+import ImagePicker from 'react-native-image-crop-picker';
+
 
 
 const AddProduct = (props) => {
-    const [productData, setProductData] = useState({
-        name: "",
-        description: "",
-        price: "",
-        in_stock: "",
-        delivery_charge: "",
-        shop_id: "",
-        phone: ""
-    });
+    const [loading, setLoading] = useState(false);
+    const [shops, setShops] = useState([]);
 
-    const handleInputChange = (key, value) => {
-        setProductData({ ...productData, [key]: value });
+    const [name, setName] = useState();
+    const [description, setDescription] = useState();
+    const [price, setPrice] = useState();
+    const [in_tock, setInStock] = useState();
+    const [deliverycharge, setDeliveryCharge] = useState();
+    const [phone, setPhone] = useState();
+    const [purchaseprice, setPurchasePrice] = useState();
+    const [sellprice, setSellPrice] = useState();
+    const [discountamount, setDiscountAmount] = useState();
+    const [offerlimit, setOfferLimit] = useState();
+    const [image, setImage] = useState();
+    const [selectedShop, setSelectedShop] = useState(null);
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+
+    useEffect(() => {
+        fetchShops();
+    }, []);
+
+    const filename = image?.split("/").pop();
+    const match = /\.(\w+)$/.exec(filename);
+    const ext = match?.[1];
+    const formData = new FormData();
+    const fetchShops = async () => {
+        try {
+            const token = await AsyncStorage.getItem('token');
+            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            const response = await axios.post('https://focusmore.codelive.info/api/shop/list');
+            setShops(response.data.data);
+        } catch (error) {
+            console.error('Error fetching shops:', error);
+        }
     };
+
 
     const addProduct = async () => {
         const token = await AsyncStorage.getItem('token');
         try {
+            formData.append('shop_id', selectedShop?.id);
+            formData.append('image_path', {
+                uri: image,
+                type: `image/${ext}`,
+                name: filename
+            });
+            formData.append('name', name);
+            formData.append('description', description);
+            formData.append('in_stock', in_tock);
+            formData.append('delivery_charge', deliverycharge);
+            formData.append('phone', phone);
+            formData.append('purchase_price', purchaseprice);
+            formData.append('sell_price', sellprice);
+            formData.append('discount_amount', discountamount);
+            formData.append('offer_limit', offerlimit);
+
+
+
+
+
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
             const response = await fetch("https://focusmore.codelive.info/api/product/add", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    'Authorization': `Bearer ${token}`,
                 },
-                body: JSON.stringify(productData)
+                body: formData
             });
             const data = await response.json();
-            if (response.ok) {
-                // Product added successfully
-                Alert.alert("Success", "Product added successfully");
-                // Clear input fields
-                setProductData({
-                    name: "",
-                    description: "",
-                    price: "",
-                    in_stock: "",
-                    delivery_charge: "",
-                    shop_id: "",
-                    phone: ""
-                });
-            } else {
-                Alert.alert("Error", data.message);
-            }
+            console.warn(data)
         } catch (error) {
-            console.error("Error adding product:", error);
-            Alert.alert("Error", "Failed to add product. Please try again.");
+            // console.error("Error adding product:", error);
+            // Alert.alert("Error", "Failed to add product. Please try again.");
         }
+    };
+    const handleShopSelection = (shop) => {
+        setSelectedShop(shop);
+        setDropdownOpen(false);
+    };
+
+    const pickImage = () => {
+        setLoading(true);
+        ImagePicker.openPicker({
+            width: 300,
+            height: 400,
+            cropping: true,
+        })
+            .then((selectedImage) => {
+                setImage(selectedImage.path);
+                console.warn(image)
+            })
+            .catch((error) => {
+                console.log('Image picking error:', error);
+
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     };
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
             <Text style={styles.heading}>Add Product</Text>
             <ScrollView>
-
+                {/* <Text style={styles.heading}>Select Shop</Text> */}
+                <TouchableOpacity onPress={() => setDropdownOpen(!dropdownOpen)}>
+                    <View style={styles.dropdown}>
+                        <Text style={styles.headingg}>
+                            {selectedShop ? selectedShop.title : 'Select Shop'}
+                        </Text>
+                    </View>
+                </TouchableOpacity>
+                {dropdownOpen && (
+                    <View style={styles.dropdownList}>
+                        {shops.map(shop => (
+                            <TouchableOpacity key={shop?.id} onPress={() => handleShopSelection(shop)}>
+                                <View style={styles.dropdownItem}>
+                                    <Text style={styles.headingg}>{shop.title}</Text>
+                                </View>
+                            </TouchableOpacity>
+                        ))}
+                    </View>
+                )}
                 <TextInput
                     style={styles.input}
                     placeholder="Product Name"
-                    value={productData.name}
-                    onChangeText={(text) => handleInputChange("name", text)}
+                    placeholderTextColor="gray"
+                    value={name}
+                    onChangeText={setName}
                 />
                 <TextInput
                     style={styles.input}
                     placeholder="Description"
-                    value={productData.description}
-                    onChangeText={(text) => handleInputChange("description", text)}
+                    placeholderTextColor="gray"
+                    value={description}
+                    onChangeText={setDescription}
                     multiline
                 />
                 <TextInput
                     style={styles.input}
                     placeholder="Price"
-                    value={productData.price}
-                    onChangeText={(text) => handleInputChange("price", text)}
+                    placeholderTextColor="gray"
+                    value={price}
+                    onChangeText={setPrice}
                     keyboardType="numeric"
                 />
                 <TextInput
                     style={styles.input}
                     placeholder="Purchase Price"
-                    value={productData.PurchasePrice}
-                    onChangeText={(text) => handleInputChange("Purchase price", text)}
+                    placeholderTextColor="gray"
+                    value={purchaseprice}
+                    onChangeText={setPurchasePrice}
                     keyboardType="numeric"
                 />
                 <TextInput
                     style={styles.input}
                     placeholder="Sell  Price"
-                    value={productData.SellPrice}
-                    onChangeText={(text) => handleInputChange("Sell price", text)}
+                    placeholderTextColor="gray"
+                    value={sellprice}
+                    onChangeText={setSellPrice}
                     keyboardType="numeric"
                 />
                 <TextInput
                     style={styles.input}
                     placeholder="DiscountAmount"
-                    value={productData.DiscountAmount}
-                    onChangeText={(text) => handleInputChange("Discount amount", text)}
+                    placeholderTextColor="gray"
+                    value={discountamount}
+                    onChangeText={setDiscountAmount}
                     keyboardType="numeric"
                 />
                 <TextInput
                     style={styles.input}
                     placeholder="Offer Limit"
-                    value={productData.OfferLimit}
-                    onChangeText={(text) => handleInputChange("offer limit", text)}
+                    placeholderTextColor="gray"
+                    value={offerlimit}
+                    onChangeText={setOfferLimit}
                     keyboardType="numeric"
                 />
                 <TextInput
                     style={styles.input}
                     placeholder="In Stock"
-                    value={productData.in_stock}
-                    onChangeText={(text) => handleInputChange("in_stock", text)}
+                    placeholderTextColor="gray"
+                    value={in_tock}
+                    onChangeText={setInStock}
                     keyboardType="numeric"
                 />
                 <TextInput
                     style={styles.input}
                     placeholder="Delivery Charge"
-                    value={productData.delivery_charge}
-                    onChangeText={(text) => handleInputChange("delivery_charge", text)}
-                    keyboardType="numeric"
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder="Shop ID"
-                    value={productData.shop_id}
-                    onChangeText={(text) => handleInputChange("shop_id", text)}
+                    placeholderTextColor="gray"
+                    value={deliverycharge}
+                    onChangeText={setDeliveryCharge}
                     keyboardType="numeric"
                 />
                 <TextInput
                     style={styles.input}
                     placeholder="Phone"
-                    value={productData.phone}
-                    onChangeText={(text) => handleInputChange("phone", text)}
+                    placeholderTextColor="gray"
+                    value={phone}
+                    onChangeText={setPhone}
                     keyboardType="phone-pad"
                 />
+                <TextInput
+                    style={styles.input}
+                    placeholder="purchase_price"
+                    placeholderTextColor="gray"
+                    onChangeText={setPurchasePrice}
+                    keyboardType="phone-pad"
+                />
+
+                <TextInput
+                    style={styles.input}
+                    placeholder="sell_price"
+                    placeholderTextColor="gray"
+                    onChangeText={setSellPrice}
+                    keyboardType="phone-pad"
+                />
+
+                <TextInput
+                    style={styles.input}
+                    placeholder="discount_amount"
+                    placeholderTextColor="gray"
+                    onChangeText={setDiscountAmount}
+                    keyboardType="phone-pad"
+                />
+
+                <TextInput
+                    style={styles.input}
+                    placeholder="offer_limit"
+                    placeholderTextColor="gray"
+                    onChangeText={setOfferLimit}
+                    keyboardType="phone-pad"
+                />
+
+                <TouchableOpacity onPress={pickImage}>
+                    <Text style={{ fontSize: 18, color: 'blue', marginBottom: 10 }}>Pick Image</Text>
+                    {loading ? (
+                        <ActivityIndicator size="small" color="blue" />
+                    ) : (
+                        <View>
+                            {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+                            {!image && <Text style={styles.headingg} >No image selected</Text>}
+                        </View>
+                    )}
+                </TouchableOpacity>
 
             </ScrollView>
             <Button title="Add Product" onPress={addProduct} />
@@ -154,7 +273,8 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: "bold",
         marginBottom: 20,
-        textAlign: "center"
+        textAlign: "center",
+        color:'black'
     },
     input: {
         height: 40,
@@ -163,7 +283,23 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         marginBottom: 10,
         paddingHorizontal: 10,
-        color:'black',
-    }
+        color: 'black',
+    },
+    headerText: {
+        color: 'white',
+        fontSize: 20,
+        fontWeight: '700',
+    },
+    header: {
+        backgroundColor: '#000000',
+        height: 100,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        marginBottom: 20
+    },
+    headingg:{
+        color: 'black',
+      }
 });
 

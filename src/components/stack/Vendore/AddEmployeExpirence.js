@@ -150,7 +150,7 @@ export default function AddEmployeExpirence() {
                         {shops.map(shop => (
                             <TouchableOpacity key={shop?.id} onPress={() => handleShopSelection(shop)}>
                                 <View style={styles.dropdownItem}>
-                                    <Text>{shop.title}</Text>
+                                    <Text style={styles.heading}>{shop.title}</Text>
                                 </View>
                             </TouchableOpacity>
                         ))}
@@ -170,7 +170,7 @@ export default function AddEmployeExpirence() {
                         {services.map(shop => (
                             <TouchableOpacity key={shop?.id} onPress={() => handleServiceSelection(shop)}>
                                 <View style={styles.dropdownItem}>
-                                    <Text>{shop.title}</Text>
+                                    <Text style={styles.heading}>{shop.title}</Text>
                                 </View>
                             </TouchableOpacity>
                         ))}
@@ -193,7 +193,7 @@ export default function AddEmployeExpirence() {
                                 {employe.map(shop => (
                                     <TouchableOpacity key={shop?.id} onPress={() => handleEmployeSelection(shop)}>
                                         <View style={styles.dropdownItem}>
-                                            <Text>{shop.employee_name}</Text>
+                                            <Text style={styles.heading}>{shop.employee_name}</Text>
                                         </View>
                                     </TouchableOpacity>
                                 ))}
@@ -205,6 +205,7 @@ export default function AddEmployeExpirence() {
                 <TextInput
                     style={styles.input}
                     placeholder="Description"
+                    placeholderTextColor="gray"
                     value={description}
                     onChangeText={setDescription}
                 />
@@ -212,6 +213,7 @@ export default function AddEmployeExpirence() {
                 <TextInput
                     style={styles.input}
                     placeholder="Others..."
+                    placeholderTextColor="gray"
                     value={other}
                     onChangeText={setOther}
                 />
@@ -296,4 +298,8 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
     },
+    heading:{
+        color: 'black',
+      }
+
 });

@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 const Broucher = (props) => {
     const [broucherImage, setBroucherImage] = useState(null);
     const userId = useSelector((state) => state.uId)
-    console.log('u id=', userId[0])
+    // console.log('u id=', userId[0])
     console.warn('s id=', props.route.params.id)
     useEffect(() => {
         const fetchData = async () => {
@@ -19,7 +19,8 @@ const Broucher = (props) => {
                     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
                     const response = await axios.post('https://focusmore.codelive.info/api/get-shop-brochure', {
                         shop_id: props.route.params?.id,
-                        user_id: userId[0]
+                        // user_id: userId[0]
+                        user_id: 91
                     });
                     console.warn('data=', response.data.data)
                     if (response.data.status === 200 && response.data.data.length > 0) {

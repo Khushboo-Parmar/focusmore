@@ -139,7 +139,7 @@ export default function AddClasified(props) {
           {categories.map(category => (
             <TouchableOpacity key={category?.id} onPress={() => handleCategorySelection(category)}>
               <View style={styles.dropdownItem}>
-                <Text>{category.name}</Text>
+                <Text style={styles.dropdownTextt} >{category.name}</Text>
               </View>
             </TouchableOpacity>
           ))}
@@ -158,7 +158,7 @@ export default function AddClasified(props) {
             {shops.map(shop => (
               <TouchableOpacity key={shop?.id} onPress={() => handleShopSelection(shop)}>
                 <View style={styles.dropdownItem}>
-                  <Text>{shop.title}</Text>
+                  <Text style={styles.dropdownTextt} >{shop.title}</Text>
                 </View>
               </TouchableOpacity>
             ))}
@@ -167,6 +167,7 @@ export default function AddClasified(props) {
       <TextInput
         style={styles.input}
         placeholder="Product title"
+        placeholderTextColor="gray"
         value={title}
         onChangeText={setTitle}
       />
@@ -177,18 +178,19 @@ export default function AddClasified(props) {
         ) : (
           <View>
             {image && <Image source={{ uri: image }} style={styles.image} />}
-            {!image && <Text style={{fontSize:12,marginBottom:10}}>No image selected</Text>}
+            {!image && <Text style={{fontSize:12,marginBottom:10 , color:'black'}}>No image selected</Text>}
           </View>
         )}
       </TouchableOpacity>
       <TextInput
         style={styles.input}
         placeholder="Description"
+        placeholderTextColor="gray"
         value={description}
         onChangeText={setDescription}
       />
       <TouchableOpacity style={styles.button} onPress={handleSumbit}>
-        <Text style={styles.buttonText}>Add Language</Text>
+        <Text style={styles.buttonText}>Add Classified</Text>
       </TouchableOpacity>
     </ScrollView>
 </>
@@ -245,6 +247,10 @@ const styles = StyleSheet.create({
       color: 'white',
       fontWeight: '700',
     },
+    dropdownTextt: {
+      color: 'black',
+     
+    },
     dropdownList: {
       marginTop: 5,
       borderWidth: 1,
@@ -253,6 +259,7 @@ const styles = StyleSheet.create({
     },
     dropdownItem: {
       padding: 10,
+      color: 'black',
     },
     button: {
       backgroundColor: 'black',
@@ -266,5 +273,8 @@ const styles = StyleSheet.create({
       fontSize: 16,
       fontWeight: 'bold',
     },
+    heading:{
+      color: 'black',
+    }
   });
   

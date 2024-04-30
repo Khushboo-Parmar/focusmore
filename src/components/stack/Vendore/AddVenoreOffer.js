@@ -122,7 +122,7 @@ export default function AddVendoreOffer(){
             {shops.map(shop => (
               <TouchableOpacity key={shop?.id} onPress={() => handleShopSelection(shop)}>
                 <View style={styles.dropdownItem}>
-                  <Text>{shop.title}</Text>
+                  <Text style={styles.heading}>{shop.title}</Text>
                 </View>
               </TouchableOpacity>
             ))}
@@ -143,7 +143,7 @@ export default function AddVendoreOffer(){
             {products.map(shop => (
               <TouchableOpacity key={shop?.id} onPress={() => handleProductSelection(shop)}>
                 <View style={styles.dropdownItem}>
-                  <Text>{shop.name}</Text>
+                  <Text style={styles.heading}>{shop.name}</Text>
                 </View>
               </TouchableOpacity>
             ))}
@@ -154,6 +154,7 @@ export default function AddVendoreOffer(){
       <TextInput
         style={styles.input}
         placeholder="Offer Tittle"
+        placeholderTextColor="gray"
         value={offertittle}
         onChangeText={setOfferTittle}
       />
@@ -236,4 +237,8 @@ const styles = StyleSheet.create({
       fontSize: 16,
       fontWeight: 'bold',
     },
+    
+  heading:{
+    color: 'black',
+  }
   });

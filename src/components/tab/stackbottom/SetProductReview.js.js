@@ -77,9 +77,9 @@ const SetProductReview = ({ productId }) => {
         console.log('rating=', rating);
         console.log('productId=', productId);
 
-        const responseData = response.data; 
+        const responseData = response.data;
         setData(responseData.data);
-        
+
         if (response.status === 200) {
           Toast.show({
             type: 'success',
@@ -99,7 +99,7 @@ const SetProductReview = ({ productId }) => {
 
 
   return (
-    <View style={{flex:1}}>
+    <View style={{ flex: 1 }}>
       <View style={{ marginTop: 20 }}>
         <View
           style={{
@@ -117,9 +117,11 @@ const SetProductReview = ({ productId }) => {
               width: 200,
               marginLeft: 10,
               padding: 5,
-              color:'black'
+              color: 'black'
             }}
             placeholder="Review Title"
+            placeholderTextColor="gray"
+
           />
           <View
             style={{
@@ -161,7 +163,7 @@ const SetProductReview = ({ productId }) => {
             margin: 8,
             paddingLeft: 20,
             fontSize: 17,
-            color:'black',
+            color: 'black',
           }}
           multiline={true}
           numberOfLines={4}
@@ -172,8 +174,8 @@ const SetProductReview = ({ productId }) => {
             width: 80,
             height: 30,
             borderRadius: 10,
-            alignSelf:'center',
-            paddingTop:5,
+            alignSelf: 'center',
+            paddingTop: 5,
           }}
         >
           <TouchableOpacity
@@ -183,7 +185,7 @@ const SetProductReview = ({ productId }) => {
               textAlign: "center",
             }}
           >
-            <Text onPress={handelsumbit} style={{ alignSelf: 'center',color: 'white' }}>Post</Text>
+            <Text onPress={handelsumbit} style={{ alignSelf: 'center', color: 'white' }}>Post</Text>
           </TouchableOpacity>
         </View>
       </View>

@@ -31,15 +31,11 @@ const NearByClassified = () => {
 
   const navigation = useNavigation();
 
-  // const handleExplore = () => {
-  //   navigation.navigate('ExploreClassified');
-
-  // }
 
   return (
     <View style={styles.componentr2}>
 
-      <Text style={styles.nearbyboxr}>NearByClassified</Text>
+      <Text style={styles.nearbyboxr}>Near By Classified</Text>
       <View style={styles.flexboxr}>
 
         {data ? (
@@ -47,7 +43,7 @@ const NearByClassified = () => {
             {data.slice(0, 3).map((i) => (
 
 
-<TouchableOpacity onPress={() => navigation.navigate('ClassifiedDetails')}>
+<TouchableOpacity onPress={() => navigation.navigate('ClassifiedDetails', { id: i.id })}>
 
                 <View style={styles.imagesbox} key={i.id}>
                   {/* <Image
@@ -67,36 +63,6 @@ const NearByClassified = () => {
             ))}
           </>
         ) : <Text>'Loading'</Text>}
-
-        {/* <View style={styles.imagesbox}>
-          <Image source={require('../images/bajaj.png')} style={styles.nearbyimg} />
-          <View>
-            <Text style={styles.textCenter}>Bajaj Electronics</Text>
-            <Text style={styles.textCenter}>0.5 kms</Text>
-
-          </View>
-        </View>
-
-        <View style={styles.imagesbox}>
-          <Image source={require('../images/bajaj.png')} style={styles.nearbyimg} />
-          <View>
-            <Text style={styles.textCenter}>Havells</Text>
-
-            <Text style={styles.textCenter}>0.6 kms</Text>
-
-          </View>
-
-
-        </View>
-
-        <View>
-          <Image source={require('../images/bajaj.png')} style={styles.nearbyimg} />
-            <View>
-            <Text style={styles.textCenter}>Universal Book Store</Text>
-            <Text style={styles.textCenter}>0.8 kms</Text>
-          </View>
-        </View> */}
-
         <View>
           <TouchableOpacity onPress={() => navigation.navigate('ExploreClassifiedList')}>
             <Text style={styles.exploretext}>Explore More</Text>
